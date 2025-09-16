@@ -73,9 +73,7 @@ def test_download_security_report(request):
     return response
 
 
-@cache_page(60 * 5)  # Cache for 5 minutes (reduced from 15)
-@vary_on_headers('User-Agent')
-def home(request):
+def _home_view(request):
     """Home page view with featured portfolio projects and testimonials"""
     # Import portfolio models only when needed to avoid circular imports
     try:
@@ -93,6 +91,19 @@ def home(request):
         'testimonials': testimonials,
     }
     return render(request, 'main/home.html', context)
+
+
+# Apply cache decorator with error handling
+home = vary_on_headers('User-Agent')(_home_view)
+try:
+    # Try to apply cache decorator
+    home = cache_page(60 * 5)(home)  # Cache for 5 minutes (reduced from 15)
+except Exception as e:
+    # If cache is not available, use the view without caching
+    import logging
+    logger = logging.getLogger(__name__)
+    logger.warning(f"Cache not available for home view: {e}")
+    home = _home_view
 
 
 @csrf_protect

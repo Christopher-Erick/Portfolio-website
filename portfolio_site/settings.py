@@ -338,15 +338,34 @@ if DEBUG:
     }
 else:
     # Production: Try Redis cache first, fall back to database cache if Redis is not available
+    redis_available = False
     try:
         import redis
+        # Try to create a Redis connection to test if Redis is available
+        # Use a short timeout to avoid hanging
+        test_client = redis.Redis(host='127.0.0.1', port=6379, socket_connect_timeout=1, socket_timeout=1)
+        test_client.ping()
+        redis_available = True
+    except Exception:
+        # Redis is not available
+        redis_available = False
+    
+    if redis_available:
         CACHES = {
             'default': {
                 'BACKEND': 'django.core.cache.backends.redis.RedisCache',
                 'LOCATION': 'redis://127.0.0.1:6379/1',
+                'TIMEOUT': 300,  # 5 minutes
+                'OPTIONS': {
+                    'CONNECTION_POOL_KWARGS': {
+                        'socket_connect_timeout': 5,
+                        'socket_timeout': 5,
+                        'retry_on_timeout': True,
+                    }
+                }
             }
         }
-    except ImportError:
+    else:
         # Fallback to database cache if Redis is not available
         CACHES = {
             'default': {
