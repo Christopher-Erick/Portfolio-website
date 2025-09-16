@@ -180,3 +180,7 @@ logs/
 
 # Media files (these should be stored separately)
 media/
+
+# Script files that may contain sensitive information
+setup_fly_secrets.sh
+setup_fly_secrets.ps1
