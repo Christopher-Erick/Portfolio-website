@@ -559,3 +559,13 @@ def download_security_report(request):
     
     return response
 
+
+@require_http_methods(["GET"])
+def health_check(request):
+    """
+    Health check endpoint for Fly.io
+    """
+    return JsonResponse({
+        'status': 'healthy',
+        'message': 'Portfolio website is running successfully'
+    })

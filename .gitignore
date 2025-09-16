@@ -167,6 +167,7 @@ cython_debug/
 .env*
 !.env.example
 !.env.development
+!.env.production
 .secret_key
 config/certs/
 *.pem
