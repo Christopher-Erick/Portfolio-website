@@ -327,6 +327,11 @@ LOGGING = {
     },
 }
 
+# Disable Django's built-in cache middleware
+# This prevents Django from automatically caching pages, which was causing
+# issues with Redis connection in production
+CACHE_MIDDLEWARE_SECONDS = 0
+
 # Caching Configuration
 if DEBUG:
     # Development: Use local memory cache
@@ -343,14 +348,38 @@ else:
         import redis
         # Try to create a Redis connection to test if Redis is available
         # Use a short timeout to avoid hanging
-        test_client = redis.Redis(host='127.0.0.1', port=6379, socket_connect_timeout=1, socket_timeout=1)
+        # Check if REDIS_URL is provided in environment variables (for Render)
+        redis_url = os.getenv('REDIS_URL')
+        if redis_url:
+            # Use Redis URL from environment
+            test_client = redis.Redis.from_url(redis_url, socket_connect_timeout=1, socket_timeout=1)
+        else:
+            # Fallback to localhost Redis (for local development)
+            test_client = redis.Redis(host='127.0.0.1', port=6379, socket_connect_timeout=1, socket_timeout=1)
         test_client.ping()
         redis_available = True
     except Exception:
         # Redis is not available
         redis_available = False
     
-    if redis_available:
+    if redis_available and os.getenv('REDIS_URL'):
+        # Use Redis with the provided URL
+        CACHES = {
+            'default': {
+                'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+                'LOCATION': os.getenv('REDIS_URL'),
+                'TIMEOUT': 300,  # 5 minutes
+                'OPTIONS': {
+                    'CONNECTION_POOL_KWARGS': {
+                        'socket_connect_timeout': 5,
+                        'socket_timeout': 5,
+                        'retry_on_timeout': True,
+                    }
+                }
+            }
+        }
+    elif redis_available:
+        # Use local Redis
         CACHES = {
             'default': {
                 'BACKEND': 'django.core.cache.backends.redis.RedisCache',
