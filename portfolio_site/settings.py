@@ -66,6 +66,13 @@ RENDER_APP_URL = os.getenv('RENDER_APP_URL')
 if RENDER_APP_URL:
     ALLOWED_HOSTS.append(RENDER_APP_URL.split('//')[1].split('/')[0])
 
+# Add the default Render URL pattern
+# This will be something like your-app-name.onrender.com
+import os
+RENDER_SERVICE_NAME = os.getenv('RENDER_SERVICE_NAME')
+if RENDER_SERVICE_NAME:
+    ALLOWED_HOSTS.append(f"{RENDER_SERVICE_NAME}.onrender.com")
+
 # Application definition
 
 INSTALLED_APPS = [
