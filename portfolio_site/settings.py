@@ -337,10 +337,20 @@ if DEBUG:
         }
     }
 else:
-    # Production: Use Redis cache (when configured)
-    CACHES = {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-            'LOCATION': 'redis://127.0.0.1:6379/1',
+    # Production: Try Redis cache first, fall back to database cache if Redis is not available
+    try:
+        import redis
+        CACHES = {
+            'default': {
+                'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+                'LOCATION': 'redis://127.0.0.1:6379/1',
+            }
         }
-    }
+    except ImportError:
+        # Fallback to database cache if Redis is not available
+        CACHES = {
+            'default': {
+                'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+                'LOCATION': 'django_cache',
+            }
+        }

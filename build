@@ -18,4 +18,8 @@ python manage.py collectstatic --no-input
 echo "Running migrations..."
 python manage.py migrate
 
+# Create cache table for database cache (fallback if Redis is not available)
+echo "Creating cache table..."
+python manage.py createcachetable || echo "Failed to create cache table, continuing..."
+
 echo "Build completed successfully!"
