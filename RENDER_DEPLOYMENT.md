@@ -76,17 +76,58 @@ For production use, consider upgrading to a paid plan to avoid the sleep behavio
 
 ## Troubleshooting
 
-1. If your application fails to build:
-   - Check the build logs for specific error messages
-   - Ensure all dependencies are listed in requirements.txt
+### Common Issues and Solutions
 
-2. If your application deploys but doesn't respond:
-   - Check that your ALLOWED_HOSTS includes your Render URL
-   - Verify your database connection settings
+1. **Repository Connection Issues**
+   - Ensure your repository is public or you've granted Render access to private repositories
+   - Check that the repository URL is correct in Render
+   - Try disconnecting and reconnecting your GitHub account in Render settings
 
-3. If static files aren't loading:
-   - Make sure collectstatic is run during the build process
-   - Check that DEBUG is set to False
+2. **Build Script Failures**
+   - Check the build logs in Render for specific error messages
+   - Ensure your [build.sh](file://c:\Users\CHRISTOPHER\Desktop\project\RESUME\build.sh) file has the correct permissions (should be executable)
+   - Verify all dependencies in [requirements.txt](file://c:\Users\CHRISTOPHER\Desktop\project\RESUME\requirements.txt) are correct and available
+
+3. **Environment Variable Issues**
+   - Make sure you've set all required environment variables in Render:
+     - [SECRET_KEY](file://c:\Users\CHRISTOPHER\Desktop\project\RESUME\portfolio_site\settings.py#L36-L36)
+     - [DEBUG](file://c:\Users\CHRISTOPHER\Desktop\project\RESUME\portfolio_site\settings.py#L43-L43) (set to False)
+     - [DATABASE_URL](file://c:\Users\CHRISTOPHER\Desktop\project\RESUME\portfolio_site\settings.py#L135-L135)
+     - [ALLOWED_HOSTS](file://c:\Users\CHRISTOPHER\Desktop\project\RESUME\portfolio_site\settings.py#L46-L46)
+
+4. **Database Connection Issues**
+   - Verify your [DATABASE_URL](file://c:\Users\CHRISTOPHER\Desktop\project\RESUME\portfolio_site\settings.py#L135-L135) is correct
+   - Check that your Railway database is running and accessible
+   - Make sure the database credentials haven't expired
+
+5. **Django Settings Issues**
+   - Check that [ALLOWED_HOSTS](file://c:\Users\CHRISTOPHER\Desktop\project\RESUME\portfolio_site\settings.py#L46-L46) includes your Render URL
+   - Ensure [DEBUG](file://c:\Users\CHRISTOPHER\Desktop\project\RESUME\portfolio_site\settings.py#L43-L43) is set to False in production
+   - Verify static files configuration
+
+6. **Application Startup Issues**
+   - Check that your start command is correct: `gunicorn portfolio_site.wsgi:application --bind 0.0.0.0:$PORT`
+   - Ensure the PORT environment variable is being used correctly
+   - Verify that your WSGI application is properly configured
+
+### Debugging Steps
+
+1. **Check Build Logs**
+   - In your Render dashboard, go to your web service
+   - Click on the "Logs" tab
+   - Look for error messages during the build process
+
+2. **Check Application Logs**
+   - After deployment, check the application logs for runtime errors
+   - Look for Django-specific errors or database connection issues
+
+3. **Test Locally**
+   - Try running your application locally with the same environment variables
+   - This can help identify configuration issues before deploying
+
+4. **Verify Dependencies**
+   - Ensure all required packages are listed in [requirements.txt](file://c:\Users\CHRISTOPHER\Desktop\project\RESUME\requirements.txt)
+   - Check for version conflicts between packages
 
 ## Useful Render Commands
 

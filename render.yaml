@@ -15,8 +15,3 @@ services:
         sync: false
       - key: ALLOWED_HOSTS
         value: "your-render-app-url,render.app"
-
-databases:
-  - name: portfolio-db
-    databaseName: portfolio_db
-    user: portfolio_user
