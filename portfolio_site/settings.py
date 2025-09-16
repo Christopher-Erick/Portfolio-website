@@ -111,6 +111,7 @@ WSGI_APPLICATION = 'portfolio_site.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# Default to SQLite for development
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -121,10 +122,23 @@ DATABASES = {
 # Parse database configuration from DATABASE_URL environment variable
 # This is needed for Railway and other cloud database providers
 import dj_database_url
-db_from_env = dj_database_url.config()
-if db_from_env:
-    DATABASES['default'] = db_from_env
 
+# Get the database URL from environment variable
+DATABASE_URL = os.getenv('DATABASE_URL')
+
+if DATABASE_URL:
+    # Parse the database URL for production
+    DATABASES['default'] = dj_database_url.parse(DATABASE_URL)
+    
+    # Additional PostgreSQL-specific settings
+    DATABASES['default']['OPTIONS'] = {
+        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        'charset': 'utf8mb4',
+    }
+    
+    # Connection pool settings for production
+    DATABASES['default']['CONN_MAX_AGE'] = 60
+    DATABASES['default']['OPTIONS']['MAX_CONNS'] = 20
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
