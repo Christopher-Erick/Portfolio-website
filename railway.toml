@@ -1,0 +1,10 @@
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "gunicorn portfolio_site.wsgi:application --bind 0.0.0.0:$PORT"
+
+[env]
+PORT = "8000"
+DEBUG = "False"
+ALLOWED_HOSTS = "your-railway-app-url,railway.app"

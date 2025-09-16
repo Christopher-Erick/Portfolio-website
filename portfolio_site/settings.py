@@ -53,9 +53,18 @@ else:
     if hosts:
         ALLOWED_HOSTS = [host.strip() for host in hosts.split(',')]
     else:
-        # Fallback for production - should be set in .env
+        # Fallback for production - should be set in environment
         ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
+# Add Render-specific hosts
+RENDER_EXTERNAL_HOSTNAME = os.getenv('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
+# Also add the RENDER_APP_URL if available
+RENDER_APP_URL = os.getenv('RENDER_APP_URL')
+if RENDER_APP_URL:
+    ALLOWED_HOSTS.append(RENDER_APP_URL.split('//')[1].split('/')[0])
 
 # Application definition
 

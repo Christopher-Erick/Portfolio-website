@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: christopher-erick-otieno-portfolio
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn portfolio_site.wsgi:application --bind 0.0.0.0:$PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.15
+      - key: SECRET_KEY
+        sync: false
+      - key: DEBUG
+        value: False
+      - key: DATABASE_URL
+        sync: false
+      - key: ALLOWED_HOSTS
+        value: "your-render-app-url,render.app"
+
+databases:
+  - name: portfolio-db
+    databaseName: portfolio_db
+    user: portfolio_user
