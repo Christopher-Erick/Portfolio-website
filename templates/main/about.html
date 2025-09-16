@@ -1,0 +1,564 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Christopher Erick Otieno - Cybersecurity Analyst{% endblock %}
+
+{% block description %}Learn more about Christopher Erick Otieno, a dedicated cybersecurity analyst with expertise in threat analysis, penetration testing, and security assessment.{% endblock %}
+
+{% block content %}
+<!-- About Hero Section -->
+<section id="about-hero" class="hero">
+    <div class="container">
+        <div class="hero-content fade-in">
+            <h1 class="hero-title">About Christopher Erick</h1>
+            <p class="hero-subtitle">Cybersecurity Analyst & IT Professional</p>
+            <p class="hero-description">
+                Passionate about building secure digital ecosystems and protecting organizations 
+                from evolving cyber threats through proactive security measures and continuous monitoring.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Detailed About Section -->
+<section id="about-details" class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col slide-in-left">
+                <div class="about-image">
+                    <img src="{% static 'images/profile.jpg' %}" alt="{{ PERSONAL_NAME|default:'Christopher Erick Otieno' }}" class="profile-img">
+                    <div class="about-image-overlay">
+                        <div class="tech-stack">
+                            <span class="tech-item">Penetration Testing</span>
+                            <span class="tech-item">Risk Assessment</span>
+                            <span class="tech-item">SIEM</span>
+                            <span class="tech-item">Python</span>
+                            <span class="tech-item">Nmap</span>
+                            <span class="tech-item">Data Analyst</span>
+                            <span class="tech-item">System Administration </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col slide-in-right">
+                <div class="about-content">
+                    <h2>My Journey in Cybersecurity</h2>
+                    <p>
+                        With 1 year of specialized experience in cybersecurity, my journey began with a fascination 
+                        for understanding how digital systems work and evolved into a passion for defending them 
+                        against sophisticated cyber threats. I focus on building secure digital ecosystems where 
+                        cybersecurity meets seamless operations, data drives decisions, and complex challenges 
+                        become elegant solutions.
+                    </p>
+                    <p>
+                        My approach to cybersecurity is rooted in proactive security measures, continuous monitoring, 
+                        and staying ahead of emerging threats. Whether I'm conducting penetration tests with Gobuster, 
+                        analyzing security vulnerabilities with Splunk, or implementing robust defense strategies, I 
+                        approach every challenge with meticulous attention to detail and a commitment to organizational 
+                        security excellence.
+                    </p>
+                    
+                    <h3>Core Competencies</h3>
+                    <div class="competencies-grid">
+                        <div class="competency-item">
+                            <i class="fas fa-search"></i>
+                            <h4>Vulnerability Assessment</h4>
+                            <p>Comprehensive security assessments and risk analysis</p>
+                        </div>
+                        <div class="competency-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <h4>Penetration Testing</h4>
+                            <p>Ethical hacking and security testing methodologies</p>
+                        </div>
+                        <div class="competency-item">
+                            <i class="fas fa-eye"></i>
+                            <h4>Security Monitoring</h4>
+                            <p>SIEM implementation and threat detection</p>
+                        </div>
+                        <div class="competency-item">
+                            <i class="fas fa-bug"></i>
+                            <h4>Incident Response</h4>
+                            <p>Threat analysis and incident investigation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Experience & Education Section -->
+<section id="experience" class="section" style="background-color: var(--bg-secondary);">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h2>Experience & Education</h2>
+            <p>Building expertise through hands-on experience and continuous learning</p>
+        </div>
+        
+        <div class="row">
+            <div class="col">
+                <div class="timeline fade-in">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>Cybersecurity Enthusiast & Job Seeker</h3>
+                            <span class="timeline-date">2024 - Present</span>
+                            <p>Building expertise through hands-on projects, security assessments, and continuous learning. Focused on threat analysis, vulnerability testing, and implementing security monitoring solutions using industry-standard tools.</p>
+                            <div class="timeline-skills">
+                                <span class="skill-tag">Splunk</span>
+                                <span class="skill-tag">Gobuster</span>
+                                <span class="skill-tag">Nmap</span>
+                                <span class="skill-tag">Wireshark</span>
+                                <span class="skill-tag">Python</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>Security Research & Learning</h3>
+                            <span class="timeline-date">2023 - 2024</span>
+                            <p>Intensive study and practical application of cybersecurity principles, completing hands-on labs and challenges on platforms like TryHackMe and HackTheBox.</p>
+                            <div class="timeline-skills">
+                                <span class="skill-tag">Penetration Testing</span>
+                                <span class="skill-tag">Linux</span>
+                                <span class="skill-tag">Kali Linux</span>
+                                <span class="skill-tag">Metasploit</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Values & Philosophy Section -->
+<section id="philosophy" class="section">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h2>My Security Philosophy</h2>
+            <p>Core principles that guide my approach to cybersecurity</p>
+        </div>
+        
+        <div class="philosophy-grid">
+            <div class="philosophy-item fade-in">
+                <div class="philosophy-icon">
+                    <i class="fas fa-shield-check"></i>
+                </div>
+                <h3>Proactive Defense</h3>
+                <p>Security isn't just about responding to threats—it's about anticipating and preventing them before they can cause harm.</p>
+            </div>
+            
+            <div class="philosophy-item fade-in">
+                <div class="philosophy-icon">
+                    <i class="fas fa-sync"></i>
+                </div>
+                <h3>Continuous Learning</h3>
+                <p>The threat landscape evolves constantly. Staying ahead requires continuous education and adaptation to new security challenges.</p>
+            </div>
+            
+            <div class="philosophy-item fade-in">
+                <div class="philosophy-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Collaborative Security</h3>
+                <p>Effective security is a team effort. Building security awareness and fostering collaboration across all organizational levels.</p>
+            </div>
+            
+            <div class="philosophy-item fade-in">
+                <div class="philosophy-icon">
+                    <i class="fas fa-balance-scale"></i>
+                </div>
+                <h3>Balanced Approach</h3>
+                <p>Security measures should enable business operations, not hinder them. Finding the right balance between security and usability.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Certifications & Achievements -->
+<section id="achievements" class="section" style="background-color: var(--bg-secondary);">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h2>Certifications & Achievements</h2>
+            <p>Professional development and continuous skill validation</p>
+        </div>
+        
+        <div class="achievements-grid">
+            <div class="achievement-item fade-in">
+                <div class="achievement-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <h4>Security Projects</h4>
+                <p class="achievement-number">10+</p>
+                <p>Completed comprehensive security projects and assessments</p>
+            </div>
+            
+            <div class="achievement-item fade-in">
+                <div class="achievement-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h4>TryHackMe Profile</h4>
+                <p class="achievement-number">erikchris54</p>
+                <p>Active participant in cybersecurity challenges</p>
+            </div>
+            
+            <div class="achievement-item fade-in">
+                <div class="achievement-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h4>Security Tools</h4>
+                <p class="achievement-number">10+</p>
+                <p>Proficient in cybersecurity tools and frameworks</p>
+            </div>
+            
+            <div class="achievement-item fade-in">
+                <div class="achievement-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h4>Experience</h4>
+                <p class="achievement-number">1+ Year</p>
+                <p>Dedicated cybersecurity experience</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section id="about-cta" class="section">
+    <div class="container">
+        <div class="cta-content text-center fade-in">
+            <h2>Let's Secure Your Organization Together</h2>
+            <p>Ready to strengthen your cybersecurity posture? I'm here to help protect your digital assets with comprehensive security solutions.</p>
+            <div class="cta-actions">
+                <a href="{% url 'main:contact' %}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-paper-plane"></i> Get In Touch
+                </a>
+                <a href="{% url 'main:resume' %}" class="btn btn-outline btn-lg">
+                    <i class="fas fa-file-alt"></i> View Resume
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* About page specific styles */
+    #about-hero {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        color: white;
+        min-height: 50vh;
+        display: flex;
+        align-items: center;
+        padding: 6rem 0 2rem;
+    }
+    
+    #about-details {
+        padding: 4rem 0;
+    }
+    
+    .about-image {
+        position: relative;
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+    
+    .profile-img {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid var(--primary-color);
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .about-image-overlay {
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--bg-primary);
+        padding: 1rem;
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        z-index: 10;
+        max-width: 280px;
+        width: max-content;
+    }
+    
+    .tech-stack {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+    
+    .tech-item {
+        background: var(--primary-color);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: var(--border-radius);
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+    
+    .competencies-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    
+    .competency-item {
+        text-align: center;
+        padding: 2rem;
+        background: var(--bg-primary);
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+    }
+    
+    .competency-item:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .competency-item i {
+        font-size: 3rem;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+    
+    .competency-item h4 {
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+    }
+    
+    /* Timeline styles */
+    .timeline {
+        position: relative;
+        padding-left: 2rem;
+    }
+    
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: 1rem;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: var(--primary-color);
+    }
+    
+    .timeline-item {
+        position: relative;
+        margin-bottom: 2rem;
+        padding-left: 2rem;
+    }
+    
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -0.5rem;
+        top: 0.5rem;
+        width: 1rem;
+        height: 1rem;
+        background: var(--primary-color);
+        border-radius: 50%;
+        border: 3px solid var(--bg-primary);
+    }
+    
+    .timeline-content {
+        background: var(--bg-primary);
+        padding: 2rem;
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--shadow);
+    }
+    
+    .timeline-date {
+        background: var(--primary-color);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: var(--border-radius);
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+    
+    .timeline-skills {
+        margin-top: 1rem;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+    
+    .skill-tag {
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        padding: 0.25rem 0.75rem;
+        border-radius: var(--border-radius);
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+    
+    /* Philosophy section */
+    .philosophy-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+    
+    .philosophy-item {
+        text-align: center;
+        padding: 2rem;
+        background: var(--bg-primary);
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+    }
+    
+    .philosophy-item:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .philosophy-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        font-size: 2rem;
+        color: white;
+    }
+    
+    /* Achievements section */
+    .achievements-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+    
+    .achievement-item {
+        text-align: center;
+        padding: 2rem;
+        background: var(--bg-primary);
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+    }
+    
+    .achievement-item:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .achievement-icon {
+        width: 60px;
+        height: 60px;
+        background: var(--primary-color);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1rem;
+        font-size: 1.5rem;
+        color: white;
+    }
+    
+    .achievement-number {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin: 0.5rem 0;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        #about-hero {
+            min-height: 70vh;
+            padding: 5rem 0 3rem;
+        }
+        
+        #about-details {
+            padding: 3rem 0;
+        }
+        
+        .about-image {
+            margin-bottom: 3rem;
+        }
+        
+        .about-image-overlay {
+            position: static;
+            transform: none;
+            left: auto;
+            bottom: auto;
+            margin: 2rem auto 0;
+            max-width: 100%;
+        }
+        
+        .competencies-grid,
+        .philosophy-grid,
+        .achievements-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .timeline {
+            padding-left: 1rem;
+        }
+        
+        .timeline-item {
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .timeline-content {
+            padding: 1.5rem;
+        }
+        
+        .profile-img {
+            width: 250px;
+            height: 250px;
+        }
+        
+        .section {
+            padding: 3rem 0;
+        }
+        
+        .cta-actions {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .cta-actions .btn {
+            width: 100%;
+            min-width: auto;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .competency-item,
+        .philosophy-item,
+        .achievement-item {
+            padding: 1.5rem;
+        }
+        
+        .timeline-content {
+            padding: 1rem;
+        }
+        
+        .profile-img {
+            width: 200px;
+            height: 200px;
+        }
+    }
+</style>
+{% endblock %}

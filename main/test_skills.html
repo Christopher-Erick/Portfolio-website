@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Skills Test</title>
+</head>
+<body>
+    <h1>Skills Test</h1>
+    
+    {% if skills_by_category %}
+        <p>Found {{ skills_by_category|length }} categories</p>
+        {% for category, skills in skills_by_category.items %}
+            <h2>{{ category|title }} ({{ skills|length }} skills)</h2>
+            <ul>
+                {% for skill in skills %}
+                    <li>{{ skill.name }} ({{ skill.category }}) - Proficiency: {{ skill.proficiency }}</li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    {% else %}
+        <p>No skills found</p>
+    {% endif %}

@@ -1,0 +1,716 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ project.title }} - Portfolio Project{% endblock %}
+
+{% block description %}{{ project.short_description }}{% endblock %}
+
+{% block og_title %}{{ project.title }} - Christopher Erick Otieno's Cybersecurity Portfolio{% endblock %}
+{% block og_description %}{{ project.short_description }}{% endblock %}
+
+{% block content %}
+<!-- Project Header -->
+<section class="project-header section">
+    <div class="container">
+        <div class="project-breadcrumb fade-in">
+            <a href="{% url 'portfolio:portfolio_list' %}">
+                <i class="fas fa-arrow-left"></i> Back to Portfolio
+            </a>
+        </div>
+        
+        <div class="project-hero fade-in">
+            <div class="row">
+                <div class="col">
+                    <div class="project-info">
+                        <div class="project-meta">
+                            <span class="project-category">{{ project.category.name }}</span>
+                            <span class="project-status status-{{ project.status }}">{{ project.get_status_display }}</span>
+                        </div>
+                        
+                        <h1 class="project-title">{{ project.title }}</h1>
+                        <p class="project-description">{{ project.short_description }}</p>
+                        
+                        <div class="project-links">
+                            {% if project.live_url %}
+                            <a href="{{ project.live_url }}" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i> View Live Project
+                            </a>
+                            {% endif %}
+                            {% if project.github_url %}
+                            <a href="{{ project.github_url }}" class="btn btn-outline btn-lg" target="_blank" rel="noopener">
+                                <i class="fab fa-github"></i> View Source Code
+                            </a>
+                            {% endif %}
+                            {% if project.demo_url %}
+                            <a href="{{ project.demo_url }}" class="btn btn-outline btn-lg" target="_blank" rel="noopener">
+                                <i class="fas fa-play"></i> Watch Demo
+                            </a>
+                            {% endif %}
+                            {% if project.writeup_document %}
+                            <a href="{{ project.writeup_document.url }}" class="btn btn-outline btn-lg" target="_blank" rel="noopener">
+                                <i class="fas fa-file-alt"></i> View Writeup
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col">
+                    <div class="project-image">
+                        {% if project.featured_image %}
+                        <img src="{{ project.featured_image.url }}" alt="{{ project.title }}" class="main-image">
+                        {% else %}
+                        <div class="image-placeholder">
+                            <i class="fas fa-code"></i>
+                            <p>Project Screenshot</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Project Details -->
+<section class="project-details section">
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <!-- Project Description -->
+                <div class="content-section fade-in">
+                    <h2>Project Overview</h2>
+                    <div class="project-content">
+                        {{ project.description|linebreaks }}
+                    </div>
+                </div>
+                
+                <!-- Project Features -->
+                {% if project.features.all %}
+                <div class="content-section fade-in">
+                    <h2>Key Features</h2>
+                    <div class="features-grid grid-2">
+                        {% for feature in project.features.all %}
+                        <div class="feature-item">
+                            {% if feature.icon %}
+                            <div class="feature-icon">
+                                <i class="{{ feature.icon }}"></i>
+                            </div>
+                            {% endif %}
+                            <div class="feature-content">
+                                <h4>{{ feature.title }}</h4>
+                                <p>{{ feature.description }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                
+                <!-- Project Gallery -->
+                {% if project.images.all %}
+                <div class="content-section fade-in">
+                    <h2>Project Gallery</h2>
+                    <div class="project-gallery">
+                        {% for image in project.images.all %}
+                        <div class="gallery-item">
+                            <img src="{{ image.image.url }}" alt="{{ image.caption|default:project.title }}" class="gallery-image" onclick="openLightbox(this)">
+                            {% if image.caption %}
+                            <p class="gallery-caption">{{ image.caption }}</p>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="col-4">
+                <!-- Project Info Sidebar -->
+                <div class="project-sidebar">
+                    <div class="sidebar-section fade-in">
+                        <h3>Project Information</h3>
+                        <div class="info-list">
+                            <div class="info-item">
+                                <span class="info-label">Category</span>
+                                <span class="info-value">{{ project.category.name }}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Status</span>
+                                <span class="info-value">{{ project.get_status_display }}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Start Date</span>
+                                <span class="info-value">{{ project.start_date|date:"F Y" }}</span>
+                            </div>
+                            {% if project.end_date %}
+                            <div class="info-item">
+                                <span class="info-label">Completion</span>
+                                <span class="info-value">{{ project.end_date|date:"F Y" }}</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <!-- Technologies Used -->
+                    <div class="sidebar-section fade-in">
+                        <h3>Technologies Used</h3>
+                        <div class="tech-stack">
+                            {% for tech in project.technologies.all %}
+                            <div class="tech-item">
+                                {% if tech.icon %}
+                                {% if 'fab' in tech.icon or 'fas' in tech.icon %}
+                                <i class="{{ tech.icon }}" style="color: {{ tech.color }};"></i>
+                                {% else %}
+                                <img src="{{ tech.icon }}" alt="{{ tech.name }}" class="tech-icon">
+                                {% endif %}
+                                {% endif %}
+                                <span class="tech-name">{{ tech.name }}</span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <!-- Project Links -->
+                    <div class="sidebar-section fade-in">
+                        <h3>Quick Links</h3>
+                        <div class="quick-links">
+                            {% if project.live_url %}
+                            <a href="{{ project.live_url }}" class="quick-link" target="_blank" rel="noopener">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span>Live Website</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            {% endif %}
+                            {% if project.github_url %}
+                            <a href="{{ project.github_url }}" class="quick-link" target="_blank" rel="noopener">
+                                <i class="fab fa-github"></i>
+                                <span>Source Code</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            {% endif %}
+                            {% if project.demo_url %}
+                            <a href="{{ project.demo_url }}" class="quick-link" target="_blank" rel="noopener">
+                                <i class="fas fa-play"></i>
+                                <span>Demo Video</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            {% endif %}
+                            {% if project.writeup_document %}
+                            <a href="{{ project.writeup_document.url }}" class="quick-link" target="_blank" rel="noopener">
+                                <i class="fas fa-file-alt"></i>
+                                <span>Project Writeup</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Related Projects -->
+{% if related_projects %}
+<section class="related-projects section" style="background-color: var(--bg-secondary);">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h2>Related Projects</h2>
+            <p>You might also be interested in these projects</p>
+        </div>
+        
+        <div class="projects-grid grid-3">
+            {% for related_project in related_projects %}
+            <div class="card project-card fade-in">
+                {% if related_project.featured_image %}
+                <img src="{{ related_project.featured_image.url }}" alt="{{ related_project.title }}" class="card-img">
+                {% else %}
+                <div class="card-img-placeholder">
+                    <i class="fas fa-code"></i>
+                </div>
+                {% endif %}
+                
+                <div class="card-content">
+                    <div class="project-meta">
+                        <span class="project-category">{{ related_project.category.name }}</span>
+                    </div>
+                    
+                    <h3 class="card-title">
+                        <a href="{{ related_project.get_absolute_url }}">{{ related_project.title }}</a>
+                    </h3>
+                    
+                    <p class="card-text">{{ related_project.short_description }}</p>
+                    
+                    <div class="project-tech">
+                        {% for tech in related_project.technologies.all|slice:":3" %}
+                        <span class="tech-tag" style="background-color: {{ tech.color }};">{{ tech.name }}</span>
+                        {% endfor %}
+                    </div>
+                    
+                    <a href="{{ related_project.get_absolute_url }}" class="btn btn-primary">
+                        <i class="fas fa-eye"></i> View Project
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Call to Action -->
+<section class="project-cta section">
+    <div class="container">
+        <div class="cta-content text-center fade-in">
+            <h2>Interested in Cybersecurity Collaboration?</h2>
+            <p>I'm always open to discussing security assessments, penetration testing opportunities, and cybersecurity projects.</p>
+            <div class="cta-actions">
+                <a href="{% url 'main:contact' %}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-shield-alt"></i> Discuss Security Needs
+                </a>
+                <a href="{% url 'portfolio:portfolio_list' %}" class="btn btn-outline btn-lg">
+                    <i class="fas fa-eye"></i> View More Security Projects
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Image Lightbox -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <div class="lightbox-content">
+        <img id="lightbox-image" src="" alt="">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Project Detail Styles */
+    .project-header {
+        padding-top: 8rem;
+        padding-bottom: 3rem;
+    }
+    
+    .project-breadcrumb {
+        margin-bottom: 2rem;
+    }
+    
+    .project-breadcrumb a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: var(--transition-fast);
+    }
+    
+    .project-breadcrumb a:hover {
+        color: var(--primary-color);
+    }
+    
+    .project-hero .row {
+        align-items: center;
+        gap: 3rem;
+    }
+    
+    .project-meta {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .project-category {
+        color: var(--primary-color);
+        font-weight: 500;
+    }
+    
+    .project-status {
+        padding: 0.25rem 0.75rem;
+        border-radius: var(--border-radius);
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+    
+    .project-title {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+    }
+    
+    .project-description {
+        font-size: 1.2rem;
+        color: var(--text-secondary);
+        margin-bottom: 2rem;
+        line-height: 1.6;
+    }
+    
+    .project-links {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+    
+    .project-image {
+        text-align: center;
+    }
+    
+    .main-image {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .image-placeholder {
+        width: 100%;
+        max-width: 500px;
+        height: 300px;
+        background: var(--bg-secondary);
+        border-radius: var(--border-radius-lg);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-muted);
+        margin: 0 auto;
+    }
+    
+    .image-placeholder i {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+    }
+    
+    /* Content Sections */
+    .content-section {
+        margin-bottom: 4rem;
+    }
+    
+    .content-section h2 {
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid var(--primary-color);
+        display: inline-block;
+    }
+    
+    .project-content {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: var(--text-secondary);
+    }
+    
+    /* Features Grid */
+    .features-grid {
+        gap: 2rem;
+    }
+    
+    .feature-item {
+        display: flex;
+        gap: 1rem;
+        padding: 1.5rem;
+        background: var(--bg-primary);
+        border-radius: var(--border-radius-lg);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        transition: var(--transition);
+    }
+    
+    .feature-item:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow);
+    }
+    
+    .feature-icon {
+        flex-shrink: 0;
+        width: 50px;
+        height: 50px;
+        background: var(--primary-color);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+    
+    .feature-content h4 {
+        margin-bottom: 0.5rem;
+        color: var(--text-primary);
+    }
+    
+    .feature-content p {
+        color: var(--text-secondary);
+        margin: 0;
+    }
+    
+    /* Project Gallery */
+    .project-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .gallery-item {
+        text-align: center;
+    }
+    
+    .gallery-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        transition: var(--transition);
+    }
+    
+    .gallery-image:hover {
+        transform: scale(1.05);
+        box-shadow: var(--shadow);
+    }
+    
+    .gallery-caption {
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+    }
+    
+    /* Sidebar */
+    .project-sidebar {
+        position: sticky;
+        top: 100px;
+    }
+    
+    .sidebar-section {
+        background: var(--bg-primary);
+        padding: 2rem;
+        border-radius: var(--border-radius-lg);
+        margin-bottom: 2rem;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .sidebar-section h3 {
+        margin-bottom: 1.5rem;
+        color: var(--primary-color);
+        font-size: 1.25rem;
+    }
+    
+    .info-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .info-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .info-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+    
+    .info-label {
+        font-weight: 500;
+        color: var(--text-secondary);
+    }
+    
+    .info-value {
+        color: var(--text-primary);
+        font-weight: 500;
+    }
+    
+    /* Tech Stack */
+    .tech-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .tech-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.75rem;
+        background: var(--bg-secondary);
+        border-radius: var(--border-radius);
+        transition: var(--transition-fast);
+    }
+    
+    .tech-item:hover {
+        background: var(--primary-color);
+        color: white;
+    }
+    
+    .tech-item i {
+        font-size: 1.5rem;
+    }
+    
+    .tech-icon {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+    }
+    
+    .tech-name {
+        font-weight: 500;
+    }
+    
+    /* Quick Links */
+    .quick-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .quick-link {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        background: var(--bg-secondary);
+        border-radius: var(--border-radius);
+        text-decoration: none;
+        color: var(--text-primary);
+        transition: var(--transition);
+    }
+    
+    .quick-link:hover {
+        background: var(--primary-color);
+        color: white;
+        transform: translateX(5px);
+    }
+    
+    .quick-link i:first-child {
+        font-size: 1.2rem;
+    }
+    
+    .quick-link span {
+        flex: 1;
+        font-weight: 500;
+    }
+    
+    .quick-link i:last-child {
+        font-size: 0.9rem;
+        opacity: 0.7;
+    }
+    
+    /* Lightbox */
+    .lightbox {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 10000;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .lightbox.active {
+        display: flex;
+    }
+    
+    .lightbox-content {
+        position: relative;
+        max-width: 90%;
+        max-height: 90%;
+    }
+    
+    .lightbox-content img {
+        width: 100%;
+        height: auto;
+        border-radius: var(--border-radius);
+    }
+    
+    .lightbox-close {
+        position: absolute;
+        top: -40px;
+        right: 0;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 2rem;
+        cursor: pointer;
+        padding: 0.5rem;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        .project-hero .row {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .project-title {
+            font-size: 2rem;
+        }
+        
+        .project-links {
+            justify-content: center;
+        }
+        
+        .project-details .row {
+            flex-direction: column;
+        }
+        
+        .project-sidebar {
+            position: static;
+            margin-top: 3rem;
+        }
+        
+        .features-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .feature-item {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .project-gallery {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Image lightbox functionality
+    function openLightbox(img) {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightbox-image');
+        
+        lightboxImage.src = img.src;
+        lightboxImage.alt = img.alt;
+        lightbox.classList.add('active');
+        
+        // Prevent body scroll
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeLightbox() {
+        const lightbox = document.getElementById('lightbox');
+        lightbox.classList.remove('active');
+        
+        // Restore body scroll
+        document.body.style.overflow = '';
+    }
+    
+    // Close lightbox with Esc key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeLightbox();
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,832 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Portfolio - Christopher Erick Otieno's Cybersecurity Projects{% endblock %}
+
+{% block description %}Explore Christopher Erick Otieno's portfolio of cybersecurity projects, featuring security assessments, penetration testing, SIEM implementations, and security automation scripts.{% endblock %}
+
+{% block content %}
+<!-- Portfolio Header -->
+<section class="portfolio-header section">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h1>My Cybersecurity Portfolio</h1>
+            <p>A collection of security projects that demonstrate my expertise in vulnerability assessment, penetration testing, and security operations</p>
+        </div>
+        
+        <!-- Search and Filters -->
+        <div class="portfolio-controls fade-in">
+            <div class="search-container">
+                <input type="text" id="portfolio-search" placeholder="Search projects..." class="form-control">
+                <i class="fas fa-search"></i>
+            </div>
+            
+            <div class="portfolio-filters">
+                <button class="portfolio-filter active" data-filter="all">All Projects</button>
+                {% for category in categories %}
+                <button class="portfolio-filter" data-filter="{{ category.slug }}">{{ category.name }}</button>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Portfolio Grid -->
+<section class="portfolio-grid section">
+    <div class="container">
+        <div class="projects-grid grid-3" id="projects-container">
+            {% for project in page_obj %}
+            <div class="portfolio-item project-card card fade-in" data-category="{{ project.category.slug }}">
+                {% if project.featured_image %}
+                <div class="card-img-container">
+                    <img src="{{ project.featured_image.url }}" alt="{{ project.title }}" class="card-img" loading="lazy">
+                    <div class="card-img-overlay">
+                        <div class="project-category-badge">{{ project.category.name }}</div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="card-img-placeholder">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>{{ project.category.name }}</span>
+                </div>
+                {% endif %}
+                
+                <div class="card-content">
+                    <div class="project-meta">
+                        <span class="project-category">{{ project.category.name }}</span>
+                        <span class="project-status status-{{ project.status }}">
+                            <i class="fas fa-circle"></i> {{ project.get_status_display }}
+                        </span>
+                    </div>
+                    
+                    <h3 class="card-title">
+                        <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
+                    </h3>
+                    
+                    <p class="card-text">{{ project.short_description }}</p>
+                    
+                    <div class="project-tech">
+                        {% for tech in project.technologies.all %}
+                        <span class="tech-tag" style="background-color: {{ tech.color }};">{{ tech.name }}</span>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="project-links">
+                        <a href="{{ project.get_absolute_url }}" class="btn btn-primary">
+                            <i class="fas fa-eye"></i> View Details
+                        </a>
+                        {% if project.live_url %}
+                        <a href="{{ project.live_url }}" class="btn btn-outline" target="_blank" rel="noopener">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                        {% endif %}
+                        {% if project.github_url %}
+                        <a href="{{ project.github_url }}" class="btn btn-outline" target="_blank" rel="noopener">
+                            <i class="fab fa-github"></i> Code
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="project-overlay">
+                    <div class="overlay-content">
+                        <h4>{{ project.title }}</h4>
+                        <p>{{ project.short_description }}</p>
+                        <div class="overlay-actions">
+                            <a href="{{ project.get_absolute_url }}" class="btn btn-primary">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <div class="no-projects text-center">
+                    <i class="fas fa-folder-open"></i>
+                    <h3>No Projects Found</h3>
+                    <p>No projects match your current filters. Try adjusting your search criteria.</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Pagination -->
+        {% if page_obj.has_other_pages %}
+        <div class="pagination-container text-center mt-5">
+            <nav aria-label="Portfolio pagination">
+                <div class="pagination">
+                    {% if page_obj.has_previous %}
+                    <a href="?page=1{% if current_category %}&category={{ current_category }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}" class="page-link">
+                        <i class="fas fa-angle-double-left"></i>
+                    </a>
+                    <a href="?page={{ page_obj.previous_page_number }}{% if current_category %}&category={{ current_category }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}" class="page-link">
+                        <i class="fas fa-angle-left"></i>
+                    </a>
+                    {% endif %}
+                    
+                    {% for page_num in page_range %}
+                        {% if page_num == page_obj.number %}
+                            <span class="page-link active">{{ page_num }}</span>
+                        {% elif page_num == paginator.ELLIPSIS %}
+                            <span class="page-link ellipsis">{{ paginator.ELLIPSIS }}</span>
+                        {% else %}
+                            <a href="?page={{ page_num }}{% if current_category %}&category={{ current_category }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}" class="page-link">{{ page_num }}</a>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}{% if current_category %}&category={{ current_category }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}" class="page-link">
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}{% if current_category %}&category={{ current_category }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}" class="page-link">
+                        <i class="fas fa-angle-double-right"></i>
+                    </a>
+                    {% endif %}
+                </div>
+            </nav>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Featured Technologies -->
+<section class="featured-tech section" style="background-color: var(--bg-secondary);">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h2>Security Tools & Technologies</h2>
+            <p>The cybersecurity tools and frameworks that power my security assessments</p>
+        </div>
+        
+        <div class="tech-grid grid-6">
+            {% for tech in technologies %}
+            <div class="tech-item fade-in">
+                {% if tech.icon %}
+                {% if 'fab' in tech.icon or 'fas' in tech.icon %}
+                <i class="{{ tech.icon }}" style="color: {{ tech.color }};"></i>
+                {% else %}
+                <img src="{{ tech.icon }}" alt="{{ tech.name }}" class="tech-icon">
+                {% endif %}
+                {% endif %}
+                <span class="tech-name">{{ tech.name }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="portfolio-cta section">
+    <div class="container">
+        <div class="cta-content text-center fade-in">
+            <h2>Ready to Secure Your Infrastructure?</h2>
+            <p>Let's discuss how my cybersecurity expertise can help strengthen your organization's security posture.</p>
+            <div class="cta-actions">
+                <a href="{% url 'main:contact' %}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-shield-alt"></i> Start Security Consultation
+                </a>
+                <a href="{% url 'main:download_resume' %}" class="btn btn-outline btn-lg" download>
+                    <i class="fas fa-download"></i> Download Resume
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Portfolio specific styles */
+    .portfolio-header {
+        padding-top: 8rem;
+    }
+    
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    
+    .portfolio-controls {
+        max-width: 800px;
+        margin: 3rem auto 0;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+    }
+    
+    .search-container {
+        position: relative;
+        max-width: 400px;
+        width: 100%;
+    }
+    
+    .search-container i {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+    }
+    
+    .portfolio-filters {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .project-card {
+        position: relative;
+        overflow: hidden;
+        background: var(--bg-primary);
+        border-radius: var(--border-radius-lg);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .project-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 35px rgba(0, 123, 255, 0.2);
+    }
+    
+    [data-theme="dark"] .project-card {
+        background: #1f1f1f;
+        border-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    [data-theme="dark"] .project-card:hover {
+        box-shadow: 0 12px 35px rgba(0, 255, 127, 0.2);
+    }
+    
+    .card-img-container {
+        position: relative;
+        height: 280px;
+        overflow: hidden;
+        border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+    }
+    
+    .card-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        transition: transform 0.3s ease;
+        border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+        background: #1a1a2e;
+    }
+    
+    .card-img-container:hover .card-img {
+        transform: scale(1.05);
+    }
+    
+    .card-img-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, transparent 50%, rgba(0, 0, 0, 0.7) 100%);
+        display: flex;
+        align-items: flex-end;
+        padding: 1.5rem;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .card-img-container:hover .card-img-overlay {
+        opacity: 1;
+    }
+    
+    .project-category-badge {
+        background: rgba(0, 123, 255, 0.9);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: var(--border-radius);
+        font-size: 0.9rem;
+        font-weight: 600;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    [data-theme="dark"] .project-category-badge {
+        background: rgba(0, 255, 127, 0.9);
+        color: #1a1a1a;
+    }
+    
+    .card-img-placeholder {
+        height: 280px;
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        color: #00ff7f;
+        margin-bottom: 0;
+        border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .card-img-placeholder::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at center, rgba(0, 255, 127, 0.1) 0%, transparent 70%);
+        animation: pulse 3s ease-in-out infinite;
+    }
+    
+    .card-img-placeholder i {
+        font-size: 3rem;
+        z-index: 2;
+        position: relative;
+        text-shadow: 0 0 20px rgba(0, 255, 127, 0.5);
+    }
+    
+    .card-img-placeholder span {
+        font-size: 1.1rem;
+        font-weight: 600;
+        z-index: 2;
+        position: relative;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    [data-theme="light"] .card-img-placeholder {
+        background: linear-gradient(135deg, #007bff 0%, #0056b3 50%, #004085 100%);
+        color: white;
+    }
+    
+    [data-theme="light"] .card-img-placeholder::before {
+        background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    }
+    
+    [data-theme="light"] .card-img-placeholder i {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+    
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+    }
+    
+    .card-content {
+        padding: 1.5rem;
+    }
+    
+    .project-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .project-category {
+        color: var(--primary-color);
+        font-weight: 500;
+    }
+    
+    .project-status {
+        padding: 0.4rem 0.8rem;
+        border-radius: var(--border-radius);
+        font-size: 0.75rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .project-status i {
+        font-size: 0.5rem;
+    }
+    
+    .status-completed {
+        background: rgba(40, 167, 69, 0.1);
+        color: #28a745;
+        border: 1px solid rgba(40, 167, 69, 0.3);
+    }
+    
+    .status-development {
+        background: rgba(255, 193, 7, 0.1);
+        color: #ffc107;
+        border: 1px solid rgba(255, 193, 7, 0.3);
+    }
+    
+    .status-planning {
+        background: rgba(108, 117, 125, 0.1);
+        color: #6c757d;
+        border: 1px solid rgba(108, 117, 125, 0.3);
+    }
+    
+    .status-maintenance {
+        background: rgba(0, 123, 255, 0.1);
+        color: #007bff;
+        border: 1px solid rgba(0, 123, 255, 0.3);
+    }
+    
+    [data-theme="dark"] .status-completed {
+        background: rgba(40, 167, 69, 0.2);
+        color: #4caf50;
+    }
+    
+    [data-theme="dark"] .status-development {
+        background: rgba(255, 193, 7, 0.2);
+        color: #ffeb3b;
+    }
+    
+    [data-theme="dark"] .status-planning {
+        background: rgba(108, 117, 125, 0.2);
+        color: #9e9e9e;
+    }
+    
+    [data-theme="dark"] .status-maintenance {
+        background: rgba(0, 255, 127, 0.2);
+        color: #00ff7f;
+    }
+    
+    .project-tech {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.5rem;
+    }
+    
+    .tech-tag {
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: var(--border-radius);
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+    
+    .project-links {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+    
+    .project-links .btn {
+        flex: 1;
+        justify-content: center;
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
+    
+    .project-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 123, 255, 0.95);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: var(--transition);
+        border-radius: var(--border-radius-lg);
+    }
+    
+    .project-card:hover .project-overlay {
+        opacity: 1;
+    }
+    
+    .overlay-content {
+        text-align: center;
+        padding: 2rem;
+    }
+    
+    .overlay-content h4 {
+        margin-bottom: 1rem;
+        color: white;
+    }
+    
+    .overlay-content p {
+        margin-bottom: 1.5rem;
+        color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .overlay-actions .btn {
+        background: white;
+        color: var(--primary-color);
+        border-color: white;
+    }
+    
+    .overlay-actions .btn:hover {
+        background: rgba(255, 255, 255, 0.9);
+    }
+    
+    /* Pagination */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    
+    .page-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: var(--bg-primary);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: var(--border-radius);
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: var(--transition-fast);
+    }
+    
+    .page-link:hover,
+    .page-link.active {
+        background: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+    }
+    
+    /* Enhanced Featured Technologies */
+    .tech-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 2rem;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    
+    .tech-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        padding: 2rem 1.5rem;
+        background: #ffffff;
+        border-radius: var(--border-radius-lg);
+        border: 2px solid #e8f4f8;
+        transition: var(--transition);
+        text-align: center;
+        min-height: 140px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    /* Light mode enhanced styling */
+    .tech-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(0, 123, 255, 0.05), rgba(0, 200, 255, 0.05));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 1;
+    }
+    
+    .tech-item:hover::before {
+        opacity: 1;
+    }
+    
+    .tech-item > * {
+        position: relative;
+        z-index: 2;
+    }
+    
+    /* Dark mode tech items - professional styling */
+    [data-theme="dark"] .tech-item {
+        background: linear-gradient(135deg, #4a5568, #2d3748);
+        border: 2px solid rgba(100, 116, 139, 0.3);
+        color: #e2e8f0;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    [data-theme="dark"] .tech-item::before {
+        display: none;
+    }
+    
+    .tech-item:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 30px rgba(0, 123, 255, 0.2);
+        border-color: rgba(0, 123, 255, 0.3);
+    }
+    
+    [data-theme="dark"] .tech-item:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 25px rgba(100, 116, 139, 0.4);
+        background: linear-gradient(135deg, #64748b, #475569);
+        border-color: rgba(148, 163, 184, 0.5);
+    }
+    
+    .tech-item i {
+        font-size: 2.5rem;
+        color: #007bff;
+        transition: all 0.3s ease;
+        text-shadow: 0 2px 4px rgba(0, 123, 255, 0.1);
+    }
+    
+    .tech-item:hover i {
+        color: #0056b3;
+        transform: scale(1.1);
+        text-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+    }
+    
+    [data-theme="dark"] .tech-item i {
+        color: inherit;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+        filter: brightness(1.3) contrast(1.1);
+    }
+    
+    [data-theme="dark"] .tech-item:hover i {
+        color: inherit;
+        transform: scale(1.1);
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+        filter: brightness(1.4) contrast(1.2);
+    }
+    
+    .tech-icon {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+    }
+    
+    .tech-item:hover .tech-icon {
+        transform: scale(1.1);
+    }
+    
+    .tech-name {
+        font-weight: 700;
+        font-size: 1rem;
+        text-align: center;
+        color: #2c3e50;
+        line-height: 1.3;
+        letter-spacing: 0.5px;
+        transition: color 0.3s ease;
+    }
+    
+    .tech-item:hover .tech-name {
+        color: #007bff;
+    }
+    
+    [data-theme="dark"] .tech-name {
+        color: #e2e8f0;
+        font-weight: 700;
+    }
+    
+    [data-theme="dark"] .tech-item:hover .tech-name {
+        color: #f8fafc;
+    }
+    
+    /* No projects state */
+    .no-projects {
+        padding: 3rem;
+        color: var(--text-muted);
+    }
+    
+    .no-projects i {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        opacity: 0.5;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        .portfolio-controls {
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .portfolio-filters {
+            flex-direction: column;
+            width: 100%;
+        }
+        
+        .portfolio-filter {
+            width: 100%;
+        }
+        
+        .projects-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .project-links {
+            flex-direction: column;
+        }
+        
+        .tech-grid {
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .tech-item {
+            padding: 1.5rem 1rem;
+            min-height: 120px;
+        }
+        
+        .tech-item i {
+            font-size: 2rem;
+        }
+        
+        .tech-name {
+            font-size: 0.9rem;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .projects-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        .tech-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .tech-item {
+            padding: 1rem;
+            min-height: 100px;
+        }
+        
+        .tech-item i {
+            font-size: 1.8rem;
+        }
+        
+        .tech-name {
+            font-size: 0.85rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Portfolio filtering functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('portfolio-search');
+        const filterButtons = document.querySelectorAll('.portfolio-filter');
+        const projectItems = document.querySelectorAll('.portfolio-item');
+        
+        // Search functionality
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                projectItems.forEach(item => {
+                    const title = item.querySelector('.card-title a').textContent.toLowerCase();
+                    const description = item.querySelector('.card-text').textContent.toLowerCase();
+                    const techs = Array.from(item.querySelectorAll('.tech-tag')).map(tag => tag.textContent.toLowerCase());
+                    
+                    const matches = title.includes(searchTerm) || 
+                                  description.includes(searchTerm) ||
+                                  techs.some(tech => tech.includes(searchTerm));
+                    
+                    if (matches) {
+                        item.style.display = 'block';
+                        setTimeout(() => item.classList.add('visible'), 10);
+                    } else {
+                        item.classList.remove('visible');
+                        setTimeout(() => item.style.display = 'none', 300);
+                    }
+                });
+            });
+        }
+        
+        // Filter functionality
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const filter = this.dataset.filter;
+                
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Filter projects
+                projectItems.forEach(item => {
+                    const category = item.dataset.category;
+                    
+                    if (filter === 'all' || category === filter) {
+                        item.style.display = 'block';
+                        setTimeout(() => item.classList.add('visible'), 10);
+                    } else {
+                        item.classList.remove('visible');
+                        setTimeout(() => item.style.display = 'none', 300);
+                    }
+                });
+            });
+        });
+    });
+</script>
+{% endblock %}

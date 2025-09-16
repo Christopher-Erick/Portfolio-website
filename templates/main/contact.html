@@ -1,0 +1,537 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact - Get In Touch with Christopher Erick Otieno{% endblock %}
+
+{% block description %}Get in touch with Christopher Erick Otieno for cybersecurity consulting, security assessments, or career opportunities. Let's discuss how we can enhance your organization's security posture.{% endblock %}
+
+{% block content %}
+<!-- Contact Header -->
+<section class="contact-header section">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h1>Get In Touch</h1>
+            <p>Ready to strengthen your cybersecurity posture? Let's discuss how my expertise can help protect your digital assets and enhance your security operations.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Content -->
+<section class="contact-content section">
+    <div class="container">
+        <div class="contact-row">
+            <div class="contact-form-column">
+                <!-- Contact Form -->
+                <div class="contact-form-container fade-in">
+                    <h2>Send Me a Message</h2>
+                    {% if success_message %}
+                        <div class="alert alert-success">
+                            <i class="fas fa-check-circle"></i> {{ success_message }}
+                        </div>
+                    {% endif %}
+                    
+                    {% if error_message %}
+                        <div class="alert alert-error">
+                            <i class="fas fa-exclamation-circle"></i> {{ error_message }}
+                        </div>
+                    {% endif %}
+                    
+                    <form id="contact-form" class="contact-form" action="{% url 'main:contact' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="name" class="form-label">Full Name *</label>
+                                    <input type="text" id="name" name="name" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="email" class="form-label">Email Address *</label>
+                                    <input type="email" id="email" name="email" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject" class="form-label">Subject *</label>
+                            <input type="text" id="subject" name="subject" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message *</label>
+                            <textarea id="message" name="message" class="form-control" rows="6" required placeholder="Tell me about your security requirements, current challenges, timeline, or any questions about cybersecurity services..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="contact-info-column">
+                <!-- Contact Information -->
+                <div class="contact-info fade-in">
+                    <h2>Contact Information</h2>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p><a href="{{ EMAIL_URL }}">{{ PERSONAL_EMAIL }}</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Phone</h4>
+                            <p><a href="tel:{{ PERSONAL_PHONE|default:'+254758081580' }}">{{ PERSONAL_PHONE|default:'+254 758 081 580' }}</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Location</h4>
+                            <p>{{ PERSONAL_LOCATION|default:'Nairobi, Kenya' }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Response Time</h4>
+                            <p>Usually within 24 hours</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Social Links -->
+                <div class="social-contact fade-in">
+                    <h3>Connect With Me</h3>
+                    <div class="social-links">
+                        <a href="{{ GITHUB_URL }}" class="social-link" target="_blank" rel="noopener">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/christopher-erick-otieno" class="social-link" target="_blank" rel="noopener">
+                            <i class="fab fa-linkedin"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="{{ TRYHACKME_URL }}" class="social-link" target="_blank" rel="noopener">
+                            <i class="fas fa-user-secret"></i>
+                            <span>TryHackMe</span>
+                        </a>
+                        <a href="{{ HACKTHEBOX_URL }}" class="social-link" target="_blank" rel="noopener">
+                            <i class="fas fa-cube"></i>
+                            <span>HackTheBox</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section section" style="background-color: var(--bg-secondary);">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h2>Frequently Asked Questions</h2>
+            <p>Quick answers to common questions about cybersecurity services and collaboration</p>
+        </div>
+        
+        <div class="faq-grid grid-2">
+            <div class="faq-item fade-in">
+                <h4>What cybersecurity services do you offer?</h4>
+                <p>I specialize in vulnerability assessments, penetration testing, security audits, SIEM implementation and monitoring, incident response planning, security automation scripting, and compliance assessments (ISO 27001, NIST frameworks).</p>
+            </div>
+            
+            <div class="faq-item fade-in">
+                <h4>What's your typical assessment timeline?</h4>
+                <p>Assessment timelines vary based on scope and complexity. Network vulnerability scans typically take 1-2 weeks, comprehensive penetration tests 2-4 weeks, and full security audits 4-8 weeks. I'll provide a detailed timeline after reviewing your requirements.</p>
+            </div>
+            
+            <div class="faq-item fade-in">
+                <h4>Do you work with remote organizations?</h4>
+                <p>Absolutely! I can conduct many security assessments remotely with proper VPN access and authorization. I'm experienced with remote security operations and use secure communication channels for all project collaboration.</p>
+            </div>
+            
+            <div class="faq-item fade-in">
+                <h4>What's your security assessment process?</h4>
+                <p>I follow industry-standard methodologies including reconnaissance, scanning, vulnerability analysis, exploitation (if authorized), and comprehensive reporting with remediation recommendations. All activities are documented and performed within agreed scope.</p>
+            </div>
+            
+            <div class="faq-item fade-in">
+                <h4>Do you provide ongoing security monitoring?</h4>
+                <p>Yes, I can help implement continuous monitoring solutions including SIEM configuration, log analysis automation, and regular security health checks. I also offer consultation on building internal security operations capabilities.</p>
+            </div>
+            
+            <div class="faq-item fade-in">
+                <h4>Are you available for full-time positions?</h4>
+                <p>Yes, I'm actively seeking full-time cybersecurity analyst positions. I'm open to discussing opportunities in security operations, threat analysis, incident response, or vulnerability management roles with forward-thinking organizations.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Contact Page Styles */
+    .contact-header {
+        padding-top: 8rem;
+        padding-bottom: 2rem;
+    }
+    
+    .contact-content {
+        padding: 0;
+    }
+    
+    .contact-row {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 3rem;
+        align-items: start;
+    }
+    
+    .contact-form-column {
+        width: 100%;
+    }
+    
+    .contact-info-column {
+        width: 100%;
+    }
+    
+    .contact-form-container {
+        background: var(--bg-primary);
+        padding: 3rem;
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+        width: 100%;
+    }
+    
+    .contact-form-container h2 {
+        margin-bottom: 2rem;
+        color: var(--primary-color);
+    }
+    
+    .alert {
+        padding: 1rem;
+        border-radius: var(--border-radius);
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+    
+    .alert-success {
+        background-color: var(--success-bg);
+        color: var(--success-color);
+        border: 1px solid var(--success-border);
+    }
+    
+    .alert-error {
+        background-color: var(--danger-bg);
+        color: var(--danger-color);
+        border: 1px solid var(--danger-border);
+    }
+    
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-col {
+        width: 100%;
+    }
+    
+    .contact-info {
+        background: var(--bg-primary);
+        padding: 2rem;
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+        width: 100%;
+    }
+    
+    .contact-info h2 {
+        margin-bottom: 2rem;
+        color: var(--primary-color);
+    }
+    
+    .contact-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .contact-item:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+    
+    .contact-icon {
+        width: 50px;
+        height: 50px;
+        background: var(--primary-color);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 1.25rem;
+    }
+    
+    .contact-details {
+        flex: 1;
+    }
+    
+    .contact-details h4 {
+        margin-bottom: 0.5rem;
+        color: var(--text-primary);
+        font-size: 1.1rem;
+    }
+    
+    .contact-details p {
+        margin: 0;
+        color: var(--text-secondary);
+    }
+    
+    .contact-details a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: var(--transition-fast);
+    }
+    
+    .contact-details a:hover {
+        color: var(--primary-color);
+    }
+    
+    /* Social Contact */
+    .social-contact {
+        background: var(--bg-primary);
+        padding: 2.5rem;
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        width: 100%;
+    }
+    
+    .social-contact h3 {
+        margin-bottom: 2rem;
+        color: var(--primary-color);
+        font-size: 1.25rem;
+    }
+    
+    .social-contact .social-links {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+    
+    .social-contact .social-link {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        padding: 1.25rem 1.5rem;
+        background: var(--bg-secondary);
+        border-radius: var(--border-radius);
+        text-decoration: none;
+        color: var(--text-primary);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        width: 100%;
+        box-sizing: border-box;
+        min-height: 64px;
+        justify-content: flex-start;
+    }
+    
+    .social-contact .social-link:hover {
+        background: var(--primary-color);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+        border-color: var(--primary-color);
+    }
+    
+    .social-contact .social-link i {
+        font-size: 1.5rem;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        flex-shrink: 0;
+        color: inherit;
+        line-height: 1;
+    }
+    
+    .social-contact .social-link span {
+        font-weight: 500;
+        font-size: 1.1rem;
+        line-height: 1.4;
+        display: flex;
+        align-items: center;
+        flex: 1;
+    }
+    
+    /* FAQ Section */
+    .faq-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+    
+    .faq-item {
+        background: var(--bg-primary);
+        padding: 2rem;
+        border-radius: var(--border-radius-lg);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        transition: var(--transition);
+    }
+    
+    .faq-item:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow);
+    }
+    
+    .faq-item h4 {
+        margin-bottom: 1rem;
+        color: var(--primary-color);
+        font-size: 1.1rem;
+    }
+    
+    .faq-item p {
+        margin: 0;
+        color: var(--text-secondary);
+        line-height: 1.6;
+    }
+    
+    /* Form Loading State */
+    .contact-form.loading {
+        opacity: 0.7;
+        pointer-events: none;
+    }
+    
+    .contact-form.loading button {
+        background: var(--muted);
+        cursor: not-allowed;
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+        .contact-row {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .contact-form-container {
+            padding: 2rem;
+        }
+        
+        .form-row {
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
+        
+        .faq-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .social-contact .social-links {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        .social-contact .social-link {
+            justify-content: flex-start;
+            padding: 1rem;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .contact-header {
+            padding-top: 6rem;
+        }
+        
+        .contact-form-container {
+            padding: 1.5rem;
+        }
+        
+        .contact-info {
+            padding: 1.5rem;
+        }
+        
+        .social-contact {
+            padding: 1.5rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Contact form handling is already implemented in main.js
+    // Additional contact page specific functionality can be added here
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        // Auto-focus on name field
+        const nameField = document.getElementById('name');
+        if (nameField) {
+            nameField.focus();
+        }
+        
+        // Character count for message field
+        const messageField = document.getElementById('message');
+        if (messageField) {
+            const maxLength = 1000;
+            const counter = document.createElement('div');
+            counter.className = 'character-counter';
+            counter.style.cssText = 'text-align: right; margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-muted);';
+            messageField.parentNode.appendChild(counter);
+            
+            function updateCounter() {
+                const remaining = maxLength - messageField.value.length;
+                counter.textContent = `${messageField.value.length}/${maxLength} characters`;
+                
+                if (remaining < 50) {
+                    counter.style.color = 'var(--danger-color)';
+                } else if (remaining < 100) {
+                    counter.style.color = 'var(--warning-color)';
+                } else {
+                    counter.style.color = 'var(--text-muted)';
+                }
+            }
+            
+            messageField.addEventListener('input', updateCounter);
+            messageField.maxLength = maxLength;
+            updateCounter();
+        }
+    });
+</script>
+{% endblock %}

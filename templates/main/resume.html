@@ -1,0 +1,984 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}Resume - Christopher Erick Otieno's Professional Experience{% endblock %}
+
+{% block description %}View Christopher Erick Otieno's professional resume including cybersecurity experience, technical skills, education, and achievements in IT security.{% endblock %}
+
+{% block content %}
+<!-- Resume Header -->
+<section class="resume-header section">
+    <div class="container">
+        <div class="resume-intro fade-in">
+            <div class="row">
+                <div class="col-8">
+                    <h1>{{ PERSONAL_NAME|default:"Christopher Erick Otieno" }}</h1>
+                    <h2 class="resume-title">Cybersecurity Analyst & IT Professional</h2>
+                    <p class="resume-summary">
+                        Dedicated Cybersecurity Analyst with 1 year of specialized experience in threat analysis, 
+                        vulnerability assessment, and security operations. Passionate about protecting digital assets 
+                        through proactive security measures, incident response, and comprehensive risk management. 
+                        Proven expertise in penetration testing, SIEM implementation, and security automation.
+                    </p>
+                </div>
+                <div class="col-4">
+                    <div class="resume-actions">
+                        <a href="{% url 'main:download_resume' %}" class="btn btn-primary btn-lg" download>
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                        <a href="{% url 'main:contact' %}" class="btn btn-outline btn-lg">
+                            <i class="fas fa-paper-plane"></i> Contact Me
+                        </a>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>{{ PERSONAL_EMAIL|default:"your.email@domain.com" }}</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>{{ PERSONAL_PHONE|default:'+254758081580' }}</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>{{ PERSONAL_LOCATION|default:'Nairobi, Kenya' }}</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-linkedin"></i>
+                            <span>linkedin.com/in/christopher-erick-otieno</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-github"></i>
+                            <span>github.com/{{ GITHUB_USERNAME|default:"your-username" }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section class="resume-skills section">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h2>Technical Skills</h2>
+        </div>
+        
+        <div class="skills-categories">
+            <div class="skills-grid">
+                <!-- Dynamic Skills by Category -->
+                {% if skills_by_category %}
+                    {% for category, skills in skills_by_category.items %}
+                    <div class="skill-category fade-in">
+                        <div class="category-header">
+                            {% if category == 'Tools' %}
+                            <i class="fas fa-tools"></i>
+                            {% elif category == 'Skills' %}
+                            <i class="fas fa-code"></i>
+                            {% elif category == 'Special Skills' %}
+                            <i class="fas fa-user"></i>
+                            {% else %}
+                            <i class="fas fa-code"></i>
+                            {% endif %}
+                            <h3>{{ category }}</h3>
+                        </div>
+                        <div class="skills-compact">
+                            {% for skill in skills %}
+                            <div class="skill-compact">
+                                {{ skill.name }}
+                                <span class="skill-level">
+                                    {% if skill.proficiency >= 80 %}
+                                        Expert
+                                    {% elif skill.proficiency >= 60 %}
+                                        Advanced
+                                    {% elif skill.proficiency >= 40 %}
+                                        Intermediate
+                                    {% else %}
+                                        Basic
+                                    {% endif %}
+                                </span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                <!-- Fallback content if no skills in database -->
+                <div class="skill-category fade-in">
+                    <div class="category-header">
+                        <i class="fas fa-tools"></i>
+                        <h3>Tools</h3>
+                    </div>
+                    <div class="skills-compact">
+                        <div class="skill-compact">Python <span class="skill-level">Expert</span></div>
+                        <div class="skill-compact">Django <span class="skill-level">Advanced</span></div>
+                        <div class="skill-compact">JavaScript <span class="skill-level">Advanced</span></div>
+                        <div class="skill-compact">SQL <span class="skill-level">Advanced</span></div>
+                        <div class="skill-compact">Git <span class="skill-level">Intermediate</span></div>
+                    </div>
+                </div>
+
+                <div class="skill-category fade-in">
+                    <div class="category-header">
+                        <i class="fas fa-code"></i>
+                        <h3>Skills</h3>
+                    </div>
+                    <div class="skills-compact">
+                        <div class="skill-compact">Web Development <span class="skill-level">Advanced</span></div>
+                        <div class="skill-compact">Database Design <span class="skill-level">Advanced</span></div>
+                        <div class="skill-compact">API Development <span class="skill-level">Advanced</span></div>
+                        <div class="skill-compact">Testing <span class="skill-level">Intermediate</span></div>
+                        <div class="skill-compact">DevOps <span class="skill-level">Intermediate</span></div>
+                    </div>
+                </div>
+
+                <div class="skill-category fade-in">
+                    <div class="category-header">
+                        <i class="fas fa-user"></i>
+                        <h3>Special Skills</h3>
+                    </div>
+                    <div class="skills-compact">
+                        <div class="skill-compact">Problem Solving <span class="skill-level">Expert</span></div>
+                        <div class="skill-compact">Team Leadership <span class="skill-level">Advanced</span></div>
+                        <div class="skill-compact">Communication <span class="skill-level">Advanced</span></div>
+                        <div class="skill-compact">Project Management <span class="skill-level">Intermediate</span></div>
+                        <div class="skill-compact">Time Management <span class="skill-level">Advanced</span></div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Experience Section -->
+<section class="resume-experience section" style="background-color: var(--bg-secondary);">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h2>Professional Experience</h2>
+        </div>
+        
+        <div class="timeline">
+            <!-- Dynamic Experience Items -->
+            {% for experience in experiences %}
+            <div class="timeline-item fade-in">
+                <div class="timeline-date">
+                    {{ experience.start_date|date:"Y" }} - {% if experience.end_date %}{{ experience.end_date|date:"Y" }}{% else %}Present{% endif %}
+                </div>
+                <div class="timeline-content">
+                    <h3>{{ experience.position }}</h3>
+                    <h4>{{ experience.company }}</h4>
+                    <p class="timeline-description">
+                        {{ experience.description }}
+                    </p>
+                    {% if experience.technologies %}
+                    <div class="timeline-tech">
+                        {% for tech in experience.technologies|split:"," %}
+                        <span class="tech-tag">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <!-- Fallback content if no experiences in database -->
+            <div class="timeline-item fade-in">
+                <div class="timeline-date">2024 - Present</div>
+                <div class="timeline-content">
+                    <h3>Cybersecurity Enthusiast & Professional</h3>
+                    <h4>Building Expertise Through Projects & Learning</h4>
+                    <p class="timeline-description">
+                        Developing cybersecurity expertise through hands-on projects, security assessments, and 
+                        continuous learning. Specializing in threat analysis, vulnerability assessment, and security 
+                        operations with tools like Splunk, Gobuster, and malware analysis frameworks. Actively 
+                        seeking cybersecurity analyst positions to apply 1+ year of experience.
+                    </p>
+                    <div class="timeline-tech">
+                        <span class="tech-tag">Vulnerability Assessment</span>
+                        <span class="tech-tag">Penetration Testing</span>
+                        <span class="tech-tag">SIEM (Splunk)</span>
+                        <span class="tech-tag">Incident Response</span>
+                        <span class="tech-tag">Risk Analysis</span>
+                        <span class="tech-tag">Gobuster</span>
+                        <span class="tech-tag">Malware Analysis</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item fade-in">
+                <div class="timeline-date">2023 - 2024</div>
+                <div class="timeline-content">
+                    <h3>Cybersecurity Analyst</h3>
+                    <h4>IT Security & Systems Administration</h4>
+                    <p class="timeline-description">
+                        Gained foundational experience in cybersecurity operations including vulnerability assessments, 
+                        threat monitoring, and incident response. Implemented security measures, conducted penetration 
+                        testing, and contributed to security policy development. Worked with various security tools and 
+                        maintained security compliance standards.
+                    </p>
+                    <div class="timeline-tech">
+                        <span class="tech-tag">Wireshark</span>
+                        <span class="tech-tag">Nmap</span>
+                        <span class="tech-tag">Metasploit</span>
+                        <span class="tech-tag">Wazuh</span>
+                        <span class="tech-tag">Python</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item fade-in">
+                <div class="timeline-date">2022 - 2023</div>
+                <div class="timeline-content">
+                    <h3>IT Support Engineer & System Administrator</h3>
+                    <h4>Technical Infrastructure & Database Management</h4>
+                    <p class="timeline-description">
+                        Provided comprehensive IT support and system administration services. Managed database operations, 
+                        conducted data analysis, and coordinated project management activities. Built foundational 
+                        experience in Windows/Linux environments while transitioning focus toward cybersecurity.
+                    </p>
+                    <div class="timeline-tech">
+                        <span class="tech-tag">Windows Server</span>
+                        <span class="tech-tag">Linux</span>
+                        <span class="tech-tag">Database Admin</span>
+                        <span class="tech-tag">PowerShell</span>
+                        <span class="tech-tag">Network Administration</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Education Section -->
+<section class="resume-education section">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h2>Education & Certifications</h2>
+        </div>
+        
+        <div class="education-grid grid-2">
+            <!-- Dynamic Education Items -->
+            {% for education in education_items %}
+            <div class="education-item fade-in">
+                <div class="education-icon">
+                    <i class="{{ education.icon }}"></i>
+                </div>
+                <div class="education-content">
+                    <h3>{{ education.degree }}</h3>
+                    <h4>{{ education.institution }}</h4>
+                    <div class="education-date">
+                        {{ education.start_date.year }} - {% if education.end_date %}{{ education.end_date.year }}{% else %}Present{% endif %}
+                    </div>
+                    {% if education.field_of_study %}
+                        <p class="field-of-study">{{ education.field_of_study }}</p>
+                    {% endif %}
+                    {% if education.description %}
+                        <p>{{ education.description }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <!-- Fallback content if no education items in database -->
+            <div class="education-item fade-in">
+                <div class="education-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="education-content">
+                    <h3>Bachelor of Science in Information Technology</h3>
+                    <h4>University of Nairobi</h4>
+                    <div class="education-date">2019 - 2023</div>
+                    <p>Specialized in cybersecurity, network administration, and IT infrastructure management. 
+                       Completed coursework in ethical hacking, digital forensics, and security frameworks. 
+                       Participated in cybersecurity competitions and capture-the-flag events.</p>
+                </div>
+            </div>
+            {% endfor %}
+            
+            <!-- Dynamic Certification Items -->
+            {% for certification in certifications %}
+            <div class="education-item fade-in">
+                <div class="education-icon">
+                    <i class="{{ certification.icon }}"></i>
+                </div>
+                <div class="education-content">
+                    <h3>{{ certification.name }}</h3>
+                    <h4>{{ certification.issuing_organization }}</h4>
+                    <div class="education-date">
+                        {{ certification.issue_date.year }}{% if certification.expiry_date %} - {{ certification.expiry_date.year }}{% endif %}
+                    </div>
+                    {% if certification.description %}
+                        <p>{{ certification.description }}</p>
+                    {% endif %}
+                    {% if certification.credential_url %}
+                        <a href="{{ certification.credential_url }}" target="_blank" class="credential-link">
+                            <i class="fas fa-external-link-alt"></i> Verify Credential
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <!-- Fallback certifications if none in database -->
+            {% if not education_items %}
+            <div class="education-item fade-in">
+                <div class="education-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <div class="education-content">
+                    <h3>Cybersecurity Fundamentals Certificate</h3>
+                    <h4>Cybrary & CompTIA Learning Path</h4>
+                    <div class="education-date">2024</div>
+                    <p>Comprehensive training in cybersecurity fundamentals, risk management, 
+                       and security best practices aligned with industry standards.</p>
+                </div>
+            </div>
+            
+            <div class="education-item fade-in">
+                <div class="education-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="education-content">
+                    <h3>Ethical Hacking & Penetration Testing</h3>
+                    <h4>TryHackMe & HackTheBox Platforms</h4>
+                    <div class="education-date">2023 - 2024</div>
+                    <p>Hands-on training in ethical hacking methodologies, vulnerability assessment, 
+                       and penetration testing through practical lab environments and challenges.</p>
+                </div>
+            </div>
+            
+            <div class="education-item fade-in">
+                <div class="education-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <div class="education-content">
+                    <h3>SIEM Implementation & Security Monitoring</h3>
+                    <h4>Wazuh & Security Operations</h4>
+                    <div class="education-date">2024</div>
+                    <p>Specialized training in Security Information and Event Management (SIEM) platforms, 
+                       log analysis, threat detection, and security operations center (SOC) procedures.</p>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Achievements Section -->
+<section class="resume-achievements section" style="background-color: var(--bg-secondary);">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h2>Key Achievements</h2>
+        </div>
+        
+        <div class="achievements-grid grid-3">
+            <!-- Dynamic Achievement Items -->
+            {% for achievement in achievements %}
+            <div class="achievement-item fade-in">
+                <div class="achievement-icon">
+                    <i class="{{ achievement.icon }}"></i>
+                </div>
+                <h4>{{ achievement.title }}</h4>
+                <p>{{ achievement.description }}</p>
+                {% if achievement.tech_list %}
+                <div class="achievement-tech-badges">
+                    {% for tech in achievement.tech_list %}
+                    <span class="tech-badge-achievement {{ tech|lower|cut:' ' }}">{{ tech }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            {% empty %}
+            <!-- Fallback content if no achievements in database -->
+            <div class="achievement-item fade-in">
+                <div class="achievement-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h4>10+ Security Projects</h4>
+                <p>Successfully completed comprehensive security projects including vulnerability assessments, penetration tests, and security implementations for various network infrastructures and applications.</p>
+            </div>
+            
+            <div class="achievement-item fade-in">
+                <div class="achievement-icon">
+                    <i class="fas fa-bug"></i>
+                </div>
+                <h4>Vulnerability Discovery</h4>
+                <p>Identified and documented critical security vulnerabilities through systematic penetration testing and security audits, contributing to improved security postures.</p>
+            </div>
+            
+            <div class="achievement-item fade-in">
+                <div class="achievement-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <h4>SIEM Implementation</h4>
+                <p>Successfully deployed and configured Wazuh SIEM platform for real-time security monitoring, resulting in enhanced threat detection capabilities.</p>
+            </div>
+            
+            <div class="achievement-item fade-in">
+                <div class="achievement-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h4>Security Automation</h4>
+                <p>Developed Python and Bash scripts for automated security tasks including log analysis, vulnerability scanning, and incident response workflows.</p>
+            </div>
+            
+            <div class="achievement-item fade-in">
+                <div class="achievement-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <h4>Continuous Learning</h4>
+                <p>Actively pursuing cybersecurity certifications and maintaining up-to-date knowledge of emerging threats, security frameworks, and industry best practices.</p>
+            </div>
+            
+            <div class="achievement-item fade-in">
+                <div class="achievement-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h4>Professional Development</h4>
+                <p>Building strong professional network within cybersecurity community while actively seeking opportunities to contribute to organizational security objectives.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Resume Page Styles */
+    .resume-header {
+        padding-top: 8rem;
+        padding-bottom: 3rem;
+    }
+    
+    .resume-intro h1 {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+        color: var(--primary-color);
+    }
+    
+    .resume-title {
+        font-size: 1.5rem;
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+        font-weight: 500;
+    }
+    
+    .resume-summary {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: var(--text-secondary);
+        margin-bottom: 2rem;
+    }
+    
+    .resume-actions {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+    }
+    
+    .contact-info {
+        background: var(--bg-secondary);
+        padding: 2rem;
+        border-radius: var(--border-radius-lg);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        color: var(--text-secondary);
+    }
+    
+    .contact-item:last-child {
+        margin-bottom: 0;
+    }
+    
+    .contact-item i {
+        width: 20px;
+        color: var(--primary-color);
+    }
+    
+    /* Skills Section */
+    .skills-categories {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    
+    .skill-category {
+        background: var(--bg-primary);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: var(--border-radius-lg);
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+    }
+    
+    .skill-category:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .category-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid var(--primary-color);
+    }
+    
+    .category-header i {
+        font-size: 1.25rem;
+        color: var(--primary-color);
+        width: 24px;
+        text-align: center;
+    }
+    
+    .category-header h3 {
+        color: var(--text-primary);
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 0;
+    }
+    
+    .skills-compact {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .skill-compact {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .skill-compact:last-child {
+        border-bottom: none;
+    }
+    
+    .skill-level {
+        background: var(--secondary-color);
+        color: white;
+        padding: 0.2rem 0.6rem;
+        border-radius: var(--border-radius);
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .skill-level:contains('Expert') {
+        background: #28a745;
+    }
+    
+    .skill-level:contains('Advanced') {
+        background: var(--primary-color);
+    }
+    
+    .skill-level:contains('Intermediate') {
+        background: #ffc107;
+        color: #000;
+    }
+    
+    /* Tech badges for tools section */
+    .tech-badges-compact {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .tech-badge-compact {
+        background: var(--primary-color);
+        color: white;
+        padding: 0.4rem 0.8rem;
+        border-radius: var(--border-radius);
+        font-size: 0.8rem;
+        font-weight: 500;
+        transition: var(--transition-fast);
+        border: 1px solid transparent;
+    }
+    
+    .tech-badge-compact:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+    }
+    
+    /* Specific tool colors */
+    .tech-badge-compact.splunk { background: #00A653; }
+    .tech-badge-compact.gobuster { background: #FF6B35; }
+    .tech-badge-compact.wireshark { background: #1679A7; }
+    .tech-badge-compact.nmap { background: #4682B4; }
+    .tech-badge-compact.metasploit { background: #2F5F8F; }
+    .tech-badge-compact.kali { background: #367AA9; }
+    .tech-badge-compact.wazuh { background: #005571; }
+    .tech-badge-compact.burp { background: #FF6633; }
+    .tech-badge-compact.nessus { background: #00A4E0; }
+    .tech-badge-compact.python { background: #3776AB; }
+    .tech-badge-compact.powershell { background: #5391FE; }
+    .tech-badge-compact.owasp { background: #000000; }
+    
+    /* Legacy styles - keeping for compatibility */
+    .tech-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .tech-badge {
+        background: var(--primary-color);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: var(--border-radius);
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: var(--transition-fast);
+    }
+    
+    .tech-badge:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+    }
+    
+    /* Timeline */
+    .timeline {
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        padding-left: 2rem;
+    }
+    
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: var(--primary-color);
+        border-radius: 2px;
+    }
+    
+    .timeline-item {
+        position: relative;
+        margin-bottom: 3rem;
+        padding-left: 3rem;
+    }
+    
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -9px;
+        top: 0;
+        width: 18px;
+        height: 18px;
+        background: var(--primary-color);
+        border-radius: 50%;
+        border: 4px solid var(--bg-primary);
+        box-shadow: 0 0 0 4px var(--primary-color);
+    }
+    
+    .timeline-date {
+        color: var(--primary-color);
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .timeline-content h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.25rem;
+        color: var(--text-primary);
+    }
+    
+    .timeline-content h4 {
+        color: var(--text-secondary);
+        font-style: italic;
+        font-weight: 500;
+        margin-bottom: 1rem;
+    }
+    
+    .timeline-description {
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+    
+    .timeline-tech {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .tech-tag {
+        background: var(--secondary-color);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: var(--border-radius);
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+    
+    /* Education */
+    .education-item {
+        display: flex;
+        gap: 1.5rem;
+        background: var(--bg-primary);
+        padding: 2rem;
+        border-radius: var(--border-radius-lg);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        transition: var(--transition);
+    }
+    
+    .education-item:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow);
+    }
+    
+    .education-icon {
+        flex-shrink: 0;
+        width: 60px;
+        height: 60px;
+        background: var(--primary-color);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+    
+    .education-content h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        color: var(--text-primary);
+    }
+    
+    .education-content h4 {
+        color: var(--primary-color);
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+    
+    .education-date {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+    
+    .education-content p {
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin: 0;
+    }
+    
+    .field-of-study {
+        font-style: italic;
+        color: var(--text-muted);
+        margin-bottom: 0.5rem !important;
+    }
+    
+    .credential-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--primary-color);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-top: 0.5rem;
+        transition: var(--transition);
+    }
+    
+    .credential-link:hover {
+        color: var(--primary-dark);
+        text-decoration: underline;
+    }
+    
+    /* Achievements */
+    .achievement-item {
+        text-align: center;
+        background: var(--bg-primary);
+        padding: 2rem;
+        border-radius: var(--border-radius-lg);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        transition: var(--transition);
+    }
+    
+    .achievement-item:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .achievement-icon {
+        width: 80px;
+        height: 80px;
+        background: var(--primary-color);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        margin: 0 auto 1.5rem;
+    }
+    
+    .achievement-item h4 {
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+    }
+    
+    .achievement-item p {
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin: 0;
+    }
+    
+    /* Achievement Technology Badges */
+    .achievement-tech-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        justify-content: center;
+    }
+    
+    .tech-badge-achievement {
+        padding: 0.4rem 0.8rem;
+        border-radius: var(--border-radius);
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: white;
+        transition: var(--transition-fast);
+        border: 1px solid transparent;
+    }
+    
+    .tech-badge-achievement:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Specific tech badge colors matching the image */
+    .tech-badge-achievement.burpsuite,
+    .tech-badge-achievement.burp { background: #FF6633; }
+    .tech-badge-achievement.iso27001,
+    .tech-badge-achievement.iso { background: #FFA500; }
+    .tech-badge-achievement.kalilinux,
+    .tech-badge-achievement.kali { background: #367AA9; }
+    .tech-badge-achievement.metasploit { background: #2F5F8F; }
+    .tech-badge-achievement.nist { background: #1E3A8A; }
+    .tech-badge-achievement.nessus { background: #00A4E0; }
+    .tech-badge-achievement.nmap { background: #4682B4; }
+    .tech-badge-achievement.owasp { background: #000000; }
+    
+    /* Additional cybersecurity tools */
+    .tech-badge-achievement.splunk { background: #00A653; }
+    .tech-badge-achievement.gobuster { background: #FF6B35; }
+    .tech-badge-achievement.wireshark { background: #1679A7; }
+    .tech-badge-achievement.wazuh { background: #005571; }
+    .tech-badge-achievement.python { background: #3776AB; }
+    .tech-badge-achievement.powershell { background: #5391FE; }
+    .tech-badge-achievement.linux { background: #FCC624; color: #000; }
+    .tech-badge-achievement.windows { background: #0078D4; }
+    
+    /* Default color for unspecified tools */
+    .tech-badge-achievement:not([class*="burp"]):not([class*="iso"]):not([class*="kali"]):not([class*="metasploit"]):not([class*="nist"]):not([class*="nessus"]):not([class*="nmap"]):not([class*="owasp"]):not([class*="splunk"]):not([class*="gobuster"]):not([class*="wireshark"]):not([class*="wazuh"]):not([class*="python"]):not([class*="powershell"]):not([class*="linux"]):not([class*="windows"]) {
+        background: var(--primary-color);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        .resume-intro .row {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .resume-intro h1 {
+            font-size: 2.5rem;
+        }
+        
+        .contact-info {
+            margin-top: 2rem;
+        }
+        
+        /* Skills responsive */
+        .skills-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .skill-category {
+            padding: 1.25rem;
+        }
+        
+        .category-header {
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+        }
+        
+        .category-header h3 {
+            font-size: 1rem;
+        }
+        
+        .tech-badges-compact {
+            gap: 0.4rem;
+        }
+        
+        .tech-badge-compact {
+            padding: 0.3rem 0.6rem;
+            font-size: 0.75rem;
+        }
+        
+        .skill-compact {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+            padding: 0.75rem 0;
+        }
+        
+        .skill-level {
+            align-self: flex-end;
+        }
+        
+        /* Legacy responsive styles */
+        .skill-item {
+            grid-template-columns: 1fr;
+            gap: 0.5rem;
+            text-align: center;
+        }
+        
+        .timeline {
+            padding-left: 1rem;
+        }
+        
+        .timeline-item {
+            padding-left: 2rem;
+        }
+        
+        .education-item {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .achievements-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}

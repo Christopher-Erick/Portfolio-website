@@ -1,0 +1,163 @@
+/* FontAwesome Icon Fixes and Enhancements */
+
+/* Ensure FontAwesome loads properly */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
+
+/* FontAwesome Family Fixes */
+.fab, .fas, .far, .fal, .fad, .fat {
+    font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands', 'FontAwesome' !important;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: inline-block;
+    font-weight: normal;
+}
+
+/* Brand Icons */
+.fab {
+    font-family: 'Font Awesome 6 Brands' !important;
+    font-weight: 400;
+}
+
+/* Solid Icons */
+.fas {
+    font-family: 'Font Awesome 6 Free' !important;
+    font-weight: 900;
+}
+
+/* Regular Icons */
+.far {
+    font-family: 'Font Awesome 6 Free' !important;
+    font-weight: 400;
+}
+
+/* Social Links Enhancement */
+.social-link {
+    position: relative;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.social-link i {
+    min-width: 20px;
+    text-align: center;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.3s ease;
+    line-height: 1 !important;
+    vertical-align: middle;
+}
+
+/* Contact page specific social links - Higher specificity */
+.social-contact .social-links {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.25rem !important;
+}
+
+.social-contact .social-links .social-link {
+    justify-content: flex-start !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 64px !important;
+    border-radius: var(--border-radius) !important;
+    padding: 1.25rem 1.5rem !important;
+    background: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    transition: all 0.3s ease !important;
+}
+
+.social-contact .social-links .social-link:hover {
+    background: var(--primary-color) !important;
+    color: white !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2) !important;
+}
+
+.social-contact .social-links .social-link i {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 1.5rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    margin-right: 1.25rem !important;
+}
+
+.social-contact .social-links .social-link span {
+    display: flex !important;
+    align-items: center !important;
+    flex: 1 !important;
+    font-size: 1.1rem !important;
+    line-height: 1.4 !important;
+    font-weight: 500 !important;
+}
+
+.social-link:hover i {
+    transform: scale(1.1);
+}
+
+/* Platform-specific icon colors */
+.social-link[href*="github.com"]:hover i {
+    color: #333 !important;
+}
+
+.social-link[href*="linkedin.com"]:hover i {
+    color: #0077b5 !important;
+}
+
+.social-link[href*="tryhackme.com"]:hover i {
+    color: #88cc14 !important;
+}
+
+.social-link[href*="hackthebox"]:hover i {
+    color: #9fef00 !important;
+}
+
+/* Cybersecurity Icon Mappings */
+.cybersec-icon {
+    font-family: 'Font Awesome 6 Free' !important;
+    font-weight: 900;
+}
+
+/* Fallback for missing icons */
+.fa-missing:before {
+    content: "🔗";
+    font-family: emoji;
+}
+
+/* Better loading state */
+[class^="fa-"], [class*=" fa-"] {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Loading state */
+.fa-loading {
+    animation: fa-spin 1s infinite linear;
+}
+
+/* Icon alignment in buttons */
+.btn i {
+    margin-right: 0.5rem;
+    vertical-align: middle;
+}
+
+/* Icon sizing consistency */
+.fa-lg { font-size: 1.33333em; }
+.fa-xl { font-size: 1.5em; }
+.fa-2x { font-size: 2em; }
+.fa-3x { font-size: 3em; }
+
+/* Custom cybersecurity icons */
+.icon-pentest:before { content: "\f188"; } /* fa-bug */
+.icon-security:before { content: "\f3ed"; } /* fa-shield-alt */
+.icon-hacker:before { content: "\f21b"; } /* fa-user-secret */
+.icon-network:before { content: "\f6ff"; } /* fa-network-wired */

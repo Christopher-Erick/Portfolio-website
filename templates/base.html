@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>{% block title %}{{ PERSONAL_NAME|default:"Christopher Erick Otieno" }} - Cybersecurity Analyst & IT Professional{% endblock %}</title>
+    <meta name="description" content="{% block description %}Professional portfolio of {{ PERSONAL_NAME|default:"Christopher Erick Otieno" }} - Cybersecurity Analyst specializing in vulnerability assessment, penetration testing, system administration, and data analysis.{% endblock %}">
+    <meta name="keywords" content="{% block keywords %}cybersecurity, analyst, penetration testing, vulnerability assessment, system administrator, data analyst, IT support, database admin{% endblock %}">
+    <meta name="author" content="{{ PERSONAL_NAME|default:"Christopher Erick Otieno" }}">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{% block og_title %}{{ PERSONAL_NAME|default:"Christopher Erick Otieno" }} - Cybersecurity Analyst{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Professional portfolio showcasing cybersecurity expertise, penetration testing projects, and IT solutions.{% endblock %}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{% load static %}{{ request.build_absolute_uri }}{% static 'images/portfolio-preview.jpg' %}{% endblock %}">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block twitter_title %}{{ PERSONAL_NAME|default:"Christopher Erick Otieno" }}{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Cybersecurity Analyst & IT Professional{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}{% load static %}{{ request.build_absolute_uri }}{% static 'images/portfolio-preview.jpg' %}{% endblock %}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <!-- Fallback Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
+    
+    <!-- CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icons.css' %}">
+    
+    <!-- Icon Fixes -->
+    <style>
+        /* FontAwesome Icon Fixes */
+        .fab, .fas, .far, .fal, .fad, .fat {
+            font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands', 'FontAwesome' !important;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .fab {
+            font-family: 'Font Awesome 6 Brands' !important;
+            font-weight: 400;
+        }
+        
+        .fas {
+            font-family: 'Font Awesome 6 Free' !important;
+            font-weight: 900;
+        }
+        
+        /* Social Link Icon Fallbacks */
+        .social-link i {
+            min-width: 20px;
+            text-align: center;
+            display: inline-block;
+        }
+        
+        /* Specific icon fixes */
+        .fa-github:before { content: "\f09b"; }
+        .fa-linkedin:before { content: "\f08c"; }
+        .fa-envelope:before { content: "\f0e0"; }
+        .fa-user-secret:before { content: "\f21b"; }
+        .fa-cube:before { content: "\f1b2"; }
+        .fa-shield-alt:before { content: "\f3ed"; }
+        
+        /* Fix for potential z-index issues */
+        body {
+            position: relative;
+            z-index: 0;
+        }
+        
+        main {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+    
+    {% block extra_css %}{% endblock %}
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "{{ PERSONAL_NAME|default:"Christopher" }}",
+        "jobTitle": "Cybersecurity Analyst",
+        "url": "{{ request.build_absolute_uri }}",
+        "sameAs": [
+            "{{ GITHUB_URL|default:"https://github.com/christopher" }}",
+            "https://www.linkedin.com/in/christopher-erick-otieno",
+            "{{ TRYHACKME_URL|default:"https://tryhackme.com" }}",
+            "{{ HACKTHEBOX_URL|default:"https://hackthebox.com" }}",
+            "{{ EMAIL_URL|default:"mailto:your.email@domain.com" }}"
+        ],
+        "knowsAbout": ["Cybersecurity", "Penetration Testing", "Vulnerability Assessment", "SIEM", "Incident Response", "Python", "Django", "JavaScript"],
+        "description": "{{ PERSONAL_TAGLINE|default:"Cybersecurity Analyst passionate about building secure digital ecosystems and delivering robust IT solutions that protect organizations from evolving threats." }}"
+    }
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="{% url 'main:home' %}" class="navbar-brand">
+                <i class="fas fa-shield-alt"></i> {{ PERSONAL_NAME|default:"Christopher Erick" }}
+            </a>
+            
+            <ul class="navbar-nav">
+                <li><a href="{% url 'main:home' %}#home">Home</a></li>
+                <li><a href="{% url 'main:home' %}#about">About</a></li>
+                <li><a href="{% url 'portfolio:portfolio_list' %}">Portfolio</a></li>
+                <li><a href="{% url 'main:resume' %}">Resume</a></li>
+                <li><a href="{% url 'blog:blog_list' %}">Blog</a></li>
+                <li><a href="{% url 'main:contact' %}">Contact</a></li>
+            </ul>
+            
+            <div class="navbar-actions">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>{{ PERSONAL_NAME|default:"Christopher Erick" }}</h3>
+                    <p>{{ PERSONAL_TAGLINE|default:"Cybersecurity Analyst passionate about building secure digital ecosystems and delivering robust IT solutions that protect organizations from evolving threats." }}</p>
+                    <div class="social-links">
+                        <a href="{{ GITHUB_URL }}" class="social-link" target="_blank" rel="noopener">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/christopher-erick-otieno" class="social-link" target="_blank" rel="noopener">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="{{ EMAIL_URL }}" class="social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><a href="{% url 'main:home' %}">Home</a></li>
+                        <li><a href="{% url 'portfolio:portfolio_list' %}">Portfolio</a></li>
+                        <li><a href="{% url 'main:resume' %}">Resume</a></li>
+                        <li><a href="{% url 'blog:blog_list' %}">Blog</a></li>
+                        <li><a href="{% url 'main:contact' %}">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><a href="#">Cybersecurity Assessment</a></li>
+                        <li><a href="#">Penetration Testing</a></li>
+                        <li><a href="#">System Administration</a></li>
+                        <li><a href="#">Data Analysis</a></li>
+                        <li><a href="#">IT Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-envelope"></i> {{ PERSONAL_EMAIL|default:"your.email@domain.com" }}</p>
+                    {% if PERSONAL_PHONE %}<p><i class="fas fa-phone"></i> {{ PERSONAL_PHONE }}</p>{% endif %}
+                    {% if PERSONAL_LOCATION %}<p><i class="fas fa-map-marker-alt"></i> {{ PERSONAL_LOCATION }}</p>{% endif %}
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; {{ current_year|default:"2025" }} {{ PERSONAL_NAME|default:"Christopher" }}. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+    
+    <!-- CSRF Token for AJAX requests -->
+    {% csrf_token %}
+    <script>
+        // Function to get CSRF token from cookies
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        window.csrfToken = getCookie('csrftoken');
+    </script>
+    
+    <!-- Analytics (if needed) -->
+    {% if google_analytics_id %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ google_analytics_id }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ google_analytics_id }}');
+    </script>
+    {% endif %}
+</body>
+</html>

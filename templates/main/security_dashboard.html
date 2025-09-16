@@ -1,0 +1,636 @@
+{% extends "base.html" %}
+
+{% block title %}Security Command Center - {{ user_profile.name }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Modern Security Dashboard Styles */
+    :root {
+        --primary-blue: #1e40af;
+        --success-green: #10b981;
+        --warning-orange: #f59e0b;
+        --danger-red: #ef4444;
+        --dark-bg: #0f172a;
+        --card-bg: #1e293b;
+        --border-color: #334155;
+        --text-light: #e2e8f0;
+        --text-muted: #94a3b8;
+    }
+    
+    .security-dashboard {
+        background: linear-gradient(135deg, var(--dark-bg) 0%, #1e3a8a 100%);
+        min-height: 100vh;
+        padding: 2rem;
+        color: var(--text-light);
+        position: relative;
+        z-index: 1;
+        /* Fix for potential overflow issues */
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    
+    .dashboard-header {
+        text-align: center;
+        margin-bottom: 3rem;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+        z-index: 2;
+        /* Fix for potential height issues */
+        display: block;
+        width: 100%;
+    }
+    
+    .dashboard-title {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        background: linear-gradient(45deg, #60a5fa, #34d399);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        /* Fix for potential text overflow */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    .threat-indicator {
+        display: inline-block;
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1.2rem;
+        margin: 1rem 0;
+        position: relative;
+        overflow: hidden;
+        z-index: 3;
+        /* Fix for potential width issues */
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .threat-low {
+        background: linear-gradient(45deg, var(--success-green), #22c55e);
+        box-shadow: 0 0 30px rgba(16, 185, 129, 0.3);
+    }
+    
+    .threat-medium {
+        background: linear-gradient(45deg, var(--warning-orange), #fbbf24);
+        box-shadow: 0 0 30px rgba(245, 158, 11, 0.3);
+    }
+    
+    .threat-high {
+        background: linear-gradient(45deg, var(--danger-red), #f87171);
+        box-shadow: 0 0 30px rgba(239, 68, 68, 0.3);
+        animation: pulse-danger 2s infinite;
+    }
+    
+    .threat-critical {
+        background: linear-gradient(45deg, #dc2626, #7f1d1d);
+        box-shadow: 0 0 30px rgba(220, 38, 38, 0.5);
+        animation: pulse-critical 1s infinite;
+    }
+    
+    @keyframes pulse-danger {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.8; }
+    }
+    
+    @keyframes pulse-critical {
+        0%, 100% { opacity: 1; box-shadow: 0 0 30px rgba(220, 38, 38, 0.5); }
+        50% { opacity: 0.9; box-shadow: 0 0 50px rgba(220, 38, 38, 0.8); }
+    }
+    
+    .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin: 3rem 0;
+        position: relative;
+        z-index: 2;
+        /* Fix for potential grid layout issues */
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .metric-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        padding: 2rem;
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        /* Fix for potential card overlap */
+        min-height: 200px;
+        box-sizing: border-box;
+    }
+    
+    .metric-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        border-color: rgba(96, 165, 250, 0.3);
+        /* Fix for potential hover overlap */
+        z-index: 4;
+    }
+    
+    .metric-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(96, 165, 250, 0.1), transparent);
+        transition: left 0.5s;
+        z-index: -1;
+    }
+    
+    .metric-card:hover::before {
+        left: 100%;
+    }
+    
+    .metric-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: var(--success-green);
+    }
+    
+    .metric-value {
+        font-size: 3rem;
+        font-weight: 700;
+        margin: 1rem 0;
+        color: var(--text-light);
+        /* Fix for potential value overflow */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    .metric-label {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        margin-bottom: 0.5rem;
+    }
+    
+    .metric-description {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        margin-top: auto;
+        /* Fix for potential description overlap */
+        min-height: 2rem;
+    }
+    
+    .events-section {
+        margin-top: 3rem;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        padding: 2rem;
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+        z-index: 2;
+        /* Fix for potential section overlap */
+        clear: both;
+        box-sizing: border-box;
+    }
+    
+    .events-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        color: var(--text-light);
+    }
+    
+    .event-item {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        margin-bottom: 0.5rem;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 10px;
+        border-left: 4px solid var(--success-green);
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 3;
+        /* Fix for potential item overlap */
+        clear: both;
+        box-sizing: border-box;
+    }
+    
+    .event-item:hover {
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateX(5px);
+        /* Fix for potential hover overlap */
+        z-index: 4;
+    }
+    
+    .event-item.severity-high {
+        border-left-color: var(--danger-red);
+    }
+    
+    .event-item.severity-medium {
+        border-left-color: var(--warning-orange);
+    }
+    
+    .event-icon {
+        font-size: 1.2rem;
+        margin-right: 1rem;
+        width: 30px;
+        text-align: center;
+        flex-shrink: 0;
+    }
+    
+    .event-details {
+        flex: 1;
+        /* Fix for potential details overflow */
+        min-width: 0;
+    }
+    
+    .event-time {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+    }
+    
+    .controls-section {
+        margin-top: 3rem;
+        text-align: center;
+        position: relative;
+        z-index: 2;
+        /* Fix for potential section overlap */
+        clear: both;
+        box-sizing: border-box;
+    }
+    
+    .dashboard-btn {
+        background: linear-gradient(45deg, var(--primary-blue), #3b82f6);
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        font-size: 1rem;
+        font-weight: 600;
+        margin: 0.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        position: relative;
+        z-index: 3;
+        min-width: 200px;
+        /* Fix for potential button overlap */
+        box-sizing: border-box;
+        vertical-align: top;
+    }
+    
+    .dashboard-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        color: white;
+        text-decoration: none;
+        /* Fix for potential hover overlap */
+        z-index: 4;
+    }
+    
+    .dashboard-btn.btn-success {
+        background: linear-gradient(45deg, var(--success-green), #22c55e);
+    }
+    
+    .dashboard-btn.btn-success:hover {
+        box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+    }
+    
+    .dashboard-btn.btn-warning {
+        background: linear-gradient(45deg, var(--warning-orange), #fbbf24);
+    }
+    
+    .dashboard-btn.btn-warning:hover {
+        box-shadow: 0 10px 20px rgba(245, 158, 11, 0.3);
+    }
+    
+    .dashboard-btn.btn-danger {
+        background: linear-gradient(45deg, var(--danger-red), #f87171);
+    }
+    
+    .dashboard-btn.btn-danger:hover {
+        box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3);
+    }
+    
+    .professional-info {
+        margin-top: 3rem;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+        position: relative;
+        z-index: 2;
+        /* Fix for potential section overlap */
+        clear: both;
+        box-sizing: border-box;
+    }
+    
+    .social-links {
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        align-items: center;
+        /* Fix for potential link overlap */
+        clear: both;
+    }
+    
+    .social-link {
+        color: var(--success-green);
+        text-decoration: none;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        display: inline-block;
+        min-width: 250px;
+        text-align: center;
+        position: relative;
+        z-index: 3;
+        /* Fix for potential link overlap */
+        box-sizing: border-box;
+    }
+    
+    .social-link:hover {
+        color: #60a5fa;
+        text-decoration: none;
+        background: rgba(96, 165, 250, 0.1);
+        border-color: rgba(96, 165, 250, 0.3);
+        transform: translateY(-2px);
+        /* Fix for potential hover overlap */
+        z-index: 4;
+    }
+    
+    .status-indicator {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 0.5rem;
+        animation: blink 2s infinite;
+        /* Fix for potential indicator overlap */
+        vertical-align: middle;
+    }
+    
+    .status-secure {
+        background: var(--success-green);
+    }
+    
+    .status-monitoring {
+        background: var(--warning-orange);
+    }
+    
+    .status-alert {
+        background: var(--danger-red);
+    }
+    
+    @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+    
+    /* Dark mode specific adjustments */
+    [data-theme="dark"] .security-dashboard {
+        background: linear-gradient(135deg, #0f0f23 0%, #1a0b3d 100%);
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .security-dashboard {
+            padding: 1rem;
+        }
+        
+        .dashboard-title {
+            font-size: 2rem;
+        }
+        
+        .metrics-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        .metric-card {
+            padding: 1.5rem;
+        }
+        
+        .social-links {
+            gap: 0.5rem;
+        }
+        
+        .social-link {
+            min-width: 200px;
+            font-size: 1rem;
+        }
+        
+        .dashboard-btn {
+            display: block;
+            margin: 0.5rem auto;
+            width: 80%;
+        }
+        
+        /* Fix for mobile-specific overlap issues */
+        .event-item {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .event-icon {
+            margin-bottom: 0.5rem;
+        }
+    }
+    
+    /* Fix for potential overlapping issues */
+    .security-dashboard * {
+        box-sizing: border-box;
+    }
+    
+    /* Ensure proper stacking context */
+    .security-dashboard > div {
+        position: relative;
+    }
+    
+    /* Clear floats to prevent overlap */
+    .security-dashboard::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    
+    /* Fix for potential absolute positioning issues */
+    .security-dashboard {
+        contain: layout style;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="security-dashboard">
+    <div class="dashboard-header">
+        <h1 class="dashboard-title">
+            <i class="fas fa-shield-alt"></i>
+            Security Command Center
+        </h1>
+        <h2 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-light);">{{ user_profile.name }}'s Portfolio</h2>
+        <p style="font-style: italic; color: var(--text-muted); max-width: 600px; margin: 0 auto;">"{{ user_profile.tagline }}"</p>
+        
+        <div class="threat-indicator threat-{{ metrics.threat_color }}">
+            {% if metrics.threat_level == 'LOW' %}
+                🟢 THREAT LEVEL: {{ metrics.threat_level }} (Score: {{ metrics.threat_score }})
+            {% elif metrics.threat_level == 'MEDIUM' %}
+                🟡 THREAT LEVEL: {{ metrics.threat_level }} (Score: {{ metrics.threat_score }})
+            {% elif metrics.threat_level == 'HIGH' %}
+                🟠 THREAT LEVEL: {{ metrics.threat_level }} (Score: {{ metrics.threat_score }})
+            {% else %}
+                🔴 THREAT LEVEL: {{ metrics.threat_level }} (Score: {{ metrics.threat_score }})
+            {% endif %}
+        </div>
+        
+        <p style="margin-top: 1rem; color: var(--text-muted);">
+            <span class="status-indicator status-{{ metrics.system_status|lower }}"></span>
+            System Status: {{ metrics.system_status }}
+        </p>
+    </div>
+    
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <div class="metric-icon">
+                <i class="fas fa-user-shield"></i>
+            </div>
+            <div class="metric-label">Failed Login Attempts</div>
+            <div class="metric-value">{{ metrics.failed_logins }}</div>
+            <div class="metric-description">Last 24 hours</div>
+        </div>
+        
+        <div class="metric-card">
+            <div class="metric-icon">
+                <i class="fas fa-envelope-open-text"></i>
+            </div>
+            <div class="metric-label">Contact Submissions</div>
+            <div class="metric-value">{{ metrics.contact_submissions }}</div>
+            <div class="metric-description">Legitimate inquiries</div>
+        </div>
+        
+        <div class="metric-card">
+            <div class="metric-icon">
+                <i class="fas fa-ban"></i>
+            </div>
+            <div class="metric-label">Blocked Attacks</div>
+            <div class="metric-value">{{ metrics.suspicious_requests }}</div>
+            <div class="metric-description">Malicious requests stopped</div>
+        </div>
+        
+        <div class="metric-card">
+            <div class="metric-icon">
+                <i class="fas fa-tachometer-alt"></i>
+            </div>
+            <div class="metric-label">Rate Limit Violations</div>
+            <div class="metric-value">{{ metrics.rate_violations }}</div>
+            <div class="metric-description">Rapid requests blocked</div>
+        </div>
+        
+        <div class="metric-card">
+            <div class="metric-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="metric-label">Unique Visitors</div>
+            <div class="metric-value">{{ metrics.unique_ips }}</div>
+            <div class="metric-description">Different IP addresses</div>
+        </div>
+        
+        <div class="metric-card">
+            <div class="metric-icon">
+                <i class="fas fa-key"></i>
+            </div>
+            <div class="metric-label">Admin Access</div>
+            <div class="metric-value">{{ metrics.admin_access }}</div>
+            <div class="metric-description">Admin panel visits</div>
+        </div>
+    </div>
+    
+    {% if recent_events %}
+    <div class="events-section">
+        <h3 class="events-title">
+            <i class="fas fa-history"></i>
+            Recent Security Events
+        </h3>
+        
+        {% for event in recent_events %}
+        <div class="event-item severity-{{ event.severity }}">
+            <div class="event-icon">
+                {% if event.event_type == 'login_failed' %}
+                    <i class="fas fa-exclamation-triangle" style="color: var(--danger-red);"></i>
+                {% elif event.event_type == 'login_success' %}
+                    <i class="fas fa-check-circle" style="color: var(--success-green);"></i>
+                {% elif event.event_type == 'admin_access' %}
+                    <i class="fas fa-user-cog" style="color: var(--primary-blue);"></i>
+                {% elif event.event_type == 'suspicious_request' %}
+                    <i class="fas fa-bug" style="color: var(--warning-orange);"></i>
+                {% elif event.event_type == 'rate_limit' %}
+                    <i class="fas fa-tachometer-alt" style="color: var(--warning-orange);"></i>
+                {% else %}
+                    <i class="fas fa-info-circle" style="color: var(--text-muted);"></i>
+                {% endif %}
+            </div>
+            <div class="event-details">
+                <div style="font-weight: 600; color: var(--text-light);">{{ event.get_event_type_display }}</div>
+                <div style="color: var(--text-muted); font-size: 0.9rem;">{{ event.description }}</div>
+                <div class="event-time">{{ event.ip_address }} • {{ event.created_at|timesince }} ago</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    <div class="professional-info">
+        <h3 style="margin-bottom: 1rem; color: var(--text-light);">
+            <i class="fas fa-user-shield"></i>
+            Cybersecurity Professional
+        </h3>
+        <p><strong>{{ user_profile.name }}</strong></p>
+        <p>{{ user_profile.email }}</p>
+        <div class="social-links">
+            <a href="https://tryhackme.com/p/{{ user_profile.tryhackme }}" target="_blank" class="social-link">
+                <i class="fas fa-crosshairs"></i> TryHackMe: {{ user_profile.tryhackme }}
+            </a>
+            <a href="https://app.hackthebox.com/profile/{{ user_profile.hackthebox }}" target="_blank" class="social-link">
+                <i class="fas fa-cube"></i> HackTheBox: {{ user_profile.hackthebox }}
+            </a>
+        </div>
+    </div>
+    
+    <div class="controls-section">
+        <a href="{% url 'main:home' %}" class="dashboard-btn">
+            <i class="fas fa-home"></i> Back to Portfolio
+        </a>
+        <a href="javascript:location.reload()" class="dashboard-btn btn-success">
+            <i class="fas fa-sync-alt"></i> Refresh Data
+        </a>
+        <a href="/{{ ADMIN_URL }}" class="dashboard-btn btn-warning">
+            <i class="fas fa-cog"></i> Admin Panel
+        </a>
+        <a href="{% url 'main:download_security_report' %}" class="dashboard-btn btn-danger">
+            <i class="fas fa-download"></i> Download Security Report
+        </a>
+    </div>
+    
+    <div style="text-align: center; margin-top: 2rem; color: var(--text-muted);">
+        <p>Last Updated: {{ last_updated|date:"Y-m-d H:i:s" }} UTC</p>
+        <p>Total Events (7 days): {{ total_events_7d }}</p>
+    </div>
+</div>
+{% endblock %}
