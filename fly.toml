@@ -4,7 +4,7 @@
 #
 
 app = "portfolio-website"
-primary_region = "iad"
+primary_region = "fra"  # Frankfurt, Germany - closest region to Kenya
 
 [build]
   dockerfile = "Dockerfile.fly"
