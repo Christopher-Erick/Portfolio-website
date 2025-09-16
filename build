@@ -2,6 +2,10 @@
 # exit on error
 set -o errexit
 
+# Create logs directory if it doesn't exist
+echo "Creating logs directory if it doesn't exist..."
+mkdir -p logs
+
 # Install dependencies
 echo "Installing dependencies..."
 pip install -r requirements.txt
