@@ -86,7 +86,12 @@ class RateLimitMiddleware(MiddlewareMixin):
             time_window = 300  # 5 minutes
         
         # Check rate limit
-        current_requests = cache.get(rate_limit_key, 0)
+        try:
+            current_requests = cache.get(rate_limit_key, 0)
+        except Exception as e:
+            # If cache is not available, skip rate limiting
+            logger.warning(f'Cache not available for rate limiting: {e}')
+            return None
         
         if current_requests >= max_requests:
             logger.warning(f'Rate limit exceeded for IP {client_ip} on {request.path}')
@@ -107,7 +112,11 @@ class RateLimitMiddleware(MiddlewareMixin):
             return HttpResponseTooManyRequests('Rate limit exceeded. Please try again later.')
         
         # Increment counter
-        cache.set(rate_limit_key, current_requests + 1, time_window)
+        try:
+            cache.set(rate_limit_key, current_requests + 1, time_window)
+        except Exception as e:
+            # If cache is not available, skip rate limiting
+            logger.warning(f'Cache not available for rate limiting: {e}')
         
         return None
     
