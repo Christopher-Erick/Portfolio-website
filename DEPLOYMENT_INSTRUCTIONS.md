@@ -43,7 +43,9 @@
    flyctl launch
    ```
    - Choose a name for your app
-   - Select a region close to your target audience
+   - Select a region close to your target audience:
+     - For Kenya/East Africa: Select "fra" (Frankfurt, Germany) as it's the closest region
+     - For other regions, choose the closest one to your audience
    - Don't deploy yet when prompted
 
 4. Set environment variables on Fly.io:
@@ -79,6 +81,7 @@ To update your application after making changes:
 
 1. Commit and push your changes to GitHub:
    ```bash
+
    git add .
    git commit -m "Description of changes"
    git push origin main
