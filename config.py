@@ -88,7 +88,7 @@ class SocialConfig:
     @staticmethod
     def get_hackthebox_url():
         username = PersonalConfig.get_hackthebox_username()
-        return f'https://app.hackthebox.com/profile/{username}' if username != 'your-username' else '#'
+        return f'https://app.hackthebox.com/users/{username}' if username != 'your-username' else '#'
     
     @staticmethod
     def get_email_url():

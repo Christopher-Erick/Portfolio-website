@@ -156,13 +156,19 @@
                 <div class="footer-section">
                     <h3>{{ PERSONAL_NAME|default:"Christopher Erick Otieno" }}</h3>
                     <div class="social-links">
-                        <a href="{{ GITHUB_URL }}" class="social-link" target="_blank" rel="noopener">
+                        <a href="{{ GITHUB_URL|default:'https://github.com/Christopher-Erick' }}" class="social-link" target="_blank" rel="noopener">
                             <i class="fab fa-github"></i>
                         </a>
                         <a href="https://www.linkedin.com/in/christopher-erick-otieno" class="social-link" target="_blank" rel="noopener">
                             <i class="fab fa-linkedin"></i>
                         </a>
-                        <a href="{{ EMAIL_URL }}" class="social-link">
+                        <a href="{{ TRYHACKME_URL|default:'https://tryhackme.com/p/erikchris54' }}" class="social-link" target="_blank" rel="noopener">
+                            <i class="fas fa-user-secret"></i>
+                        </a>
+                        <a href="{{ HACKTHEBOX_URL|default:'https://app.hackthebox.com/users/ChristopherErick' }}" class="social-link" target="_blank" rel="noopener">
+                            <i class="fas fa-cube"></i>
+                        </a>
+                        <a href="{{ EMAIL_URL|default:'mailto:erikchris54@gmail.com' }}" class="social-link">
                             <i class="fas fa-envelope"></i>
                         </a>
                     </div>
