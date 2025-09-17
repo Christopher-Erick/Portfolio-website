@@ -237,6 +237,7 @@ a:hover {
     .row {
         flex-direction: column;
         margin: 0;
+        margin-bottom: 1rem;
     }
     
     .col {
@@ -443,6 +444,7 @@ a:hover {
     letter-spacing: 0.025em;
     min-height: 44px;
     gap: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .btn:focus {
@@ -1393,6 +1395,11 @@ a:hover {
         grid-template-columns: 1fr;
         gap: 1.5rem;
         text-align: center;
+    }
+    
+    /* Add margin-bottom for better spacing on small screens */
+    .row {
+        margin-bottom: 1rem;
     }
 }
 
