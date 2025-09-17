@@ -6,13 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
     <!-- SEO Meta Tags -->
-    <title>{% block title %}{{ PERSONAL_NAME|default:"Christopher Erick Otieno" }} - Cybersecurity Analyst & IT Professional{% endblock %}</title>
+    <title>{% block title %}{{ PERSONAL_NAME|default:"Christopher Erick Otieno" }} - Cybersecurity Analyst, System Administrator & IT Professional{% endblock %}</title>
     <meta name="description" content="{% block description %}Professional portfolio of {{ PERSONAL_NAME|default:"Christopher Erick Otieno" }} - Cybersecurity Analyst specializing in vulnerability assessment, penetration testing, system administration, and data analysis.{% endblock %}">
     <meta name="keywords" content="{% block keywords %}cybersecurity, analyst, penetration testing, vulnerability assessment, system administrator, data analyst, IT support, database admin{% endblock %}">
     <meta name="author" content="{{ PERSONAL_NAME|default:"Christopher Erick Otieno" }}">
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="{% block og_title %}{{ PERSONAL_NAME|default:"Christopher Erick Otieno" }} - Cybersecurity Analyst{% endblock %}">
+    <meta property="og:title" content="{% block og_title %}{{ PERSONAL_NAME|default:"Christopher Erick Otieno" }} - Cybersecurity Analyst, System Administrator{% endblock %}">
     <meta property="og:description" content="{% block og_description %}Professional portfolio showcasing cybersecurity expertise, penetration testing projects, and IT solutions.{% endblock %}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock %}">
@@ -21,7 +21,7 @@
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{% block twitter_title %}{{ PERSONAL_NAME|default:"Christopher Erick Otieno" }}{% endblock %}">
-    <meta name="twitter:description" content="{% block twitter_description %}Cybersecurity Analyst & IT Professional{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Cybersecurity Analyst, System Administrator & IT Professional{% endblock %}">
     <meta name="twitter:image" content="{% block twitter_image %}{% load static %}{{ request.build_absolute_uri }}{% static 'images/portfolio-preview.jpg' %}{% endblock %}">
     
     <!-- Favicon -->
@@ -102,7 +102,7 @@
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "{{ PERSONAL_NAME|default:"Christopher" }}",
-        "jobTitle": "Cybersecurity Analyst",
+        "jobTitle": "Cybersecurity Analyst, System Administrator",
         "url": "{{ request.build_absolute_uri }}",
         "sameAs": [
             "{{ GITHUB_URL|default:"https://github.com/christopher" }}",
