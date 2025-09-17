@@ -112,6 +112,24 @@ The updated deployment process now includes:
      python manage.py createsuperuser
      ```
 
+5. **Admin URL Not Working**
+   - If you're getting a 404 error when accessing the admin panel, this usually means the environment variables weren't properly applied
+   - Redeploy your application to ensure environment variables take effect
+   - Try accessing the default admin URL: `https://christopher-erick-otieno-portfolio.onrender.com/secure-admin-ceo789/`
+   - Check your Render dashboard to verify the ADMIN_URL environment variable is set correctly
+
+6. **Rate Limit Exceeded**
+   - If you're seeing "Rate limit exceeded" messages, you've made too many requests in a short period
+   - The application has these rate limits:
+     - Admin Panel: 50 requests per 5 minutes
+     - Contact Form: 10 requests per 15 minutes
+     - General Pages: 200 requests per 5 minutes
+   - Wait for the rate limit window to expire (5-15 minutes)
+   - If you have access to the Render console, clear the cache:
+     ```bash
+     python manage.py shell -c "from django.core.cache import cache; cache.clear()"
+     ```
+
 ### Debugging Steps
 
 1. **Check Application Logs**
@@ -126,6 +144,26 @@ The updated deployment process now includes:
 3. **Test Locally**
    - Run your application locally with the same environment variables
    - This can help identify configuration issues before deploying
+
+4. **Debug Admin URL**
+   - Run the debug scripts provided in your repository:
+     ```bash
+     python debug_admin_url.py
+     python find_admin_url.py
+     python test_admin_url.py
+     ```
+   - These scripts will help identify the correct admin URL and diagnose issues
+
+5. **Check Rate Limit Issues**
+   - Run the rate limit helper script:
+     ```bash
+     python rate_limit_helper.py
+     ```
+   - This will provide information about rate limits and solutions
+   - If you have access to the Render console, you can clear rate limits:
+     ```bash
+     python manage.py shell -c "from django.core.cache import cache; cache.clear()"
+     ```
 
 ## Future Updates
 

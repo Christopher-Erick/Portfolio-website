@@ -109,7 +109,7 @@
             "https://www.linkedin.com/in/christopher-erick-otieno",
             "{{ TRYHACKME_URL|default:"https://tryhackme.com" }}",
             "{{ HACKTHEBOX_URL|default:"https://hackthebox.com" }}",
-            "{{ EMAIL_URL|default:"mailto:your.email@domain.com" }}"
+            "{{ EMAIL_URL|default:"mailto:erikchris54@gmail.com" }}"
         ],
         "knowsAbout": ["Cybersecurity", "Penetration Testing", "Vulnerability Assessment", "SIEM", "Incident Response", "Python", "Django", "JavaScript"],
         "description": "{{ PERSONAL_TAGLINE|default:"Cybersecurity Analyst passionate about building secure digital ecosystems and delivering robust IT solutions that protect organizations from evolving threats." }}"
@@ -121,7 +121,7 @@
     <nav class="navbar" id="navbar">
         <div class="container">
             <a href="{% url 'main:home' %}" class="navbar-brand">
-                <i class="fas fa-shield-alt"></i> {{ PERSONAL_NAME|default:"Christopher Erick" }}
+                <i class="fas fa-shield-alt"></i> {{ PERSONAL_NAME|default:"Christopher Erick Otieno" }}
             </a>
             
             <ul class="navbar-nav">
@@ -154,8 +154,8 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>{{ PERSONAL_NAME|default:"Christopher Erick" }}</h3>
-                    <p>{{ PERSONAL_TAGLINE|default:"Cybersecurity Analyst passionate about building secure digital ecosystems and delivering robust IT solutions that protect organizations from evolving threats." }}</p>
+                    <h3>{{ PERSONAL_NAME|default:"Christopher Erick Otieno" }}</h3>
+                    <p>{{ PERSONAL_TAGLINE|default:"Building secure digital ecosystems from the ground up — where cybersecurity meets seamless operations, data drives decisions, and complex challenges become elegant solutions." }}</p>
                     <div class="social-links">
                         <a href="{{ GITHUB_URL }}" class="social-link" target="_blank" rel="noopener">
                             <i class="fab fa-github"></i>
@@ -193,14 +193,14 @@
                 
                 <div class="footer-section">
                     <h3>Contact Info</h3>
-                    <p><i class="fas fa-envelope"></i> {{ PERSONAL_EMAIL|default:"your.email@domain.com" }}</p>
+                    <p><i class="fas fa-envelope"></i> {{ PERSONAL_EMAIL|default:"erikchris54@gmail.com" }}</p>
                     {% if PERSONAL_PHONE %}<p><i class="fas fa-phone"></i> {{ PERSONAL_PHONE }}</p>{% endif %}
                     {% if PERSONAL_LOCATION %}<p><i class="fas fa-map-marker-alt"></i> {{ PERSONAL_LOCATION }}</p>{% endif %}
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; {{ current_year|default:"2025" }} {{ PERSONAL_NAME|default:"Christopher" }}. All rights reserved.</p>
+                <p>&copy; {{ current_year|default:"2025" }} {{ PERSONAL_NAME|default:"Christopher Erick Otieno" }}. All rights reserved.</p>
             </div>
         </div>
     </footer>

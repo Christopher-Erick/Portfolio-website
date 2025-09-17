@@ -29,11 +29,11 @@ class PersonalConfig:
     
     @staticmethod
     def get_full_name():
-        return os.getenv('FULL_NAME', 'Your Name')
+        return os.getenv('FULL_NAME', 'Christopher Erick Otieno')
     
     @staticmethod
     def get_email():
-        return os.getenv('EMAIL', 'your.email@domain.com')
+        return os.getenv('EMAIL', 'erikchris54@gmail.com')
     
     @staticmethod
     def get_github_username():
