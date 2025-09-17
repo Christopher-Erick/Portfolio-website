@@ -11,4 +11,5 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('security-dashboard/', views.security_dashboard, name='security_dashboard'),
     path('health/', views.health_check, name='health_check'),  # Health check endpoint for Fly.io
+    path('test-social-links/', views.test_social_links, name='test_social_links'),
 ]
