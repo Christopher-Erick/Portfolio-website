@@ -22,6 +22,7 @@ Before deploying, ensure the build scripts have the correct permissions:
 On Unix/Linux/Mac systems (including Render):
 ```bash
 chmod +x build.sh
+chmod +x build
 ```
 
 On Windows systems, the batch file should work directly.
@@ -34,6 +35,19 @@ Or on Windows:
 ```cmd
 set_permissions.bat
 ```
+
+If you're using Git, you can also set the permissions using Git commands:
+```bash
+git update-index --chmod=+x build.sh
+git update-index --chmod=+x build
+```
+
+The build scripts should be committed with executable permissions (`100755` in Git). You can verify this with:
+```bash
+git ls-files --stage build*
+```
+
+All build scripts in this project have been configured with the correct permissions.
 
 ```
 SECRET_KEY=b4kb04&m%=cv0%1_ufu$e%@3#%qt(f(e5p%1snsc^y1(3*x!rl
@@ -156,7 +170,13 @@ The updated deployment process now includes:
      ```bash
      chmod +x build.sh
      ```
-   - The project now includes both `build.sh` (Unix) and `build.bat` (Windows) scripts
+   - The project now includes multiple build scripts for cross-platform compatibility:
+     - `build.sh` - Unix/Linux build script
+     - `build.bat` - Windows build script
+     - `build` - Generic Unix/Linux build script
+   - All scripts should be committed with executable permissions (`100755` in Git)
+   - You can verify permissions with: `git ls-files --stage build*`
+   - To fix permissions, use: `git update-index --chmod=+x <script-name>`
 
 ### Debugging Steps
 

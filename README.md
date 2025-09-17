@@ -198,6 +198,19 @@ Update views in `main/views.py`, `portfolio/views.py`, and `blog/views.py` to mo
 
 For deployment instructions, see:
 - [RENDER_DEPLOYMENT.md](RENDER_DEPLOYMENT.md) for Render deployment
+
+### Build Scripts
+
+This project includes platform-specific build scripts to ensure proper deployment across different environments:
+
+- `build.sh` - Unix/Linux build script
+- `build.bat` - Windows build script
+- `build` - Generic build script (Unix/Linux)
+
+All build scripts have executable permissions set. If you encounter permission issues during deployment, you can use the permission setting scripts:
+
+- `set_permissions.sh` - Unix/Linux permission setting script
+- `set_permissions.bat` - Windows permission setting script
 - [RAILWAY_DEPLOYMENT.md](RAILWAY_DEPLOYMENT.md) for Railway deployment
 - [DOCKER_DEPLOYMENT_GUIDE.md](DOCKER_DEPLOYMENT_GUIDE.md) for Docker deployment
 

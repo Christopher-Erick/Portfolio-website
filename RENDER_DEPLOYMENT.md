@@ -87,6 +87,9 @@ For production use, consider upgrading to a paid plan to avoid the sleep behavio
    - Check the build logs in Render for specific error messages
    - Ensure your [build.sh](file://c:\Users\CHRISTOPHER\Desktop\project\RESUME\build.sh) file has the correct permissions (should be executable)
    - Verify all dependencies in [requirements.txt](file://c:\Users\CHRISTOPHER\Desktop\project\RESUME\requirements.txt) are correct and available
+   - The build script should be committed with executable permissions (`100755` in Git)
+   - If you encounter permission issues, you can use the `set_permissions.sh` script to fix them
+   - For cross-platform compatibility, the project includes both `build.sh` (Unix/Linux) and `build.bat` (Windows) scripts
 
 3. **Environment Variable Issues**
    - Make sure you've set all required environment variables in Render:
