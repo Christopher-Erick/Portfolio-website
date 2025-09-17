@@ -2,11 +2,9 @@ services:
   - type: web
     name: christopher-erick-otieno-portfolio
     env: python
-    buildCommand: "chmod +x ./build && ./build"
+    buildCommand: "./build"
     startCommand: "gunicorn portfolio_site.wsgi:application --bind 0.0.0.0:$PORT"
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.9.15
       - key: SECRET_KEY
         sync: false
       - key: DEBUG
@@ -14,4 +12,36 @@ services:
       - key: DATABASE_URL
         sync: false
       - key: ALLOWED_HOSTS
-        sync: false
+        value: "christopher-erick-otieno-portfolio.onrender.com,render.app"
+      - key: RENDER_EXTERNAL_HOSTNAME
+        value: "christopher-erick-otieno-portfolio.onrender.com"
+      - key: FULL_NAME
+        value: "Christopher Erick Otieno"
+      - key: EMAIL
+        value: "erikchris54@gmail.com"
+      - key: GITHUB_USERNAME
+        value: "Christopher-Erick"
+      - key: TRYHACKME_USERNAME
+        value: "erikchris54"
+      - key: HACKTHEBOX_USERNAME
+        value: "ChristopherErick"
+      - key: TAGLINE
+        value: "Building secure digital ecosystems from the ground up — where cybersecurity meets seamless operations, data drives decisions, and complex challenges become elegant solutions."
+      - key: PHONE
+        value: "+254758081580"
+      - key: LOCATION
+        value: "Nairobi, Kenya"
+      - key: ADMIN_USERNAME
+        value: "portfolio_admin_x7k9"
+      - key: ADMIN_EMAIL
+        value: "erikchris54@gmail.com"
+      - key: ADMIN_URL
+        value: "secure-admin-path-12345/"
+      - key: CONTACT_EMAIL
+        value: "erikchris54@gmail.com"
+      - key: SECURE_SSL_REDIRECT
+        value: True
+      - key: SESSION_COOKIE_SECURE
+        value: True
+      - key: CSRF_COOKIE_SECURE
+        value: True

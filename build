@@ -22,4 +22,8 @@ python manage.py migrate
 echo "Creating cache table..."
 python manage.py createcachetable || echo "Failed to create cache table, continuing..."
 
+# Populate database with initial data
+echo "Populating database with initial data..."
+python post_deploy.py
+
 echo "Build completed successfully!"

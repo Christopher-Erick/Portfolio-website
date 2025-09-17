@@ -2,6 +2,10 @@
 
 A comprehensive Django-based portfolio website for showcasing cybersecurity expertise, projects, and professional experience.
 
+## ⚠️ Important Notice
+
+If you've deployed this application and it's missing personal information or projects, please see [FIX_DEPLOYMENT.md](FIX_DEPLOYMENT.md) for instructions on how to populate your database with the necessary data.
+
 ## Project Overview
 
 This portfolio website is designed for cybersecurity professionals to showcase their skills, projects, and experience. It features a modern, responsive design with dark/light mode support and interactive elements.
@@ -187,6 +191,15 @@ Update views in `main/views.py`, `portfolio/views.py`, and `blog/views.py` to mo
 - Suspicious request detection
 - Security event logging
 - Admin security dashboard
+
+## Deployment
+
+For deployment instructions, see:
+- [RENDER_DEPLOYMENT.md](RENDER_DEPLOYMENT.md) for Render deployment
+- [RAILWAY_DEPLOYMENT.md](RAILWAY_DEPLOYMENT.md) for Railway deployment
+- [DOCKER_DEPLOYMENT_GUIDE.md](DOCKER_DEPLOYMENT_GUIDE.md) for Docker deployment
+
+If you've deployed the application and it's missing data, see [FIX_DEPLOYMENT.md](FIX_DEPLOYMENT.md).
 
 ## Contributing
 
