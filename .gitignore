@@ -189,5 +189,5 @@ setup_fly_secrets.sh
 setup_fly_secrets.ps1
 
 # Build scripts
-build.sh
+
 build.ps1

@@ -1,6 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # exit on error
 set -o errexit
+
+# NOTE: When deploying to Unix-based systems, ensure this file has executable permissions (100755)
+# chmod +x build.sh
 
 # Create logs directory if it doesn't exist
 echo "Creating logs directory if it doesn't exist..."
