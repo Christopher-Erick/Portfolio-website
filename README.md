@@ -144,6 +144,8 @@ RESUME/
 ├── .env.production    # Template for production environment (preserves your information)
 ├── .env.development   # Template for development environment (preserves your information)
 ├── .env.backup        # Backup of your original .env file
+├── build.sh           # Unix build script for deployment
+├── build.bat          # Windows build script for deployment
 ├── manage.py          # Django management script
 └── requirements.txt   # Python dependencies
 ```

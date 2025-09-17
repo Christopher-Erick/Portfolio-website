@@ -15,6 +15,26 @@ This document provides step-by-step instructions to populate your deployed appli
 3. Go to "Environment Variables" section
 4. Add/update the following environment variables:
 
+### 2. Set Correct Permissions for Build Scripts
+
+Before deploying, ensure the build scripts have the correct permissions:
+
+On Unix/Linux/Mac systems (including Render):
+```bash
+chmod +x build.sh
+```
+
+On Windows systems, the batch file should work directly.
+
+Alternatively, you can run the provided helper scripts:
+```bash
+./set_permissions.sh
+```
+Or on Windows:
+```cmd
+set_permissions.bat
+```
+
 ```
 SECRET_KEY=b4kb04&m%=cv0%1_ufu$e%@3#%qt(f(e5p%1snsc^y1(3*x!rl
 DEBUG=False
@@ -129,6 +149,14 @@ The updated deployment process now includes:
      ```bash
      python manage.py shell -c "from django.core.cache import cache; cache.clear()"
      ```
+
+7. **Build Script Permission Issues**
+   - If you're seeing "Permission denied" errors during build, the build script may not have execute permissions
+   - On Unix systems (including Render), ensure the build script is executable:
+     ```bash
+     chmod +x build.sh
+     ```
+   - The project now includes both `build.sh` (Unix) and `build.bat` (Windows) scripts
 
 ### Debugging Steps
 
