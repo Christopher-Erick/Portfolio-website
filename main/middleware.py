@@ -205,7 +205,8 @@ class BlockSuspiciousRequestsMiddleware(MiddlewareMixin):
     
     def process_request(self, request):
         # Skip blocking in debug mode for normal browser requests
-        if settings.DEBUG and request.method == 'GET':
+        # Also allow health check endpoint
+        if settings.DEBUG and (request.method == 'GET' or request.path == '/health/'):
             return None
             
         # Block requests with malicious user agents

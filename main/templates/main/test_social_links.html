@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Test Social Links</h1>
+    
+    <div class="social-links">
+        <h2>Social Media Links:</h2>
+        <ul>
+            <li>GitHub: <a href="{{ GITHUB_URL }}" target="_blank">{{ GITHUB_URL }}</a></li>
+            <li>TryHackMe: <a href="{{ TRYHACKME_URL }}" target="_blank">{{ TRYHACKME_URL }}</a></li>
+            <li>HackTheBox: <a href="{{ HACKTHEBOX_URL }}" target="_blank">{{ HACKTHEBOX_URL }}</a></li>
+            <li>Email: <a href="{{ EMAIL_URL }}">{{ EMAIL_URL }}</a></li>
+        </ul>
+    </div>
+    
+    <div class="social-links-footer">
+        <h2>Footer Social Links:</h2>
+        <div class="social-links">
+            <a href="{{ GITHUB_URL|default:'https://github.com/Christopher-Erick' }}" class="social-link" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/christopher-erick-otieno" class="social-link" target="_blank" rel="noopener">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            <a href="{{ TRYHACKME_URL|default:'https://tryhackme.com/p/erikchris54' }}" class="social-link" target="_blank" rel="noopener">
+                <i class="fas fa-user-secret"></i> TryHackMe
+            </a>
+            <a href="{{ HACKTHEBOX_URL|default:'https://app.hackthebox.com/users/ChristopherErick' }}" class="social-link" target="_blank" rel="noopener">
+                <i class="fas fa-cube"></i> HackTheBox
+            </a>
+            <a href="{{ EMAIL_URL|default:'mailto:erikchris54@gmail.com' }}" class="social-link">
+                <i class="fas fa-envelope"></i> Email
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

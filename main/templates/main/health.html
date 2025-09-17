@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Check</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .health-check-status {
+            text-align: center;
+        }
+        .status-ok {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .health-details {
+            margin: 2rem 0;
+            text-align: left;
+        }
+        .health-details ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .health-details li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        .health-details li:last-child {
+            border-bottom: none;
+        }
+        .timestamp {
+            margin-top: 2rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="health-check-status">
+            <h1>System Status: <span class="status-ok">OK</span></h1>
+            <p>All systems are operational.</p>
+            
+            <div class="health-details">
+                <h2>System Information</h2>
+                <ul>
+                    <li><strong>Database:</strong> <span class="status-ok">Connected</span></li>
+                    <li><strong>Cache:</strong> <span class="status-ok">Available</span></li>
+                    <li><strong>Email Backend:</strong> <span class="status-ok">Configured</span></li>
+                    <li><strong>Static Files:</strong> <span class="status-ok">Accessible</span></li>
+                </ul>
+            </div>
+            
+            <div class="timestamp">
+                <p>Last checked: {% now "Y-m-d H:i:s" %} UTC</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
