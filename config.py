@@ -79,19 +79,34 @@ class SocialConfig:
     @staticmethod
     def get_github_url():
         username = PersonalConfig.get_github_username()
-        return f'https://github.com/{username}' if username != 'your-username' else '#'
+        # In production, environment variables should be set directly
+        # In development, they come from .env file
+        # If username is the default placeholder or empty, use the known values
+        if username and username != 'your-username':
+            return f'https://github.com/{username}'
+        # Fallback to known values if environment variables aren't set properly
+        return 'https://github.com/Christopher-Erick'
     
     @staticmethod
     def get_tryhackme_url():
         username = PersonalConfig.get_tryhackme_username()
-        return f'https://tryhackme.com/p/{username}' if username != 'your-username' else '#'
+        if username and username != 'your-username':
+            return f'https://tryhackme.com/p/{username}'
+        # Fallback to known values if environment variables aren't set properly
+        return 'https://tryhackme.com/p/erikchris54'
     
     @staticmethod
     def get_hackthebox_url():
         username = PersonalConfig.get_hackthebox_username()
-        return f'https://app.hackthebox.com/users/{username}' if username != 'your-username' else '#'
+        if username and username != 'your-username':
+            return f'https://app.hackthebox.com/users/{username}'
+        # Fallback to known values if environment variables aren't set properly
+        return 'https://app.hackthebox.com/users/ChristopherErick'
     
     @staticmethod
     def get_email_url():
         email = PersonalConfig.get_email()
-        return f'mailto:{email}' if email != 'your.email@domain.com' else '#'
+        if email and email != 'your.email@domain.com':
+            return f'mailto:{email}'
+        # Fallback to known values if environment variables aren't set properly
+        return 'mailto:erikchris54@gmail.com'
