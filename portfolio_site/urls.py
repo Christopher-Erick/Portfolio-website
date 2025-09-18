@@ -17,16 +17,16 @@ Expires: 2025-12-31T23:59:59.000Z
 Preferred-Languages: en
 Policy: https://localhost/security-policy
 """
-    return HttpResponse(content, content_type='text/plain')
+    return HttpResponse(content.encode('utf-8'), content_type='text/plain')
 
 def robots_txt(request):
     """Robots.txt with security considerations"""
-    content = f"""User-agent: *
+    content = """User-agent: *
 Disallow: /admin/
 Disallow: /media/private/
 Sitemap: https://localhost/sitemap.xml
 """
-    return HttpResponse(content, content_type='text/plain')
+    return HttpResponse(content.encode('utf-8'), content_type='text/plain')
 
 # Use custom admin URL from settings for security
 admin_url = getattr(settings, 'ADMIN_URL', 'admin/')
@@ -46,6 +46,7 @@ urlpatterns = [
     path('robots.txt', robots_txt, name='robots_txt'),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# Serve static and media files in both development and production
+# In production on platforms like Render, we need to serve media files explicitly
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
