@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
-from .models import Testimonial
+from .models import Testimonial, Skill, Education, Certification, Achievement, Experience
 
 # Get the logger
 logger = logging.getLogger('portfolio_site')
@@ -27,7 +27,34 @@ def about(request):
 
 def resume(request):
     """Render the resume page"""
-    return render(request, 'main/resume.html')
+    # Fetch all resume-related data
+    education_items = Education.objects.all()
+    certifications = Certification.objects.all()
+    achievements = Achievement.objects.filter(is_active=True)
+    skills = Skill.objects.all()
+    experiences = Experience.objects.all()
+    
+    # Organize skills by category
+    skills_by_category = {}
+    category_mapping = {
+        'skill': 'Skills',
+        'tools': 'Tools',
+        'soft': 'Special Skills',
+    }
+    
+    for skill in skills:
+        mapped_category = category_mapping.get(skill.category, skill.category)
+        if mapped_category not in skills_by_category:
+            skills_by_category[mapped_category] = []
+        skills_by_category[mapped_category].append(skill)
+    
+    return render(request, 'main/resume.html', {
+        'education_items': education_items,
+        'certifications': certifications,
+        'achievements': achievements,
+        'experiences': experiences,
+        'skills_by_category': skills_by_category,
+    })
 
 def download_resume(request):
     """Handle resume download"""
