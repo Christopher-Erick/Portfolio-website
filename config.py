@@ -18,7 +18,8 @@ def load_env_file():
                 line = line.strip()
                 if line and not line.startswith('#') and '=' in line:
                     key, value = line.split('=', 1)
-                    os.environ.setdefault(key.strip(), value.strip())
+                    # Always set the environment variable from .env file
+                    os.environ[key.strip()] = value.strip()
 
 # Load .env file on import
 load_env_file()
