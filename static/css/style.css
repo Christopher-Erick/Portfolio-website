@@ -412,13 +412,7 @@ a:hover {
 
 .hero-description {
     font-size: 1.1rem;
-    color: var(--text-secondary);
-    margin-bottom: 2rem;
-}
-
-.hero-description {
-    font-size: 1.1rem;
-    color: var(--text-muted);
+    color: #d7cbcf; /* Changed from var(--text-secondary) to match about page */
     margin-bottom: 3rem;
     max-width: 600px;
     margin-left: auto;
@@ -1297,6 +1291,11 @@ a:hover {
         bottom: auto;
         margin: 1rem auto 0;
         max-width: 100%;
+    }
+    
+    /* Center social links on smaller screens */
+    .social-links {
+        justify-content: center;
     }
 }
 
