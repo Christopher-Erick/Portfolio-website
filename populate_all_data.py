@@ -7,6 +7,11 @@ import sys
 import django
 from datetime import date
 
+# Check if script should run based on environment variable
+if os.environ.get('RUN_POPULATE_SCRIPT', '').lower() != 'true':
+    print("ℹ️  Populate script skipped. Set RUN_POPULATE_SCRIPT=true to run.")
+    sys.exit(0)
+
 # Setup Django environment
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'portfolio_site.settings')
