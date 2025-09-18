@@ -2,7 +2,7 @@ services:
   - type: web
     name: christopher-erick-otieno-portfolio
     env: python
-    buildCommand: "bash build"
+    buildCommand: "chmod +x build && bash build"
     startCommand: "gunicorn portfolio_site.wsgi:application --bind 0.0.0.0:$PORT"
     envVars:
       - key: SECRET_KEY
