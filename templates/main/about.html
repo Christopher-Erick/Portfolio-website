@@ -140,6 +140,11 @@
                             <h4>Incident Response</h4>
                             <p>Threat analysis and incident investigation</p>
                         </div>
+                        <div class="competency-item">
+                            <i class="fas fa-database"></i>
+                            <h4>Database Administration</h4>
+                            <p>Database security, optimization, and administration roles</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -186,84 +191,6 @@
                 </div>
                 <h3>Balanced Approach</h3>
                 <p>Security measures should enable business operations, not hinder them. Finding the right balance between security and usability.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Technical Expertise Section -->
-<section id="expertise" class="section" style="background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);">
-    <div class="container">
-        <div class="section-title fade-in">
-            <h2>Technical Expertise</h2>
-            <p>Tools and technologies I specialize in</p>
-        </div>
-        
-        <div class="expertise-categories">
-            <div class="category fade-in">
-                <h3><i class="fas fa-crosshairs"></i> Offensive Security</h3>
-                <div class="tools-grid">
-                    <div class="tool-item">
-                        <i class="fas fa-radar-chart"></i>
-                        <span>Nmap</span>
-                    </div>
-                    <div class="tool-item">
-                        <i class="fas fa-bomb"></i>
-                        <span>Metasploit</span>
-                    </div>
-                    <div class="tool-item">
-                        <i class="fas fa-spider"></i>
-                        <span>Burp Suite</span>
-                    </div>
-                    <div class="tool-item">
-                        <i class="fas fa-search-location"></i>
-                        <span>Gobuster</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="category fade-in">
-                <h3><i class="fas fa-shield-check"></i> Defensive Security</h3>
-                <div class="tools-grid">
-                    <div class="tool-item">
-                        <i class="fas fa-chart-line"></i>
-                        <span>Splunk</span>
-                    </div>
-                    <div class="tool-item">
-                        <i class="fas fa-eye"></i>
-                        <span>Wazuh</span>
-                    </div>
-                    <div class="tool-item">
-                        <i class="fas fa-wave-square"></i>
-                        <span>Wireshark</span>
-                    </div>
-                    <div class="tool-item">
-                        <i class="fas fa-microscope"></i>
-                        <span>Nessus</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="category fade-in">
-                <h3><i class="fas fa-code"></i> Development & Analysis</h3>
-                <div class="tools-grid">
-                    <div class="tool-item">
-                        <i class="fas fa-virus"></i>
-                        <span>Malware Analysis</span>
-                    </div>
-                    <div class="tool-item">
-                        <i class="fab fa-python"></i>
-                        <span>Python Security</span>
-                    </div>
-                    <div class="tool-item">
-                        <i class="fab fa-linux"></i>
-                        <span>Kali Linux</span>
-                    </div>
-                    <div class="tool-item">
-                        <i class="fab fa-microsoft"></i>
-                        <span>PowerShell</span>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -555,6 +482,7 @@
         transition: var(--transition);
         position: relative;
         overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.1);
     }
     
     .competency-item::before {
@@ -573,6 +501,7 @@
     .competency-item:hover {
         transform: translateY(-5px);
         box-shadow: var(--shadow-lg);
+        border-color: var(--primary-color);
     }
     
     .competency-item:hover::before {
@@ -683,6 +612,7 @@
         opacity: 0;
         transform: translateY(30px);
         animation: slideInUp 0.6s ease forwards;
+        border: 1px solid rgba(0, 0, 0, 0.1);
     }
     
     .philosophy-item:nth-child(1) {
@@ -711,6 +641,7 @@
     .philosophy-item:hover {
         transform: translateY(-10px);
         box-shadow: var(--shadow-lg);
+        border-color: var(--primary-color);
     }
     
     .philosophy-item::after {
@@ -767,87 +698,38 @@
         transform: rotate(30deg) translate(20%, 20%);
     }
     
-    /* Technical Expertise Section */
-    .expertise-categories {
-        margin-top: 3rem;
+    /* Light mode improvements */
+    body:not([data-theme="dark"]) .competency-item {
+        background: white;
+        border: 1px solid #e2e8f0;
     }
     
-    .category {
-        margin-bottom: 3rem;
-        opacity: 0;
-        transform: translateX(30px);
-        animation: slideInRight 0.6s ease forwards;
+    body:not([data-theme="dark"]) .innovation-card {
+        background: white;
+        border: 1px solid #e2e8f0;
     }
     
-    .category:nth-child(1) {
-        animation-delay: 0.2s;
+    body:not([data-theme="dark"]) .philosophy-item {
+        background: white;
+        border: 1px solid #e2e8f0;
     }
     
-    .category:nth-child(2) {
-        animation-delay: 0.4s;
+    body:not([data-theme="dark"]) .journey-highlight {
+        background: linear-gradient(135deg, rgba(219, 234, 254, 0.3) 0%, rgba(224, 242, 254, 0.3) 100%);
+        border-left: 4px solid #3b82f6;
     }
     
-    .category:nth-child(3) {
-        animation-delay: 0.6s;
-    }
-    
-    @keyframes slideInRight {
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-    
-    .category h3 {
-        text-align: center;
-        margin-bottom: 2rem;
-        color: var(--primary-color);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-    }
-    
-    .tools-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 1.5rem;
-    }
-    
-    .tool-item {
-        background: var(--bg-primary);
-        border-radius: var(--border-radius);
-        padding: 1.5rem 1rem;
-        text-align: center;
-        box-shadow: var(--shadow-sm);
-        transition: all 0.3s ease;
+    body:not([data-theme="dark"]) .stat-item {
+        background: rgba(255, 255, 255, 0.8);
         border: 1px solid rgba(0, 0, 0, 0.1);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
+        backdrop-filter: blur(5px);
     }
     
-    .tool-item:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--shadow);
-        border-color: var(--primary-color);
-    }
-    
-    .tool-item i {
-        font-size: 1.5rem;
-        color: var(--primary-color);
-        transition: all 0.3s ease;
-    }
-    
-    .tool-item:hover i {
-        transform: scale(1.2);
-    }
-    
-    .tool-item span {
-        font-size: 0.9rem;
-        font-weight: 500;
-        color: var(--text-primary);
+    body:not([data-theme="dark"]) .hero-title {
+        background: linear-gradient(to right, #1e293b, #0f172a);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
     
     /* Dark mode enhancements */
@@ -903,11 +785,19 @@
         border-color: #64748b;
     }
     
-    [data-theme="dark"] .tool-item {
+    [data-theme="dark"] .philosophy-item {
         border: 1px solid rgba(255, 255, 255, 0.1);
     }
     
-    [data-theme="dark"] .tool-item:hover {
+    [data-theme="dark"] .philosophy-item:hover {
+        border-color: #64748b;
+    }
+    
+    [data-theme="dark"] .competency-item {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    [data-theme="dark"] .competency-item:hover {
         border-color: #64748b;
     }
     
@@ -926,10 +816,6 @@
     @media (max-width: 992px) {
         .hero-title {
             font-size: 2.8rem;
-        }
-        
-        .tools-grid {
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
         }
         
         .category h3 {
@@ -995,9 +881,22 @@
             grid-template-columns: 1fr;
             gap: 1.5rem;
         }
+    }
+    
+    @media (max-width: 576px) {
+        .hero-title {
+            font-size: 2rem;
+        }
         
-        .tools-grid {
-            grid-template-columns: repeat(2, 1fr);
+        .hero-stats {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .competency-item,
+        .philosophy-item,
+        .innovation-card {
+            padding: 1.5rem;
         }
         
         .profile-img {
@@ -1045,9 +944,9 @@
         }
     }
     
-    @media (max-width: 576px) {
+    @media (max-width: 480px) {
         .hero-title {
-            font-size: 2rem;
+            font-size: 1.8rem;
         }
         
         .hero-stats {
@@ -1064,35 +963,6 @@
         .profile-img {
             width: 200px;
             height: 200px;
-        }
-        
-        .tools-grid {
-            grid-template-columns: 1fr;
-        }
-        
-        .tool-item {
-            padding: 1rem;
-        }
-    }
-    
-    @media (max-width: 480px) {
-        .hero-title {
-            font-size: 1.8rem;
-        }
-        
-        .hero-subtitle {
-            font-size: 1rem;
-        }
-        
-        .section-title h2 {
-            font-size: 1.8rem;
-        }
-        
-        .philosophy-icon,
-        .innovation-icon {
-            width: 60px;
-            height: 60px;
-            font-size: 1.5rem;
         }
     }
     
@@ -1115,7 +985,6 @@
         }
     }
     
-    /* Large screen optimizations */
     @media (min-width: 1400px) {
         .hero-title {
             font-size: 4rem;
@@ -1140,7 +1009,6 @@
         }
     }
     
-    /* Ultra-wide screen support */
     @media (min-width: 1600px) {
         .container {
             max-width: 1400px;
