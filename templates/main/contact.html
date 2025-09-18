@@ -25,16 +25,12 @@
                 <!-- Contact Form -->
                 <div class="contact-form-container fade-in">
                     <h2>Send Me a Message</h2>
-                    {% if success_message %}
-                        <div class="alert alert-success">
-                            <i class="fas fa-check-circle"></i> {{ success_message }}
-                        </div>
-                    {% endif %}
-                    
-                    {% if error_message %}
-                        <div class="alert alert-error">
-                            <i class="fas fa-exclamation-circle"></i> {{ error_message }}
-                        </div>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                                <i class="fas fa-{% if message.tags == 'success' %}check-circle{% else %}exclamation-circle{% endif %}"></i> {{ message }}
+                            </div>
+                        {% endfor %}
                     {% endif %}
                     
                     <form id="contact-form" class="contact-form" action="{% url 'main:contact' %}" method="post">
