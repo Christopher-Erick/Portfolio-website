@@ -4,13 +4,22 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
+from .models import Testimonial
 
 # Get the logger
 logger = logging.getLogger('portfolio_site')
 
 def home(request):
     """Render the home page"""
-    return render(request, 'main/home.html')
+    # Fetch active testimonials ordered by display order
+    testimonials = Testimonial.objects.filter(is_active=True).order_by('order', 'name')
+    
+    # Debug: Print number of testimonials to console
+    print(f"Number of testimonials fetched: {testimonials.count()}")
+    
+    return render(request, 'main/home.html', {
+        'testimonials': testimonials
+    })
 
 def about(request):
     """Render the about page"""

@@ -57,6 +57,25 @@ def clear_resume_cache():
     # Also clear template fragment cache if used
     cache.delete(make_template_fragment_key('home_testimonials'))
     
+    # Clear all template fragment caches for the home page
+    # This is a more comprehensive approach
+    import hashlib
+    from django.utils.encoding import force_bytes
+    
+    # Try different variations of the cache key
+    fragment_names = ['home_testimonials', 'testimonials', 'home']
+    for fragment_name in fragment_names:
+        # Try different hash algorithms that Django might use
+        for algo in ['md5', 'sha1']:
+            try:
+                if algo == 'md5':
+                    cache_key = f"template.cache.{fragment_name}.{hashlib.md5(force_bytes(fragment_name)).hexdigest()}"
+                else:
+                    cache_key = f"template.cache.{fragment_name}.{hashlib.sha1(force_bytes(fragment_name)).hexdigest()}"
+                cache.delete(cache_key)
+            except:
+                pass
+    
     # Most reliable approach: Clear all cache (as a last resort)
     # cache.clear()  # Uncomment this if the above approaches don't work
 
