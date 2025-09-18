@@ -57,8 +57,68 @@ def resume(request):
     })
 
 def download_resume(request):
-    """Handle resume download"""
-    # In a real implementation, this would serve the actual resume file
+    """Handle resume download - serves uploaded CV or fallback static file"""
+    try:
+        # Try to get the admin user's profile
+        from django.contrib.auth.models import User
+        admin_user = User.objects.filter(is_staff=True).first()
+        
+        if admin_user and hasattr(admin_user, 'profile'):
+            user_profile = admin_user.profile
+            # Check if a CV document is uploaded
+            if user_profile.cv_document:
+                # Serve the uploaded CV file
+                from django.http import FileResponse
+                import os
+                
+                # Get the file path
+                file_path = user_profile.cv_document.path
+                
+                # Check if file exists
+                if os.path.exists(file_path):
+                    # Get the filename for the download
+                    filename = user_profile.cv_filename or 'Christopher_Erick_Resume.pdf'
+                    
+                    # Serve the file
+                    response = FileResponse(
+                        open(file_path, 'rb'),
+                        as_attachment=True,
+                        filename=filename
+                    )
+                    return response
+                else:
+                    # File doesn't exist on disk
+                    messages.warning(request, 'The uploaded CV file could not be found.')
+            else:
+                # No CV uploaded
+                messages.info(request, 'No CV has been uploaded yet.')
+        else:
+            # No admin user or profile
+            messages.info(request, 'No user profile found.')
+            
+    except Exception as e:
+        # Log the error for debugging
+        logger.error(f"Error serving CV: {str(e)}")
+        messages.error(request, 'An error occurred while trying to download the CV.')
+    
+    # Fallback: Try to serve static resume.pdf if it exists
+    try:
+        import os
+        from django.conf import settings
+        from django.http import FileResponse
+        
+        static_resume_path = os.path.join(settings.MEDIA_ROOT, 'resume.pdf')
+        if os.path.exists(static_resume_path):
+            response = FileResponse(
+                open(static_resume_path, 'rb'),
+                as_attachment=True,
+                filename='Christopher_Erick_Resume.pdf'
+            )
+            return response
+    except Exception as e:
+        logger.error(f"Error serving static resume: {str(e)}")
+    
+    # If all else fails, show message
     messages.info(request, 'Resume download functionality would be implemented here.')
     return redirect('main:resume')
 
