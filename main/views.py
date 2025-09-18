@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
-from .models import Testimonial, Skill, Education, Certification, Achievement, Experience
+from .models import Testimonial, Skill, Education, Certification, Achievement, Experience, ContactSubmission
 
 # Get the logger
 logger = logging.getLogger('portfolio_site')
@@ -12,7 +12,7 @@ logger = logging.getLogger('portfolio_site')
 def home(request):
     """Render the home page"""
     # Fetch active testimonials ordered by display order
-    testimonials = Testimonial.objects.filter(is_active=True).order_by('order', 'name')
+    testimonials = getattr(Testimonial, 'objects').filter(is_active=True).order_by('order', 'name')
     
     # Debug: Print number of testimonials to console
     print(f"Number of testimonials fetched: {testimonials.count()}")
@@ -28,11 +28,11 @@ def about(request):
 def resume(request):
     """Render the resume page"""
     # Fetch all resume-related data
-    education_items = Education.objects.all()
-    certifications = Certification.objects.all()
-    achievements = Achievement.objects.filter(is_active=True)
-    skills = Skill.objects.all()
-    experiences = Experience.objects.all()
+    education_items = getattr(Education, 'objects').all()
+    certifications = getattr(Certification, 'objects').all()
+    achievements = getattr(Achievement, 'objects').filter(is_active=True)
+    skills = getattr(Skill, 'objects').all()
+    experiences = getattr(Experience, 'objects').all()
     
     # Organize skills by category
     skills_by_category = {}
@@ -72,6 +72,19 @@ def contact(request):
         message = request.POST.get('message', '')
         
         if name and email and subject and message:
+            # Save to database
+            try:
+                contact_submission = getattr(ContactSubmission, 'objects').create(
+                    name=name,
+                    email=email,
+                    subject=subject,
+                    message=message
+                )
+                logger.info(f"Contact submission saved to database: {contact_submission.id}")
+            except Exception as e:
+                logger.error(f"Failed to save contact submission to database: {str(e)}")
+                # Continue with email even if database save fails
+            
             # Log the contact attempt
             logger.info(f"Contact form submitted by {name} ({email}) with subject: {subject}")
             
