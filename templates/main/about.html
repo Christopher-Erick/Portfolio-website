@@ -140,6 +140,11 @@
                             <h4>Incident Response</h4>
                             <p>Threat analysis and incident investigation</p>
                         </div>
+                        <div class="competency-item">
+                            <i class="fas fa-server"></i>
+                            <h4>System Administration</h4>
+                            <p>Server management, configuration, and maintenance</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -845,11 +850,17 @@
             grid-template-columns: 1fr;
             gap: 1.5rem;
         }
+        
+        /* Center social links on smaller screens */
+        .social-links {
+            justify-content: center;
+        }
     }
     
     @media (max-width: 576px) {
         .hero-title {
             font-size: 2rem;
+            padding-top:2rem;
         }
         
         .hero-stats {
@@ -911,6 +922,7 @@
     @media (max-width: 480px) {
         .hero-title {
             font-size: 1.8rem;
+            padding-top: 2rem;
         }
         
         .hero-stats {
