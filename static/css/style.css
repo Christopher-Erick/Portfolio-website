@@ -412,7 +412,7 @@ a:hover {
 
 .hero-description {
     font-size: 1.1rem;
-    color: #d7cbcf; /* Changed from var(--text-secondary) to match about page */
+    color: var(--text-secondary);
     margin-bottom: 3rem;
     max-width: 600px;
     margin-left: auto;
