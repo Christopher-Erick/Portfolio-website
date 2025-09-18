@@ -174,75 +174,16 @@ function initContactForm() {
     const contactForm = document.getElementById('contact-form');
     
     if (contactForm) {
+        // Remove the AJAX submission and let the form submit normally
+        // This will allow the Django messages to work properly
         contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
+            // Form will submit normally, no need to prevent default
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
             
             // Show loading state
             submitBtn.textContent = 'Sending...';
             submitBtn.disabled = true;
-            
-            // Get form data
-            const formData = new FormData(this);
-            
-            // Try to get CSRF token
-            let csrfToken = window.csrfToken || getCSRFToken();
-            
-            // If we still don't have a CSRF token, try to get it from the form
-            if (!csrfToken) {
-                const csrfInput = this.querySelector('[name=csrfmiddlewaretoken]');
-                if (csrfInput) {
-                    csrfToken = csrfInput.value;
-                }
-            }
-            
-            // If we still don't have a CSRF token, show an error
-            if (!csrfToken) {
-                showNotification('CSRF token not found. Please refresh the page and try again.', 'error');
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-                return;
-            }
-            
-            // Prepare data for sending
-            const data = {};
-            for (let [key, value] of formData.entries()) {
-                data[key] = value;
-            }
-            
-            // Send the request
-            fetch(this.action, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.success) {
-                    showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
-                    contactForm.reset();
-                } else {
-                    showNotification(data.error || 'There was an error sending your message.', 'error');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                showNotification('There was an error sending your message. Please try again.', 'error');
-            })
-            .finally(() => {
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            });
         });
     }
 }

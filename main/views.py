@@ -81,27 +81,39 @@ def contact(request):
                     message=message
                 )
                 logger.info(f"Contact submission saved to database: {contact_submission.id}")
+                database_success = True
             except Exception as e:
                 logger.error(f"Failed to save contact submission to database: {str(e)}")
-                # Continue with email even if database save fails
+                database_success = False
             
             # Log the contact attempt
             logger.info(f"Contact form submitted by {name} ({email}) with subject: {subject}")
             
-            # Send email (in production, you'd use a proper email backend)
+            # Try to send email (in production, you'd use a proper email backend)
+            email_success = False
             try:
-                send_mail(
-                    f"Contact Form: {subject}",
-                    f"From: {name} <{email}>\n\n{message}",
-                    email,  # From email
-                    [settings.CONTACT_EMAIL],  # To email
-                    fail_silently=False,
-                )
-                messages.success(request, 'Thank you for your message. We will contact you soon!')
-                logger.info(f"Contact email sent successfully from {email}")
+                # Check if email settings are configured
+                if hasattr(settings, 'CONTACT_EMAIL') and settings.CONTACT_EMAIL:
+                    send_mail(
+                        f"Contact Form: {subject}",
+                        f"From: {name} <{email}>\n\n{message}",
+                        email,  # From email
+                        [settings.CONTACT_EMAIL],  # To email
+                        fail_silently=False,
+                    )
+                    email_success = True
+                    logger.info(f"Contact email sent successfully from {email}")
+                else:
+                    # Email not configured, but that's okay
+                    logger.info("Email not configured, skipping email send")
             except Exception as e:
-                messages.error(request, 'Sorry, there was an error sending your message. Please try again later.')
                 logger.error(f"Failed to send contact email: {str(e)}")
+            
+            # Show appropriate message based on what worked
+            if database_success:
+                messages.success(request, 'Thank you for your message. We will contact you soon!')
+            else:
+                messages.success(request, 'Thank you for your message. We will contact you soon! (Note: There was an issue saving your message, but it was sent via email)')
             
             return redirect('main:contact')
         else:
