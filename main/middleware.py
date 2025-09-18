@@ -61,6 +61,10 @@ class RateLimitMiddleware(MiddlewareMixin):
         ):
             return None
         
+        # Skip rate limiting for health check endpoint
+        if request.path == '/health/':
+            return None
+        
         # Skip rate limiting for GET requests to main pages in development
         if settings.DEBUG and request.method == 'GET' and request.path in ['/', '/home/', '/portfolio/', '/blog/', '/resume/', '/contact/']:
             return None
