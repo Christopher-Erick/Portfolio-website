@@ -267,6 +267,31 @@ def cloudinary_test(request):
         'status': 'Cloudinary is configured' if using_cloudinary else 'Cloudinary is not configured'
     })
 
+def cloudinary_debug(request):
+    """Debug endpoint to check actual file paths in database"""
+    from portfolio.models import Project
+    import os
+    
+    # Get all projects
+    projects = getattr(Project, 'objects').all()
+    
+    project_data = []
+    for project in projects:
+        project_info = {
+            'title': project.title,
+            'slug': project.slug,
+            'featured_image_path': str(project.featured_image) if project.featured_image else 'None',
+            'writeup_document_path': str(project.writeup_document) if project.writeup_document else 'None',
+            'featured_image_url': project.featured_image.url if project.featured_image else 'None',
+            'writeup_document_url': project.writeup_document.url if project.writeup_document else 'None',
+        }
+        project_data.append(project_info)
+    
+    return JsonResponse({
+        'projects': project_data,
+        'total_projects': len(project_data)
+    })
+
 def test_social_links(request):
     """Test view to check social links rendering"""
     return render(request, 'test_social_links.html')
