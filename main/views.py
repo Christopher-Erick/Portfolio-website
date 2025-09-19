@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
+from django.http import JsonResponse
+from django.utils import timezone
 from .models import Testimonial, Skill, Education, Certification, Achievement, Experience, ContactSubmission
 
 # Get the logger
