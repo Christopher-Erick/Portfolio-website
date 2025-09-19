@@ -188,8 +188,66 @@ def security_dashboard(request):
     return render(request, 'main/security_dashboard.html')
 
 def health_check(request):
-    """Health check endpoint for deployment platforms"""
-    return render(request, 'main/health.html')
+    """Health check endpoint for monitoring"""
+    try:
+        # Test database connection
+        from django.db import connection
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT 1")
+            db_status = "OK"
+    except Exception as e:
+        db_status = f"Error: {str(e)}"
+    
+    # Check if we're in debug mode
+    from django.conf import settings
+    debug_mode = getattr(settings, 'DEBUG', False)
+    
+    # Check Cloudinary configuration
+    cloudinary_status = "Not checked"
+    try:
+        from django.conf import settings
+        default_storage = getattr(settings, 'DEFAULT_FILE_STORAGE', '')
+        if 'cloudinary' in default_storage.lower():
+            cloudinary_status = "Configured"
+        else:
+            cloudinary_status = "Not configured"
+    except:
+        cloudinary_status = "Error checking"
+    
+    return JsonResponse({
+        'status': 'healthy',
+        'timestamp': timezone.now().isoformat(),
+        'database': db_status,
+        'debug': debug_mode,
+        'cloudinary': cloudinary_status
+    })
+
+def cloudinary_test(request):
+    """Test endpoint to check Cloudinary configuration"""
+    import os
+    from django.conf import settings
+    
+    # Check Cloudinary environment variables
+    cloudinary_cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME', 'Not set')
+    cloudinary_api_key = os.getenv('CLOUDINARY_API_KEY', 'Not set')
+    cloudinary_api_secret = 'Set' if os.getenv('CLOUDINARY_API_SECRET') else 'Not set'
+    
+    # Check Django settings
+    default_file_storage = getattr(settings, 'DEFAULT_FILE_STORAGE', 'Not set')
+    debug = getattr(settings, 'DEBUG', 'Not set')
+    
+    # Check if Cloudinary is being used
+    using_cloudinary = 'cloudinary' in default_file_storage.lower() if default_file_storage != 'Not set' else False
+    
+    return JsonResponse({
+        'cloudinary_configured': using_cloudinary,
+        'cloudinary_cloud_name': cloudinary_cloud_name,
+        'cloudinary_api_key': 'Set' if cloudinary_api_key != 'Not set' else 'Not set',
+        'cloudinary_api_secret': cloudinary_api_secret,
+        'default_file_storage': default_file_storage,
+        'debug_mode': debug,
+        'status': 'Cloudinary is configured' if using_cloudinary else 'Cloudinary is not configured'
+    })
 
 def test_social_links(request):
     """Test view to check social links rendering"""
