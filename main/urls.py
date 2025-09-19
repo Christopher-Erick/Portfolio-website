@@ -14,4 +14,5 @@ urlpatterns = [
     path('test-social-links/', views.test_social_links, name='test_social_links'),
     path('cloudinary-test/', views.cloudinary_test, name='cloudinary_test'),
     path('cloudinary-debug/', views.cloudinary_debug, name='cloudinary_debug'),
+    path('cloudinary-upload-test/', views.cloudinary_upload_test, name='cloudinary_upload_test'),
 ]

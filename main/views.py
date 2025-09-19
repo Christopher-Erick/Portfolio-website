@@ -267,6 +267,38 @@ def cloudinary_test(request):
         'status': 'Cloudinary is configured' if using_cloudinary else 'Cloudinary is not configured'
     })
 
+def cloudinary_upload_test(request):
+    """Test endpoint to try uploading a file to Cloudinary"""
+    if request.method != 'POST':
+        return JsonResponse({'error': 'POST method required'})
+    
+    if 'file' not in request.FILES:
+        return JsonResponse({'error': 'No file provided'})
+    
+    try:
+        # Import Cloudinary
+        import cloudinary
+        import cloudinary.uploader
+        
+        # Get the uploaded file
+        uploaded_file = request.FILES['file']
+        
+        # Upload to Cloudinary
+        result = cloudinary.uploader.upload(uploaded_file)
+        
+        return JsonResponse({
+            'success': True,
+            'public_id': result.get('public_id'),
+            'url': result.get('secure_url'),
+            'format': result.get('format'),
+            'bytes': result.get('bytes')
+        })
+    except Exception as e:
+        return JsonResponse({
+            'success': False,
+            'error': str(e)
+        })
+
 def cloudinary_debug(request):
     """Debug endpoint to check actual file paths in database"""
     from portfolio.models import Project
