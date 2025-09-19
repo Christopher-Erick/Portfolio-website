@@ -241,6 +241,21 @@ def cloudinary_test(request):
     # Check if Cloudinary is being used
     using_cloudinary = 'cloudinary' in default_file_storage.lower() if default_file_storage != 'Not set' else False
     
+    # Test Cloudinary connection
+    cloudinary_test_result = "Not tested"
+    if using_cloudinary:
+        try:
+            import cloudinary
+            import cloudinary.uploader
+            # Test the configuration
+            config = cloudinary.config()
+            if config.cloud_name and config.api_key:
+                cloudinary_test_result = "Connection successful"
+            else:
+                cloudinary_test_result = "Configuration incomplete"
+        except Exception as e:
+            cloudinary_test_result = f"Connection failed: {str(e)}"
+    
     return JsonResponse({
         'cloudinary_configured': using_cloudinary,
         'cloudinary_cloud_name': cloudinary_cloud_name,
@@ -248,6 +263,7 @@ def cloudinary_test(request):
         'cloudinary_api_secret': cloudinary_api_secret,
         'default_file_storage': default_file_storage,
         'debug_mode': debug,
+        'cloudinary_test': cloudinary_test_result,
         'status': 'Cloudinary is configured' if using_cloudinary else 'Cloudinary is not configured'
     })
 
