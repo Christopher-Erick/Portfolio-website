@@ -199,6 +199,10 @@ Update views in `main/views.py`, `portfolio/views.py`, and `blog/views.py` to mo
 For deployment instructions, see:
 - [RENDER_DEPLOYMENT.md](RENDER_DEPLOYMENT.md) for Render deployment
 
+### Media Files in Production
+
+For production deployments (especially on platforms like Render), this application supports Cloudinary for persistent media storage. See [CLOUDINARY_SETUP_GUIDE.md](CLOUDINARY_SETUP_GUIDE.md) for setup instructions.
+
 ### Build Scripts
 
 This project includes platform-specific build scripts to ensure proper deployment across different environments:
