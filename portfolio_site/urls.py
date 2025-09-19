@@ -46,7 +46,9 @@ urlpatterns = [
     path('robots.txt', robots_txt, name='robots_txt'),
 ]
 
-# Serve static and media files in both development and production
-# In production on platforms like Render, we need to serve media files explicitly
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Serve static files in both development and production
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+# Only serve media files locally when not using Cloudinary
+if not hasattr(settings, 'DEFAULT_FILE_STORAGE') or 'cloudinary' not in settings.DEFAULT_FILE_STORAGE:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
