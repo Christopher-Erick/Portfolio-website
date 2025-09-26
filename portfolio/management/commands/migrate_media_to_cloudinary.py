@@ -35,41 +35,74 @@ class Command(BaseCommand):
         migrated_count = 0
         
         for project in projects:
+            self.stdout.write(f'Processing project: {project.title}')
+            
             # Check if project has featured image
-            if project.featured_image:
-                old_path = project.featured_image.path if hasattr(project.featured_image, 'path') else str(project.featured_image)
-                self.stdout.write(f'Project: {project.title}')
+            if project.featured_image and project.featured_image.name:
+                old_path = str(project.featured_image)
                 self.stdout.write(f'  Featured image: {old_path}')
                 
-                # Try to migrate the file
-                try:
-                    # Re-save the project to trigger Cloudinary upload
-                    project.save()
-                    migrated_count += 1
+                # Only migrate if it's a local path (not already in Cloudinary)
+                if not old_path.startswith('http'):
+                    try:
+                        # Clear the current file reference
+                        project.featured_image = None
+                        project.save()
+                        
+                        # Re-save the project to trigger Cloudinary upload
+                        project.save()
+                        
+                        if project.featured_image:
+                            new_path = str(project.featured_image)
+                            migrated_count += 1
+                            self.stdout.write(
+                                f'  Successfully migrated featured image to: {new_path}'
+                            )
+                        else:
+                            self.stdout.write(
+                                f'  Failed to migrate featured image'
+                            )
+                    except Exception as e:
+                        self.stdout.write(
+                            f'  Failed to migrate featured image: {str(e)}'
+                        )
+                else:
                     self.stdout.write(
-                        f'  Successfully migrated featured image'
-                    )
-                except Exception as e:
-                    self.stdout.write(
-                        f'  Failed to migrate featured image: {str(e)}'
+                        f'  Featured image already in Cloudinary: {old_path}'
                     )
             
             # Check if project has writeup document
-            if project.writeup_document:
-                old_path = project.writeup_document.path if hasattr(project.writeup_document, 'path') else str(project.writeup_document)
+            if project.writeup_document and project.writeup_document.name:
+                old_path = str(project.writeup_document)
                 self.stdout.write(f'  Writeup document: {old_path}')
                 
-                # Try to migrate the file
-                try:
-                    # Re-save the project to trigger Cloudinary upload
-                    project.save()
-                    migrated_count += 1
+                # Only migrate if it's a local path (not already in Cloudinary)
+                if not old_path.startswith('http'):
+                    try:
+                        # Clear the current file reference
+                        project.writeup_document = None
+                        project.save()
+                        
+                        # Re-save the project to trigger Cloudinary upload
+                        project.save()
+                        
+                        if project.writeup_document:
+                            new_path = str(project.writeup_document)
+                            migrated_count += 1
+                            self.stdout.write(
+                                f'  Successfully migrated writeup document to: {new_path}'
+                            )
+                        else:
+                            self.stdout.write(
+                                f'  Failed to migrate writeup document'
+                            )
+                    except Exception as e:
+                        self.stdout.write(
+                            f'  Failed to migrate writeup document: {str(e)}'
+                        )
+                else:
                     self.stdout.write(
-                        f'  Successfully migrated writeup document'
-                    )
-                except Exception as e:
-                    self.stdout.write(
-                        f'  Failed to migrate writeup document: {str(e)}'
+                        f'  Writeup document already in Cloudinary: {old_path}'
                     )
         
         self.stdout.write(
