@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>Portfolio - Christopher Erick Otieno's Cybersecurity Projects</title>
+    <meta name="description" content="Explore Christopher Erick Otieno's portfolio of cybersecurity projects, featuring security assessments, penetration testing, SIEM implementations, and security automation scripts.">
+    <meta name="keywords" content="cybersecurity, analyst, penetration testing, vulnerability assessment, system administrator, data analyst, IT support, database admin">
+    <meta name="author" content="Christopher Erick Otieno">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Christopher Erick Otieno - Cybersecurity Analyst, System Administrator">
+    <meta property="og:description" content="Professional portfolio showcasing cybersecurity expertise, penetration testing projects, and IT solutions.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://localhost/portfolio/">
+    <meta property="og:image" content="http://localhost/portfolio//images/portfolio-preview.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Christopher Erick Otieno">
+    <meta name="twitter:description" content="Cybersecurity Analyst, System Administrator & IT Professional">
+    <meta name="twitter:image" content="http://localhost/portfolio//images/portfolio-preview.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <!-- Fallback Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
+    
+    <!-- CSS -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/icons.css">
+    
+    <!-- Icon Fixes -->
+    <style>
+        /* FontAwesome Icon Fixes */
+        .fab, .fas, .far, .fal, .fad, .fat {
+            font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands', 'FontAwesome' !important;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .fab {
+            font-family: 'Font Awesome 6 Brands' !important;
+            font-weight: 400;
+        }
+        
+        .fas {
+            font-family: 'Font Awesome 6 Free' !important;
+            font-weight: 900;
+        }
+        
+        /* Social Link Icon Fallbacks */
+        .social-link i {
+            min-width: 20px;
+            text-align: center;
+            display: inline-block;
+        }
+        
+        /* Specific icon fixes */
+        .fa-github:before { content: "\f09b"; }
+        .fa-linkedin:before { content: "\f08c"; }
+        .fa-envelope:before { content: "\f0e0"; }
+        .fa-user-secret:before { content: "\f21b"; }
+        .fa-cube:before { content: "\f1b2"; }
+        .fa-shield-alt:before { content: "\f3ed"; }
+        
+        /* Fix for potential z-index issues */
+        body {
+            position: relative;
+            z-index: 0;
+        }
+        
+        main {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+    
+    
+<style>
+    /* Portfolio specific styles */
+    .portfolio-header {
+        padding-top: 8rem;
+    }
+    
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    
+    .portfolio-controls {
+        max-width: 800px;
+        margin: 3rem auto 0;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+    }
+    
+    .search-container {
+        position: relative;
+        max-width: 400px;
+        width: 100%;
+    }
+    
+    .search-container i {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+    }
+    
+    .portfolio-filters {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .project-card {
+        position: relative;
+        overflow: hidden;
+        background: var(--bg-primary);
+        border-radius: var(--border-radius-lg);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .project-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 35px rgba(0, 123, 255, 0.2);
+    }
+    
+    [data-theme="dark"] .project-card {
+        background: #1f1f1f;
+        border-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    [data-theme="dark"] .project-card:hover {
+        box-shadow: 0 12px 35px rgba(0, 255, 127, 0.2);
+    }
+    
+    .card-img-container {
+        position: relative;
+        height: 280px;
+        overflow: hidden;
+        border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+    }
+    
+    .card-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        transition: transform 0.3s ease;
+        border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+        background: #1a1a2e;
+    }
+    
+    .card-img-container:hover .card-img {
+        transform: scale(1.05);
+    }
+    
+    .card-img-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, transparent 50%, rgba(0, 0, 0, 0.7) 100%);
+        display: flex;
+        align-items: flex-end;
+        padding: 1.5rem;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .card-img-container:hover .card-img-overlay {
+        opacity: 1;
+    }
+    
+    .project-category-badge {
+        background: rgba(0, 123, 255, 0.9);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: var(--border-radius);
+        font-size: 0.9rem;
+        font-weight: 600;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    [data-theme="dark"] .project-category-badge {
+        background: rgba(0, 255, 127, 0.9);
+        color: #1a1a1a;
+    }
+    
+    .card-img-placeholder {
+        height: 280px;
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        color: #00ff7f;
+        margin-bottom: 0;
+        border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .card-img-placeholder::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at center, rgba(0, 255, 127, 0.1) 0%, transparent 70%);
+        animation: pulse 3s ease-in-out infinite;
+    }
+    
+    .card-img-placeholder i {
+        font-size: 3rem;
+        z-index: 2;
+        position: relative;
+        text-shadow: 0 0 20px rgba(0, 255, 127, 0.5);
+    }
+    
+    .card-img-placeholder span {
+        font-size: 1.1rem;
+        font-weight: 600;
+        z-index: 2;
+        position: relative;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    [data-theme="light"] .card-img-placeholder {
+        background: linear-gradient(135deg, #007bff 0%, #0056b3 50%, #004085 100%);
+        color: white;
+    }
+    
+    [data-theme="light"] .card-img-placeholder::before {
+        background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    }
+    
+    [data-theme="light"] .card-img-placeholder i {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+    
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+    }
+    
+    .card-content {
+        padding: 1.5rem;
+    }
+    
+    .project-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .project-category {
+        color: var(--primary-color);
+        font-weight: 500;
+    }
+    
+    .project-status {
+        padding: 0.4rem 0.8rem;
+        border-radius: var(--border-radius);
+        font-size: 0.75rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .project-status i {
+        font-size: 0.5rem;
+    }
+    
+    .status-completed {
+        background: rgba(40, 167, 69, 0.1);
+        color: #28a745;
+        border: 1px solid rgba(40, 167, 69, 0.3);
+    }
+    
+    .status-development {
+        background: rgba(255, 193, 7, 0.1);
+        color: #ffc107;
+        border: 1px solid rgba(255, 193, 7, 0.3);
+    }
+    
+    .status-planning {
+        background: rgba(108, 117, 125, 0.1);
+        color: #6c757d;
+        border: 1px solid rgba(108, 117, 125, 0.3);
+    }
+    
+    .status-maintenance {
+        background: rgba(0, 123, 255, 0.1);
+        color: #007bff;
+        border: 1px solid rgba(0, 123, 255, 0.3);
+    }
+    
+    [data-theme="dark"] .status-completed {
+        background: rgba(40, 167, 69, 0.2);
+        color: #4caf50;
+    }
+    
+    [data-theme="dark"] .status-development {
+        background: rgba(255, 193, 7, 0.2);
+        color: #ffeb3b;
+    }
+    
+    [data-theme="dark"] .status-planning {
+        background: rgba(108, 117, 125, 0.2);
+        color: #9e9e9e;
+    }
+    
+    [data-theme="dark"] .status-maintenance {
+        background: rgba(0, 255, 127, 0.2);
+        color: #00ff7f;
+    }
+    
+    .project-tech {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.5rem;
+    }
+    
+    .tech-tag {
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: var(--border-radius);
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+    
+    .project-links {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+    
+    .project-links .btn {
+        flex: 1;
+        justify-content: center;
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
+    
+    .project-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 123, 255, 0.95);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: var(--transition);
+        border-radius: var(--border-radius-lg);
+    }
+    
+    .project-card:hover .project-overlay {
+        opacity: 1;
+    }
+    
+    .overlay-content {
+        text-align: center;
+        padding: 2rem;
+    }
+    
+    .overlay-content h4 {
+        margin-bottom: 1rem;
+        color: white;
+    }
+    
+    .overlay-content p {
+        margin-bottom: 1.5rem;
+        color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .overlay-actions .btn {
+        background: white;
+        color: var(--primary-color);
+        border-color: white;
+    }
+    
+    .overlay-actions .btn:hover {
+        background: rgba(255, 255, 255, 0.9);
+    }
+    
+    /* Pagination */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    
+    .page-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: var(--bg-primary);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: var(--border-radius);
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: var(--transition-fast);
+    }
+    
+    .page-link:hover,
+    .page-link.active {
+        background: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+    }
+    
+    /* Enhanced Featured Technologies */
+    .tech-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 2rem;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    
+    .tech-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        padding: 2rem 1.5rem;
+        background: #ffffff;
+        border-radius: var(--border-radius-lg);
+        border: 2px solid #e8f4f8;
+        transition: var(--transition);
+        text-align: center;
+        min-height: 140px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    /* Light mode enhanced styling */
+    .tech-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(0, 123, 255, 0.05), rgba(0, 200, 255, 0.05));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 1;
+    }
+    
+    .tech-item:hover::before {
+        opacity: 1;
+    }
+    
+    .tech-item > * {
+        position: relative;
+        z-index: 2;
+    }
+    
+    /* Dark mode tech items - professional styling */
+    [data-theme="dark"] .tech-item {
+        background: linear-gradient(135deg, #4a5568, #2d3748);
+        border: 2px solid rgba(100, 116, 139, 0.3);
+        color: #e2e8f0;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    [data-theme="dark"] .tech-item::before {
+        display: none;
+    }
+    
+    .tech-item:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 30px rgba(0, 123, 255, 0.2);
+        border-color: rgba(0, 123, 255, 0.3);
+    }
+    
+    [data-theme="dark"] .tech-item:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 25px rgba(100, 116, 139, 0.4);
+        background: linear-gradient(135deg, #64748b, #475569);
+        border-color: rgba(148, 163, 184, 0.5);
+    }
+    
+    .tech-item i {
+        font-size: 2.5rem;
+        color: #007bff;
+        transition: all 0.3s ease;
+        text-shadow: 0 2px 4px rgba(0, 123, 255, 0.1);
+    }
+    
+    .tech-item:hover i {
+        color: #0056b3;
+        transform: scale(1.1);
+        text-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+    }
+    
+    [data-theme="dark"] .tech-item i {
+        color: inherit;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+        filter: brightness(1.3) contrast(1.1);
+    }
+    
+    [data-theme="dark"] .tech-item:hover i {
+        color: inherit;
+        transform: scale(1.1);
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+        filter: brightness(1.4) contrast(1.2);
+    }
+    
+    .tech-icon {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+    }
+    
+    .tech-item:hover .tech-icon {
+        transform: scale(1.1);
+    }
+    
+    .tech-name {
+        font-weight: 700;
+        font-size: 1rem;
+        text-align: center;
+        color: #2c3e50;
+        line-height: 1.3;
+        letter-spacing: 0.5px;
+        transition: color 0.3s ease;
+    }
+    
+    .tech-item:hover .tech-name {
+        color: #007bff;
+    }
+    
+    [data-theme="dark"] .tech-name {
+        color: #e2e8f0;
+        font-weight: 700;
+    }
+    
+    [data-theme="dark"] .tech-item:hover .tech-name {
+        color: #f8fafc;
+    }
+    
+    /* No projects state */
+    .no-projects {
+        padding: 3rem;
+        color: var(--text-muted);
+    }
+    
+    .no-projects i {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        opacity: 0.5;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        .portfolio-controls {
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .portfolio-filters {
+            flex-direction: column;
+            width: 100%;
+        }
+        
+        .portfolio-filter {
+            width: 100%;
+        }
+        
+        .projects-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .project-links {
+            flex-direction: column;
+        }
+        
+        .tech-grid {
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .tech-item {
+            padding: 1.5rem 1rem;
+            min-height: 120px;
+        }
+        
+        .tech-item i {
+            font-size: 2rem;
+        }
+        
+        .tech-name {
+            font-size: 0.9rem;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .projects-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        .tech-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .tech-item {
+            padding: 1rem;
+            min-height: 100px;
+        }
+        
+        .tech-item i {
+            font-size: 1.8rem;
+        }
+        
+        .tech-name {
+            font-size: 0.85rem;
+        }
+    }
+</style>
+
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Christopher Erick Otieno",
+        "jobTitle": "Cybersecurity Analyst, System Administrator",
+        "url": "http://localhost/portfolio/",
+        "sameAs": [
+            "https://github.com/Christopher-Erick",
+            "https://www.linkedin.com/in/christopher-erick-otieno",
+            "https://tryhackme.com/p/erikchris54",
+            "https://app.hackthebox.com/users/ChristopherErick",
+            "mailto:christophererick879@gmail.com"
+        ],
+        "knowsAbout": ["Cybersecurity", "Penetration Testing", "Vulnerability Assessment", "SIEM", "Incident Response", "Python", "Django", "JavaScript"],
+        "description": "Building secure digital ecosystems from the ground up — where cybersecurity meets seamless operations."
+    }
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="/" class="navbar-brand">
+                <i class="fas fa-shield-alt"></i> Christopher Erick Otieno
+            </a>
+            
+            <ul class="navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about/">About</a></li>
+                <li><a href="/portfolio/">Portfolio</a></li>
+                <li><a href="/resume/">Resume</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+            
+            <div class="navbar-actions">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        
+<!-- Portfolio Header -->
+<section class="portfolio-header section">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h1>My Cybersecurity Portfolio</h1>
+            <p>A collection of security projects that demonstrate my expertise in vulnerability assessment, penetration testing, and security operations</p>
+        </div>
+        
+        <!-- Search and Filters -->
+        <div class="portfolio-controls fade-in">
+            <div class="search-container">
+                <input type="text" id="portfolio-search" placeholder="Search projects..." class="form-control">
+                <i class="fas fa-search"></i>
+            </div>
+            
+            <div class="portfolio-filters">
+                <button class="portfolio-filter active" data-filter="all">All Projects</button>
+                
+                <button class="portfolio-filter" data-filter="malware-analysis">Malware Analysis</button>
+                
+                <button class="portfolio-filter" data-filter="penetration-testing">Penetration Testing</button>
+                
+                <button class="portfolio-filter" data-filter="siem-monitoring">SIEM &amp; Monitoring</button>
+                
+                <button class="portfolio-filter" data-filter="security-assessment">Security Assessment</button>
+                
+                <button class="portfolio-filter" data-filter="security-automation">Security Automation</button>
+                
+                <button class="portfolio-filter" data-filter="system-administration">System Administration</button>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Portfolio Grid -->
+<section class="portfolio-grid section">
+    <div class="container">
+        <div class="projects-grid grid-3" id="projects-container">
+            
+            <div class="portfolio-item project-card card fade-in" data-category="security-assessment">
+                
+                <div class="card-img-container">
+                    <img src="/media/https%3A/res.cloudinary.com/dge5xurfz/image/upload/v1758913083/writeupsimages/VULNERABILITY_ASSEMEMENT" alt="Vulnerability Assessment - Nessus and OpenVAS Implementation" class="card-img" loading="lazy">
+                    <div class="card-img-overlay">
+                        <div class="project-category-badge">Security Assessment</div>
+                    </div>
+                </div>
+                
+                
+                <div class="card-content">
+                    <div class="project-meta">
+                        <span class="project-category">Security Assessment</span>
+                        <span class="project-status status-completed">
+                            <i class="fas fa-circle"></i> Completed
+                        </span>
+                    </div>
+                    
+                    <h3 class="card-title">
+                        <a href="/portfolio/comprehensive-vulnerability-assessment/">Vulnerability Assessment - Nessus and OpenVAS Implementation</a>
+                    </h3>
+                    
+                    <p class="card-text">Enterprise vulnerability assessment using Nessus and OpenVAS with comprehensive scanning, validation, and professional reporting methodologies.</p>
+                    
+                    <div class="project-tech">
+                        
+                        <span class="tech-tag" style="background-color: #367588;">Kali Linux</span>
+                        
+                        <span class="tech-tag" style="background-color: #0066CC;">NIST</span>
+                        
+                        <span class="tech-tag" style="background-color: #00A652;">Nessus</span>
+                        
+                        <span class="tech-tag" style="background-color: #000000;">OWASP</span>
+                        
+                        <span class="tech-tag" style="background-color: #228B22;">OpenVAS</span>
+                        
+                        <span class="tech-tag" style="background-color: #3776AB;">Python</span>
+                        
+                        <span class="tech-tag" style="background-color: #FF6600;">Splunk</span>
+                        
+                        <span class="tech-tag" style="background-color: #607078;">VMware</span>
+                        
+                        <span class="tech-tag" style="background-color: #183A61;">VirtualBox</span>
+                        
+                        <span class="tech-tag" style="background-color: ##0078D;">Windows Server</span>
+                        
+                    </div>
+                    
+                    <div class="project-links">
+                        <a href="/portfolio/comprehensive-vulnerability-assessment/" class="btn btn-primary">
+                            <i class="fas fa-eye"></i> View Details
+                        </a>
+                        
+                        <a href="https://academy.hackthebox.com/achievement/264193/108" class="btn btn-outline" target="_blank" rel="noopener">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+                
+                <div class="project-overlay">
+                    <div class="overlay-content">
+                        <h4>Vulnerability Assessment - Nessus and OpenVAS Implementation</h4>
+                        <p>Enterprise vulnerability assessment using Nessus and OpenVAS with comprehensive scanning, validation, and professional reporting methodologies.</p>
+                        <div class="overlay-actions">
+                            <a href="/portfolio/comprehensive-vulnerability-assessment/" class="btn btn-primary">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-item project-card card fade-in" data-category="siem-monitoring">
+                
+                <div class="card-img-container">
+                    <img src="/media/https%3A/res.cloudinary.com/dge5xurfz/image/upload/v1758913069/writeupsimages/splunk" alt="SIEM Log Analysis with Splunk SPL - Advanced Query Techniques" class="card-img" loading="lazy">
+                    <div class="card-img-overlay">
+                        <div class="project-category-badge">SIEM &amp; Monitoring</div>
+                    </div>
+                </div>
+                
+                
+                <div class="card-content">
+                    <div class="project-meta">
+                        <span class="project-category">SIEM &amp; Monitoring</span>
+                        <span class="project-status status-completed">
+                            <i class="fas fa-circle"></i> Completed
+                        </span>
+                    </div>
+                    
+                    <h3 class="card-title">
+                        <a href="/portfolio/siem-log-analysis-splunk-spl/">SIEM Log Analysis with Splunk SPL - Advanced Query Techniques</a>
+                    </h3>
+                    
+                    <p class="card-text">Advanced SIEM log analysis using Splunk SPL with filtering, transformation, and visualization techniques for security monitoring.</p>
+                    
+                    <div class="project-tech">
+                        
+                        <span class="tech-tag" style="background-color: #367588;">Kali Linux</span>
+                        
+                        <span class="tech-tag" style="background-color: #5391FE;">PowerShell</span>
+                        
+                        <span class="tech-tag" style="background-color: #3776AB;">Python</span>
+                        
+                        <span class="tech-tag" style="background-color: #FF6600;">Splunk</span>
+                        
+                        <span class="tech-tag" style="background-color: #607078;">VMware</span>
+                        
+                        <span class="tech-tag" style="background-color: #183A61;">VirtualBox</span>
+                        
+                        <span class="tech-tag" style="background-color: ##0078D;">Windows Server</span>
+                        
+                    </div>
+                    
+                    <div class="project-links">
+                        <a href="/portfolio/siem-log-analysis-splunk-spl/" class="btn btn-primary">
+                            <i class="fas fa-eye"></i> View Details
+                        </a>
+                        
+                        <a href="https://tryhackme.com/p/erikchris54" class="btn btn-outline" target="_blank" rel="noopener">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+                
+                <div class="project-overlay">
+                    <div class="overlay-content">
+                        <h4>SIEM Log Analysis with Splunk SPL - Advanced Query Techniques</h4>
+                        <p>Advanced SIEM log analysis using Splunk SPL with filtering, transformation, and visualization techniques for security monitoring.</p>
+                        <div class="overlay-actions">
+                            <a href="/portfolio/siem-log-analysis-splunk-spl/" class="btn btn-primary">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-item project-card card fade-in" data-category="malware-analysis">
+                
+                <div class="card-img-container">
+                    <img src="/media/https%3A/res.cloudinary.com/dge5xurfz/image/upload/v1758913060/writeupsimages/malware" alt="Malware Analysis Fundamentals - Static and Dynamic Analysis Techniques" class="card-img" loading="lazy">
+                    <div class="card-img-overlay">
+                        <div class="project-category-badge">Malware Analysis</div>
+                    </div>
+                </div>
+                
+                
+                <div class="card-content">
+                    <div class="project-meta">
+                        <span class="project-category">Malware Analysis</span>
+                        <span class="project-status status-completed">
+                            <i class="fas fa-circle"></i> Completed
+                        </span>
+                    </div>
+                    
+                    <h3 class="card-title">
+                        <a href="/portfolio/malware-analysis-Fundamental/">Malware Analysis Fundamentals - Static and Dynamic Analysis Techniques</a>
+                    </h3>
+                    
+                    <p class="card-text">Hands-on malware analysis project covering static analysis, obfuscation detection, and reverse engineering techniques using industry-standard tools</p>
+                    
+                    <div class="project-tech">
+                        
+                        <span class="tech-tag" style="background-color: #FF6B00;">IDA</span>
+                        
+                        <span class="tech-tag" style="background-color: #367588;">Kali Linux</span>
+                        
+                        <span class="tech-tag" style="background-color: #007bff;">PEview</span>
+                        
+                        <span class="tech-tag" style="background-color: #DC143C;">PeID</span>
+                        
+                        <span class="tech-tag" style="background-color: #5391FE;">PowerShell</span>
+                        
+                        <span class="tech-tag" style="background-color: #3776AB;">Python</span>
+                        
+                        <span class="tech-tag" style="background-color: #607078;">VMware</span>
+                        
+                        <span class="tech-tag" style="background-color: #183A61;">VirtualBox</span>
+                        
+                        <span class="tech-tag" style="background-color: #007bff;">Virus Total</span>
+                        
+                        <span class="tech-tag" style="background-color: #4B0082;">Volatility</span>
+                        
+                        <span class="tech-tag" style="background-color: #800080;">YARA</span>
+                        
+                    </div>
+                    
+                    <div class="project-links">
+                        <a href="/portfolio/malware-analysis-Fundamental/" class="btn btn-primary">
+                            <i class="fas fa-eye"></i> View Details
+                        </a>
+                        
+                        <a href="https://tryhackme.com/p/erikchris54" class="btn btn-outline" target="_blank" rel="noopener">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+                
+                <div class="project-overlay">
+                    <div class="overlay-content">
+                        <h4>Malware Analysis Fundamentals - Static and Dynamic Analysis Techniques</h4>
+                        <p>Hands-on malware analysis project covering static analysis, obfuscation detection, and reverse engineering techniques using industry-standard tools</p>
+                        <div class="overlay-actions">
+                            <a href="/portfolio/malware-analysis-Fundamental/" class="btn btn-primary">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- Pagination -->
+        
+    </div>
+</section>
+
+<!-- Featured Technologies -->
+<section class="featured-tech section" style="background-color: var(--bg-secondary);">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h2>Security Tools & Technologies</h2>
+            <p>The cybersecurity tools and frameworks that power my security assessments</p>
+        </div>
+        
+        <div class="tech-grid grid-6">
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-users-cog" style="color: #0078D4;"></i>
+                
+                
+                <span class="tech-name">Active Directory</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-wifi" style="color: #0066CC;"></i>
+                
+                
+                <span class="tech-name">Aircrack-ng</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-terminal" style="color: #4EAA25;"></i>
+                
+                
+                <span class="tech-name">Bash</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-spider" style="color: #FF6B00;"></i>
+                
+                
+                <span class="tech-name">Burp Suite</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fab fa-docker" style="color: #2496ED;"></i>
+                
+                
+                <span class="tech-name">Docker</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-spider" style="color: #28A745;"></i>
+                
+                
+                <span class="tech-name">Gobuster</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-key" style="color: #FFA500;"></i>
+                
+                
+                <span class="tech-name">Hashcat</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-spider" style="color: #FF6B00;"></i>
+                
+                
+                <span class="tech-name">IDA</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-unlock" style="color: #8B4513;"></i>
+                
+                
+                <span class="tech-name">John the Ripper</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fab fa-linux" style="color: #367588;"></i>
+                
+                
+                <span class="tech-name">Kali Linux</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-bomb" style="color: #DC3545;"></i>
+                
+                
+                <span class="tech-name">Metasploit</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-certificate" style="color: #0066CC;"></i>
+                
+                
+                <span class="tech-name">NIST</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-search" style="color: #00A652;"></i>
+                
+                
+                <span class="tech-name">Nessus</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-spider" style="color: #FF4444;"></i>
+                
+                
+                <span class="tech-name">Nikto</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-map" style="color: #4F81BD;"></i>
+                
+                
+                <span class="tech-name">Nmap</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-shield-alt" style="color: #000000;"></i>
+                
+                
+                <span class="tech-name">OWASP</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-search" style="color: #228B22;"></i>
+                
+                
+                <span class="tech-name">OpenVAS</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-graduation-cap" style="color: #007bff;"></i>
+                
+                
+                <span class="tech-name">PE Explorer</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-graduation-cap" style="color: #007bff;"></i>
+                
+                
+                <span class="tech-name">PEview</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-graduation-cap" style="color: #DC143C;"></i>
+                
+                
+                <span class="tech-name">PeID</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fab fa-microsoft" style="color: #5391FE;"></i>
+                
+                
+                <span class="tech-name">PowerShell</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fab fa-python" style="color: #3776AB;"></i>
+                
+                
+                <span class="tech-name">Python</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-key" style="color: #000000;"></i>
+                
+                
+                <span class="tech-name">SPL</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-shield-alt" style="color: #FF6347;"></i>
+                
+                
+                <span class="tech-name">Snort</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-search-plus" style="color: #FF6600;"></i>
+                
+                
+                <span class="tech-name">Splunk</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-database" style="color: #DC143C;"></i>
+                
+                
+                <span class="tech-name">Sqlmap</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-server" style="color: #607078;"></i>
+                
+                
+                <span class="tech-name">VMware</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-cube" style="color: #183A61;"></i>
+                
+                
+                <span class="tech-name">VirtualBox</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-graduation-cap" style="color: #007bff;"></i>
+                
+                
+                <span class="tech-name">Virus Total</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-memory" style="color: #4B0082;"></i>
+                
+                
+                <span class="tech-name">Volatility</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-eye" style="color: #3498DB;"></i>
+                
+                
+                <span class="tech-name">Wazuh</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fab fa-windows" style="color: ##0078D;"></i>
+                
+                
+                <span class="tech-name">Windows Server</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-chart-line" style="color: #1679A7;"></i>
+                
+                
+                <span class="tech-name">Wireshark</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-fingerprint" style="color: #800080;"></i>
+                
+                
+                <span class="tech-name">YARA</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-fire" style="color: #1E90FF;"></i>
+                
+                
+                <span class="tech-name">pfSense</span>
+            </div>
+            
+            <div class="tech-item fade-in">
+                
+                
+                <i class="fas fa-linux" style="color: #FFA500;"></i>
+                
+                
+                <span class="tech-name">windows Event Log</span>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="portfolio-cta section">
+    <div class="container">
+        <div class="cta-content text-center fade-in">
+            <h2>Ready to Secure Your Infrastructure?</h2>
+            <p>Let's discuss how my cybersecurity expertise can help strengthen your organization's security posture.</p>
+            <div class="cta-actions">
+                <a href="/contact/" class="btn btn-primary btn-lg">
+                    <i class="fas fa-shield-alt"></i> Start Security Consultation
+                </a>
+                <a href="/resume/download/" class="btn btn-outline btn-lg" download>
+                    <i class="fas fa-download"></i> Download Resume
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Christopher Erick Otieno</h3>
+                    <div class="social-links">
+                        <a href="https://github.com/Christopher-Erick" class="social-link" target="_blank" rel="noopener">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/christopher-erick-otieno" class="social-link" target="_blank" rel="noopener">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://tryhackme.com/p/erikchris54" class="social-link" target="_blank" rel="noopener">
+                            <i class="fas fa-user-secret"></i>
+                        </a>
+                        <a href="https://app.hackthebox.com/users/ChristopherErick" class="social-link" target="_blank" rel="noopener">
+                            <i class="fas fa-cube"></i>
+                        </a>
+                        <a href="mailto:christophererick879@gmail.com" class="social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/portfolio/">Portfolio</a></li>
+                        <li><a href="/resume/">Resume</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="/contact/">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>Cybersecurity Assessment</li>
+                        <li>Penetration Testing</li>
+                        <li>System Administration</li>
+                        <li>Data Analysis</li>
+                        <li>IT Support</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-envelope"></i> christophererick879@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +254758081580</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Christopher Erick Otieno. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/js/main.js"></script>
+    
+<script>
+    // Portfolio filtering functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('portfolio-search');
+        const filterButtons = document.querySelectorAll('.portfolio-filter');
+        const projectItems = document.querySelectorAll('.portfolio-item');
+        
+        // Search functionality
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                projectItems.forEach(item => {
+                    const title = item.querySelector('.card-title a').textContent.toLowerCase();
+                    const description = item.querySelector('.card-text').textContent.toLowerCase();
+                    const techs = Array.from(item.querySelectorAll('.tech-tag')).map(tag => tag.textContent.toLowerCase());
+                    
+                    const matches = title.includes(searchTerm) || 
+                                  description.includes(searchTerm) ||
+                                  techs.some(tech => tech.includes(searchTerm));
+                    
+                    if (matches) {
+                        item.style.display = 'block';
+                        setTimeout(() => item.classList.add('visible'), 10);
+                    } else {
+                        item.classList.remove('visible');
+                        setTimeout(() => item.style.display = 'none', 300);
+                    }
+                });
+            });
+        }
+        
+        // Filter functionality
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const filter = this.dataset.filter;
+                
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Filter projects
+                projectItems.forEach(item => {
+                    const category = item.dataset.category;
+                    
+                    if (filter === 'all' || category === filter) {
+                        item.style.display = 'block';
+                        setTimeout(() => item.classList.add('visible'), 10);
+                    } else {
+                        item.classList.remove('visible');
+                        setTimeout(() => item.style.display = 'none', 300);
+                    }
+                });
+            });
+        });
+    });
+</script>
+
+    
+    <!-- CSRF Token for AJAX requests -->
+    <input type="hidden" name="csrfmiddlewaretoken" value="bbpkRVIT0LvkxAfxNDmx1HismL4nbW9XbLFGbEblZJp8o36QSvfmMeux7sLXr7Yp">
+    <script>
+        // Function to get CSRF token from cookies
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        window.csrfToken = getCookie('csrftoken');
+    </script>
+    
+    <!-- Analytics (if needed) -->
+    
+</body>
+</html>

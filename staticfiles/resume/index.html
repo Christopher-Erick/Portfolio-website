@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>Resume - Christopher Erick Otieno's Professional Experience</title>
+    <meta name="description" content="View Christopher Erick Otieno's professional resume including cybersecurity experience, technical skills, education, and achievements in IT security.">
+    <meta name="keywords" content="cybersecurity, analyst, penetration testing, vulnerability assessment, system administrator, data analyst, IT support, database admin">
+    <meta name="author" content="Christopher Erick Otieno">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Christopher Erick Otieno - Cybersecurity Analyst, System Administrator">
+    <meta property="og:description" content="Professional portfolio showcasing cybersecurity expertise, penetration testing projects, and IT solutions.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://localhost/resume/">
+    <meta property="og:image" content="http://localhost/resume//images/portfolio-preview.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Christopher Erick Otieno">
+    <meta name="twitter:description" content="Cybersecurity Analyst, System Administrator & IT Professional">
+    <meta name="twitter:image" content="http://localhost/resume//images/portfolio-preview.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <!-- Fallback Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
+    
+    <!-- CSS -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/icons.css">
+    
+    <!-- Icon Fixes -->
+    <style>
+        /* FontAwesome Icon Fixes */
+        .fab, .fas, .far, .fal, .fad, .fat {
+            font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands', 'FontAwesome' !important;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .fab {
+            font-family: 'Font Awesome 6 Brands' !important;
+            font-weight: 400;
+        }
+        
+        .fas {
+            font-family: 'Font Awesome 6 Free' !important;
+            font-weight: 900;
+        }
+        
+        /* Social Link Icon Fallbacks */
+        .social-link i {
+            min-width: 20px;
+            text-align: center;
+            display: inline-block;
+        }
+        
+        /* Specific icon fixes */
+        .fa-github:before { content: "\f09b"; }
+        .fa-linkedin:before { content: "\f08c"; }
+        .fa-envelope:before { content: "\f0e0"; }
+        .fa-user-secret:before { content: "\f21b"; }
+        .fa-cube:before { content: "\f1b2"; }
+        .fa-shield-alt:before { content: "\f3ed"; }
+        
+        /* Fix for potential z-index issues */
+        body {
+            position: relative;
+            z-index: 0;
+        }
+        
+        main {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+    
+    
+<style>
+    /* Resume Page Styles */
+    .resume-header {
+        padding-top: 8rem;
+        padding-bottom: 3rem;
+    }
+    
+    .resume-intro h1 {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+        color: var(--primary-color);
+    }
+    
+    .resume-title {
+        font-size: 1.5rem;
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+        font-weight: 500;
+    }
+    
+    .resume-summary {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: var(--text-secondary);
+        margin-bottom: 2rem;
+    }
+    
+    .resume-actions {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+    }
+    
+    .contact-info {
+        background: var(--bg-secondary);
+        padding: 2rem;
+        border-radius: var(--border-radius-lg);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        color: var(--text-secondary);
+    }
+    
+    .contact-item:last-child {
+        margin-bottom: 0;
+    }
+    
+    .contact-item i {
+        width: 20px;
+        color: var(--primary-color);
+    }
+    
+    /* Skills Section */
+    .skills-categories {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    
+    .skill-category {
+        background: var(--bg-primary);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: var(--border-radius-lg);
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+    }
+    
+    .skill-category:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .category-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid var(--primary-color);
+    }
+    
+    .category-header i {
+        font-size: 1.25rem;
+        color: var(--primary-color);
+        width: 24px;
+        text-align: center;
+    }
+    
+    .category-header h3 {
+        color: var(--text-primary);
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 0;
+    }
+    
+    .skills-compact {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .skill-compact {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .skill-compact:last-child {
+        border-bottom: none;
+    }
+    
+    .skill-level {
+        background: var(--secondary-color);
+        color: white;
+        padding: 0.2rem 0.6rem;
+        border-radius: var(--border-radius);
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .skill-level:contains('Expert') {
+        background: #28a745;
+    }
+    
+    .skill-level:contains('Advanced') {
+        background: var(--primary-color);
+    }
+    
+    .skill-level:contains('Intermediate') {
+        background: #ffc107;
+        color: #000;
+    }
+    
+    /* Tech badges for tools section */
+    .tech-badges-compact {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .tech-badge-compact {
+        background: var(--primary-color);
+        color: white;
+        padding: 0.4rem 0.8rem;
+        border-radius: var(--border-radius);
+        font-size: 0.8rem;
+        font-weight: 500;
+        transition: var(--transition-fast);
+        border: 1px solid transparent;
+    }
+    
+    .tech-badge-compact:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+    }
+    
+    /* Specific tool colors */
+    .tech-badge-compact.splunk { background: #00A653; }
+    .tech-badge-compact.gobuster { background: #FF6B35; }
+    .tech-badge-compact.wireshark { background: #1679A7; }
+    .tech-badge-compact.nmap { background: #4682B4; }
+    .tech-badge-compact.metasploit { background: #2F5F8F; }
+    .tech-badge-compact.kali { background: #367AA9; }
+    .tech-badge-compact.wazuh { background: #005571; }
+    .tech-badge-compact.burp { background: #FF6633; }
+    .tech-badge-compact.nessus { background: #00A4E0; }
+    .tech-badge-compact.python { background: #3776AB; }
+    .tech-badge-compact.powershell { background: #5391FE; }
+    .tech-badge-compact.owasp { background: #000000; }
+    
+    /* Legacy styles - keeping for compatibility */
+    .tech-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .tech-badge {
+        background: var(--primary-color);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: var(--border-radius);
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: var(--transition-fast);
+    }
+    
+    .tech-badge:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+    }
+    
+    /* Timeline */
+    .timeline {
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        padding-left: 2rem;
+    }
+    
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: var(--primary-color);
+        border-radius: 2px;
+    }
+    
+    .timeline-item {
+        position: relative;
+        margin-bottom: 3rem;
+        padding-left: 3rem;
+    }
+    
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -9px;
+        top: 0;
+        width: 18px;
+        height: 18px;
+        background: var(--primary-color);
+        border-radius: 50%;
+        border: 4px solid var(--bg-primary);
+        box-shadow: 0 0 0 4px var(--primary-color);
+    }
+    
+    .timeline-date {
+        color: var(--primary-color);
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .timeline-content h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.25rem;
+        color: var(--text-primary);
+    }
+    
+    .timeline-content h4 {
+        color: var(--text-secondary);
+        font-style: italic;
+        font-weight: 500;
+        margin-bottom: 1rem;
+    }
+    
+    .timeline-description {
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+    
+    .timeline-tech {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .tech-tag {
+        background: var(--secondary-color);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: var(--border-radius);
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+    
+    /* Education */
+    .education-item {
+        display: flex;
+        gap: 1.5rem;
+        background: var(--bg-primary);
+        padding: 2rem;
+        border-radius: var(--border-radius-lg);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        transition: var(--transition);
+    }
+    
+    .education-item:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow);
+    }
+    
+    .education-icon {
+        flex-shrink: 0;
+        width: 60px;
+        height: 60px;
+        background: var(--primary-color);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+    
+    .education-content h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        color: var(--text-primary);
+    }
+    
+    .education-content h4 {
+        color: var(--primary-color);
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+    
+    .education-date {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+    
+    .education-content p {
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin: 0;
+    }
+    
+    .field-of-study {
+        font-style: italic;
+        color: var(--text-muted);
+        margin-bottom: 0.5rem !important;
+    }
+    
+    .credential-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--primary-color);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-top: 0.5rem;
+        transition: var(--transition);
+    }
+    
+    .credential-link:hover {
+        color: var(--primary-dark);
+        text-decoration: underline;
+    }
+    
+    /* Achievements */
+    .achievement-item {
+        text-align: center;
+        background: var(--bg-primary);
+        padding: 2rem;
+        border-radius: var(--border-radius-lg);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        transition: var(--transition);
+    }
+    
+    .achievement-item:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .achievement-icon {
+        width: 80px;
+        height: 80px;
+        background: var(--primary-color);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        margin: 0 auto 1.5rem;
+    }
+    
+    .achievement-item h4 {
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+    }
+    
+    .achievement-item p {
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin: 0;
+    }
+    
+    /* Achievement Technology Badges */
+    .achievement-tech-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        justify-content: center;
+    }
+    
+    .tech-badge-achievement {
+        padding: 0.4rem 0.8rem;
+        border-radius: var(--border-radius);
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: white;
+        transition: var(--transition-fast);
+        border: 1px solid transparent;
+    }
+    
+    .tech-badge-achievement:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Specific tech badge colors matching the image */
+    .tech-badge-achievement.burpsuite,
+    .tech-badge-achievement.burp { background: #FF6633; }
+    .tech-badge-achievement.iso27001,
+    .tech-badge-achievement.iso { background: #FFA500; }
+    .tech-badge-achievement.kalilinux,
+    .tech-badge-achievement.kali { background: #367AA9; }
+    .tech-badge-achievement.metasploit { background: #2F5F8F; }
+    .tech-badge-achievement.nist { background: #1E3A8A; }
+    .tech-badge-achievement.nessus { background: #00A4E0; }
+    .tech-badge-achievement.nmap { background: #4682B4; }
+    .tech-badge-achievement.owasp { background: #000000; }
+    
+    /* Additional cybersecurity tools */
+    .tech-badge-achievement.splunk { background: #00A653; }
+    .tech-badge-achievement.gobuster { background: #FF6B35; }
+    .tech-badge-achievement.wireshark { background: #1679A7; }
+    .tech-badge-achievement.wazuh { background: #005571; }
+    .tech-badge-achievement.python { background: #3776AB; }
+    .tech-badge-achievement.powershell { background: #5391FE; }
+    .tech-badge-achievement.linux { background: #FCC624; color: #000; }
+    .tech-badge-achievement.windows { background: #0078D4; }
+    
+    /* Default color for unspecified tools */
+    .tech-badge-achievement:not([class*="burp"]):not([class*="iso"]):not([class*="kali"]):not([class*="metasploit"]):not([class*="nist"]):not([class*="nessus"]):not([class*="nmap"]):not([class*="owasp"]):not([class*="splunk"]):not([class*="gobuster"]):not([class*="wireshark"]):not([class*="wazuh"]):not([class*="python"]):not([class*="powershell"]):not([class*="linux"]):not([class*="windows"]) {
+        background: var(--primary-color);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        .resume-intro .row {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .resume-intro h1 {
+            font-size: 2.5rem;
+        }
+        
+        .contact-info {
+            margin-top: 2rem;
+        }
+        
+        /* Skills responsive */
+        .skills-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .skill-category {
+            padding: 1.25rem;
+        }
+        
+        .category-header {
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+        }
+        
+        .category-header h3 {
+            font-size: 1rem;
+        }
+        
+        .tech-badges-compact {
+            gap: 0.4rem;
+        }
+        
+        .tech-badge-compact {
+            padding: 0.3rem 0.6rem;
+            font-size: 0.75rem;
+        }
+        
+        .skill-compact {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+            padding: 0.75rem 0;
+        }
+        
+        .skill-level {
+            align-self: flex-end;
+        }
+        
+        /* Legacy responsive styles */
+        .skill-item {
+            grid-template-columns: 1fr;
+            gap: 0.5rem;
+            text-align: center;
+        }
+        
+        .timeline {
+            padding-left: 1rem;
+        }
+        
+        .timeline-item {
+            padding-left: 2rem;
+        }
+        
+        .education-item {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .achievements-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Christopher Erick Otieno",
+        "jobTitle": "Cybersecurity Analyst, System Administrator",
+        "url": "http://localhost/resume/",
+        "sameAs": [
+            "https://github.com/Christopher-Erick",
+            "https://www.linkedin.com/in/christopher-erick-otieno",
+            "https://tryhackme.com/p/erikchris54",
+            "https://app.hackthebox.com/users/ChristopherErick",
+            "mailto:christophererick879@gmail.com"
+        ],
+        "knowsAbout": ["Cybersecurity", "Penetration Testing", "Vulnerability Assessment", "SIEM", "Incident Response", "Python", "Django", "JavaScript"],
+        "description": "Building secure digital ecosystems from the ground up — where cybersecurity meets seamless operations."
+    }
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="/" class="navbar-brand">
+                <i class="fas fa-shield-alt"></i> Christopher Erick Otieno
+            </a>
+            
+            <ul class="navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about/">About</a></li>
+                <li><a href="/portfolio/">Portfolio</a></li>
+                <li><a href="/resume/">Resume</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+            
+            <div class="navbar-actions">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        
+<!-- Resume Header -->
+<section class="resume-header section">
+    <div class="container">
+        <div class="resume-intro fade-in">
+            <div class="row">
+                <div class="col-8">
+                    <h1>Christopher Erick Otieno</h1>
+                    <h2 class="resume-title">Cybersecurity Analyst & IT Professional</h2>
+                    <p class="resume-summary">
+                        Dedicated Cybersecurity Analyst with 1 year of specialized experience in threat analysis, 
+                        vulnerability assessment, and security operations. Passionate about protecting digital assets 
+                        through proactive security measures, incident response, and comprehensive risk management. 
+                        Proven expertise in penetration testing, SIEM implementation, and security automation.
+                    </p>
+                </div>
+                <div class="col-4">
+                    <div class="resume-actions">
+                        <a href="/resume/download/" class="btn btn-primary btn-lg" download>
+                            <i class="fas fa-download"></i> Download PDF
+                        </a>
+                        <a href="/contact/" class="btn btn-outline btn-lg">
+                            <i class="fas fa-paper-plane"></i> Contact Me
+                        </a>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>christophererick879@gmail.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+254758081580</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Nairobi, Kenya</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-linkedin"></i>
+                            <span>linkedin.com/in/christopher-erick-otieno</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-github"></i>
+                            <span>github.com/Christopher-Erick</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section class="resume-skills section">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h2>Technical Skills</h2>
+        </div>
+        
+        <div class="skills-categories">
+            <div class="skills-grid">
+                <!-- Dynamic Skills by Category -->
+                
+                    
+                    <div class="skill-category fade-in">
+                        <div class="category-header">
+                            
+                            <i class="fas fa-code"></i>
+                            
+                            <h3>Skills</h3>
+                        </div>
+                        <div class="skills-compact">
+                            
+                            <div class="skill-compact">
+                                Cloud Security
+                                <span class="skill-level">
+                                    
+                                        Advanced
+                                    
+                                </span>
+                            </div>
+                            
+                            <div class="skill-compact">
+                                Compliance (ISO 27001)
+                                <span class="skill-level">
+                                    
+                                        Advanced
+                                    
+                                </span>
+                            </div>
+                            
+                            <div class="skill-compact">
+                                Digital Forensics
+                                <span class="skill-level">
+                                    
+                                        Advanced
+                                    
+                                </span>
+                            </div>
+                            
+                            <div class="skill-compact">
+                                Incident Response
+                                <span class="skill-level">
+                                    
+                                        Advanced
+                                    
+                                </span>
+                            </div>
+                            
+                            <div class="skill-compact">
+                                Malware Analysis
+                                <span class="skill-level">
+                                    
+                                        Advanced
+                                    
+                                </span>
+                            </div>
+                            
+                            <div class="skill-compact">
+                                Network Security
+                                <span class="skill-level">
+                                    
+                                        Advanced
+                                    
+                                </span>
+                            </div>
+                            
+                            <div class="skill-compact">
+                                Scripting &amp; Programming
+                                <span class="skill-level">
+                                    
+                                        Advanced
+                                    
+                                </span>
+                            </div>
+                            
+                            <div class="skill-compact">
+                                Security Assessment
+                                <span class="skill-level">
+                                    
+                                        Advanced
+                                    
+                                </span>
+                            </div>
+                            
+                            <div class="skill-compact">
+                                System Administration
+                                <span class="skill-level">
+                                    
+                                        Expert
+                                    
+                                </span>
+                            </div>
+                            
+                            <div class="skill-compact">
+                                Threat Analysis
+                                <span class="skill-level">
+                                    
+                                        Advanced
+                                    
+                                </span>
+                            </div>
+                            
+                            <div class="skill-compact">
+                                Web Application Security
+                                <span class="skill-level">
+                                    
+                                        Advanced
+                                    
+                                </span>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category fade-in">
+                        <div class="category-header">
+                            
+                            <i class="fas fa-user"></i>
+                            
+                            <h3>Special Skills</h3>
+                        </div>
+                        <div class="skills-compact">
+                            
+                            <div class="skill-compact">
+                                Communication
+                                <span class="skill-level">
+                                    
+                                        Expert
+                                    
+                                </span>
+                            </div>
+                            
+                            <div class="skill-compact">
+                                Critical Thinking
+                                <span class="skill-level">
+                                    
+                                        Expert
+                                    
+                                </span>
+                            </div>
+                            
+                            <div class="skill-compact">
+                                Problem Solving
+                                <span class="skill-level">
+                                    
+                                        Expert
+                                    
+                                </span>
+                            </div>
+                            
+                            <div class="skill-compact">
+                                Productivity
+                                <span class="skill-level">
+                                    
+                                        Expert
+                                    
+                                </span>
+                            </div>
+                            
+                            <div class="skill-compact">
+                                Teamwork
+                                <span class="skill-level">
+                                    
+                                        Expert
+                                    
+                                </span>
+                            </div>
+                            
+                            <div class="skill-compact">
+                                Time Management
+                                <span class="skill-level">
+                                    
+                                        Expert
+                                    
+                                </span>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category fade-in">
+                        <div class="category-header">
+                            
+                            <i class="fas fa-tools"></i>
+                            
+                            <h3>Tools</h3>
+                        </div>
+                        <div class="skills-compact">
+                            
+                            <div class="skill-compact">
+                                Gobuster
+                                <span class="skill-level">
+                                    
+                                        Advanced
+                                    
+                                </span>
+                            </div>
+                            
+                            <div class="skill-compact">
+                                Kali Linux
+                                <span class="skill-level">
+                                    
+                                        Expert
+                                    
+                                </span>
+                            </div>
+                            
+                            <div class="skill-compact">
+                                Metasploit
+                                <span class="skill-level">
+                                    
+                                        Expert
+                                    
+                                </span>
+                            </div>
+                            
+                            <div class="skill-compact">
+                                Nessus
+                                <span class="skill-level">
+                                    
+                                        Advanced
+                                    
+                                </span>
+                            </div>
+                            
+                            <div class="skill-compact">
+                                Nmap
+                                <span class="skill-level">
+                                    
+                                        Expert
+                                    
+                                </span>
+                            </div>
+                            
+                            <div class="skill-compact">
+                                Owasp
+                                <span class="skill-level">
+                                    
+                                        Advanced
+                                    
+                                </span>
+                            </div>
+                            
+                            <div class="skill-compact">
+                                Splunk
+                                <span class="skill-level">
+                                    
+                                        Expert
+                                    
+                                </span>
+                            </div>
+                            
+                            <div class="skill-compact">
+                                Wazuh
+                                <span class="skill-level">
+                                    
+                                        Advanced
+                                    
+                                </span>
+                            </div>
+                            
+                            <div class="skill-compact">
+                                Wireshark
+                                <span class="skill-level">
+                                    
+                                        Expert
+                                    
+                                </span>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Experience Section -->
+<section class="resume-experience section" style="background-color: var(--bg-secondary);">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h2>Professional Experience</h2>
+        </div>
+        
+        <div class="timeline">
+            <!-- Dynamic Experience Items -->
+            
+            <div class="timeline-item fade-in">
+                <div class="timeline-date">
+                    2025 - 2025
+                </div>
+                <div class="timeline-content">
+                    <h3>System Support Engineer (Volunteer)</h3>
+                    <h4>St. Paul&#x27;s University</h4>
+                    <p class="timeline-description">
+                        Volunteered as System Support Engineer for the implementation and rollout of the Respondus LockDown Browser system for online examinations. Provided technical support for 2 weeks each month, troubleshooting complex system issues including DLL errors (libcef.dll, api-ms-win-shcore-scaling-l1-1-1.dll), camera access permissions, server connection problems, and firewall configurations. Developed comprehensive error solution documentation and provided hands-on support to faculty and students across multiple operating systems. Managed system installations, performed administrative troubleshooting, and ensured smooth operation of the secure examination platform.
+                    </p>
+                    
+                    <div class="timeline-tech">
+                        
+                        <span class="tech-tag">LockDown Browser</span>
+                        
+                        <span class="tech-tag">Windows OS</span>
+                        
+                        <span class="tech-tag">Linux</span>
+                        
+                        <span class="tech-tag">Chrome book</span>
+                        
+                        <span class="tech-tag">mac</span>
+                        
+                        <span class="tech-tag">eLearning platforms</span>
+                        
+                        <span class="tech-tag">Microsoft Visual C++ Redistributables</span>
+                        
+                        <span class="tech-tag">Windows Defender Firewall</span>
+                        
+                        <span class="tech-tag">Control Panel administration</span>
+                        
+                        <span class="tech-tag">System registry management</span>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="timeline-item fade-in">
+                <div class="timeline-date">
+                    2025 - 2025
+                </div>
+                <div class="timeline-content">
+                    <h3>Attachee</h3>
+                    <h4>Kenya Power and Lightening Company</h4>
+                    <p class="timeline-description">
+                        Completed comprehensive industrial attachment in the ICT Division at Kenya Power&#x27;s Central Office. Gained hands-on experience across multiple departments including system administration, network infrastructure, data center operations, and cybersecurity. Successfully managed incident resolution procedures, provided IT service desk support, and worked with enterprise systems including SAP modules for HR, Finance, and Supply Chain. Demonstrated strong adaptability, dependability, and maintained high standards of integrity while contributing to various technical projects and daily operations
+                    </p>
+                    
+                    <div class="timeline-tech">
+                        
+                        <span class="tech-tag">SAP</span>
+                        
+                        <span class="tech-tag">InCMS</span>
+                        
+                        <span class="tech-tag">IMS</span>
+                        
+                        <span class="tech-tag">Fortinet</span>
+                        
+                        <span class="tech-tag">Forti-client</span>
+                        
+                        <span class="tech-tag">DTMMS</span>
+                        
+                        <span class="tech-tag">Medicare</span>
+                        
+                        <span class="tech-tag">ICS</span>
+                        
+                        <span class="tech-tag">FortiNac</span>
+                        
+                        <span class="tech-tag">OTDR</span>
+                        
+                        <span class="tech-tag">Multigo</span>
+                        
+                        <span class="tech-tag">Cellebrite</span>
+                        
+                        <span class="tech-tag">Forensic Tool Kit</span>
+                        
+                        <span class="tech-tag">Pensuite</span>
+                        
+                        <span class="tech-tag">Forti-analyzer</span>
+                        
+                        <span class="tech-tag">Qradar</span>
+                        
+                        <span class="tech-tag">Syterminal</span>
+                        
+                        <span class="tech-tag">HSM</span>
+                        
+                        <span class="tech-tag">EVG</span>
+                        
+                        <span class="tech-tag">SQL</span>
+                        
+                        <span class="tech-tag">VoIP</span>
+                        
+                        <span class="tech-tag">Circuit-Switch</span>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- Education Section -->
+<section class="resume-education section">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h2>Education & Certifications</h2>
+        </div>
+        
+        <div class="education-grid grid-2">
+            <!-- Dynamic Education Items -->
+            
+            <div class="education-item fade-in">
+                <div class="education-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="education-content">
+                    <h3>Bachelors Degree</h3>
+                    <h4>St Paul&#x27;s University</h4>
+                    <div class="education-date">
+                        2019 - 2025
+                    </div>
+                    
+                        <p class="field-of-study">Computer Science</p>
+                    
+                    
+                        <p>Computer science with specialized cybersecurity and digital forensics training. Mastered threat analysis, incident investigation, and forensic evidence handling. Core competencies include data analysis, database administration, system administration, and software development, with concentrated expertise in security protocols, malware analysis, and incident response procedures.</p>
+                    
+                </div>
+            </div>
+            
+            
+            <!-- Dynamic Certification Items -->
+            
+            <div class="education-item fade-in">
+                <div class="education-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <div class="education-content">
+                    <h3>Security Analyst</h3>
+                    <h4>Cyber Shujaa</h4>
+                    <div class="education-date">
+                        2025
+                    </div>
+                    
+                        <p>Specialized training in threat detection, digital forensics, and security operations. Mastered SIEM platforms, vulnerability assessment, incident response, and penetration testing. Core competencies include threat intelligence analysis, malware investigation, and SOC operations for enterprise cybersecurity environments.</p>
+                    
+                    
+                </div>
+            </div>
+            
+            <div class="education-item fade-in">
+                <div class="education-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <div class="education-content">
+                    <h3>Ethical Hacking</h3>
+                    <h4>Cyber Shujaa</h4>
+                    <div class="education-date">
+                        2025
+                    </div>
+                    
+                        <p>Training in penetration testing and offensive security within ethical frameworks. Mastered vulnerability identification, exploitation techniques, and security assessments using industry tools. Core competencies include network reconnaissance, web application testing, exploit development, and security reporting to strengthen organizational defenses</p>
+                    
+                    
+                </div>
+            </div>
+            
+            <div class="education-item fade-in">
+                <div class="education-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <div class="education-content">
+                    <h3>Project Management</h3>
+                    <h4>Microsoft</h4>
+                    <div class="education-date">
+                        2025
+                    </div>
+                    
+                        <p>Advanced training in project management methodologies and frameworks. Mastered budget development, project scheduling, requirements management, and stakeholder communications. Core competencies include project lifecycle management, resource allocation, timeline optimization, and delivering projects on time and within budget through systematic planning and execution</p>
+                    
+                    
+                        <a href="https://www.linkedin.com/learning/certificates/af4f3c0c1f0a8023c6c366ba7a9d06f73ba9485fe5110e7a8919a6e7e599b1c3" target="_blank" class="credential-link">
+                            <i class="fas fa-external-link-alt"></i> Verify Credential
+                        </a>
+                    
+                </div>
+            </div>
+            
+            <div class="education-item fade-in">
+                <div class="education-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <div class="education-content">
+                    <h3>Data Analyst</h3>
+                    <h4>DOT kenya</h4>
+                    <div class="education-date">
+                        2023
+                    </div>
+                    
+                        <p>Advanced training in data analytics, statistical modeling, and business intelligence. Mastered data manipulation, predictive analytics, and visualization using Python, SQL, and Excel. Core competencies include machine learning algorithms, data mining, hypothesis testing, and dashboard development for data-driven decision making.</p>
+                    
+                    
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- Achievements Section -->
+<section class="resume-achievements section" style="background-color: var(--bg-secondary);">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h2>Key Achievements</h2>
+        </div>
+        
+        <div class="achievements-grid grid-3">
+            <!-- Dynamic Achievement Items -->
+            
+            <div class="achievement-item fade-in">
+                <div class="achievement-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h4>WIndow Server Configuration</h4>
+                <p>Successfully installed and configured Windows Server infrastructure for an enterprise unit, ensuring optimal system performance, security protocols, and seamless integration with existing network architecture</p>
+                
+                <div class="achievement-tech-badges">
+                    
+                    <span class="tech-badge-achievement virtualmachine">Virtual Machine</span>
+                    
+                    <span class="tech-badge-achievement winserver2022">Win Server 2022</span>
+                    
+                    <span class="tech-badge-achievement activedirectory">Active Directory</span>
+                    
+                    <span class="tech-badge-achievement win10">Win 10</span>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="achievement-item fade-in">
+                <div class="achievement-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h4>Intrusion Detection System</h4>
+                <p>Developed and implemented a custom Intrusion Detection System (IDS) for website security, enhancing threat monitoring capabilities and protecting against malicious activities and unauthorized access attempts</p>
+                
+                <div class="achievement-tech-badges">
+                    
+                    <span class="tech-badge-achievement python">Python</span>
+                    
+                    <span class="tech-badge-achievement docker">Docker</span>
+                    
+                    <span class="tech-badge-achievement virtualmachine">Virtual Machine</span>
+                    
+                    <span class="tech-badge-achievement snort">snort</span>
+                    
+                    <span class="tech-badge-achievement nginx">Nginx</span>
+                    
+                    <span class="tech-badge-achievement loganalysistool">Log Analysis Tool</span>
+                    
+                    <span class="tech-badge-achievement tcp/ipprotocol">TCP/IP protocol</span>
+                    
+                    <span class="tech-badge-achievement http/httpstrafficanalysis">HTTP/HTTPS Traffic analysis</span>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="achievement-item fade-in">
+                <div class="achievement-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h4>System Log Analysis( Forensic Evidence)</h4>
+                <p>Conducted comprehensive digital forensics investigation of network traffic using PCAP analysis. Successfully identified and analyzed a Log4Shell (CVE-2021-44228) exploitation attempt, traced attacker IP addresses, extracted malicious JNDI LDAP injection payloads, and performed hash analysis to uncover security breach indicators and attack vectors</p>
+                
+                <div class="achievement-tech-badges">
+                    
+                    <span class="tech-badge-achievement linux">Linux</span>
+                    
+                    <span class="tech-badge-achievement wireshark">Wireshark</span>
+                    
+                    <span class="tech-badge-achievement tcp/ip">TCP/IP</span>
+                    
+                    <span class="tech-badge-achievement http">HTTP</span>
+                    
+                    <span class="tech-badge-achievement log4j">Log4j</span>
+                    
+                    <span class="tech-badge-achievement jndildap">JNDI LDAP</span>
+                    
+                    <span class="tech-badge-achievement hashanalysistools">Hash analysis tools</span>
+                    
+                    <span class="tech-badge-achievement networkforensics">Network forensics</span>
+                    
+                    <span class="tech-badge-achievement netcat">Netcat</span>
+                    
+                    <span class="tech-badge-achievement javawebserver">Java web server</span>
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Christopher Erick Otieno</h3>
+                    <div class="social-links">
+                        <a href="https://github.com/Christopher-Erick" class="social-link" target="_blank" rel="noopener">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/christopher-erick-otieno" class="social-link" target="_blank" rel="noopener">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://tryhackme.com/p/erikchris54" class="social-link" target="_blank" rel="noopener">
+                            <i class="fas fa-user-secret"></i>
+                        </a>
+                        <a href="https://app.hackthebox.com/users/ChristopherErick" class="social-link" target="_blank" rel="noopener">
+                            <i class="fas fa-cube"></i>
+                        </a>
+                        <a href="mailto:christophererick879@gmail.com" class="social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/portfolio/">Portfolio</a></li>
+                        <li><a href="/resume/">Resume</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="/contact/">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>Cybersecurity Assessment</li>
+                        <li>Penetration Testing</li>
+                        <li>System Administration</li>
+                        <li>Data Analysis</li>
+                        <li>IT Support</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-envelope"></i> christophererick879@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +254758081580</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Christopher Erick Otieno. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/js/main.js"></script>
+    
+    
+    <!-- CSRF Token for AJAX requests -->
+    <input type="hidden" name="csrfmiddlewaretoken" value="YhvENijBDOnEqvxMh4yk0auzLvoFDT4VdLac6v3WcoEA0309GCn2jeWvs08DbuMl">
+    <script>
+        // Function to get CSRF token from cookies
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        window.csrfToken = getCookie('csrftoken');
+    </script>
+    
+    <!-- Analytics (if needed) -->
+    
+</body>
+</html>

@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>About Christopher Erick Otieno - Cybersecurity Analyst</title>
+    <meta name="description" content="Learn more about Christopher Erick Otieno, a dedicated cybersecurity analyst with expertise in threat analysis, penetration testing, and security assessment.">
+    <meta name="keywords" content="cybersecurity, analyst, penetration testing, vulnerability assessment, system administrator, data analyst, IT support, database admin">
+    <meta name="author" content="Christopher Erick Otieno">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Christopher Erick Otieno - Cybersecurity Analyst, System Administrator">
+    <meta property="og:description" content="Professional portfolio showcasing cybersecurity expertise, penetration testing projects, and IT solutions.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://localhost/about/">
+    <meta property="og:image" content="http://localhost/about//images/portfolio-preview.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Christopher Erick Otieno">
+    <meta name="twitter:description" content="Cybersecurity Analyst, System Administrator & IT Professional">
+    <meta name="twitter:image" content="http://localhost/about//images/portfolio-preview.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <!-- Fallback Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
+    
+    <!-- CSS -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/icons.css">
+    
+    <!-- Icon Fixes -->
+    <style>
+        /* FontAwesome Icon Fixes */
+        .fab, .fas, .far, .fal, .fad, .fat {
+            font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands', 'FontAwesome' !important;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .fab {
+            font-family: 'Font Awesome 6 Brands' !important;
+            font-weight: 400;
+        }
+        
+        .fas {
+            font-family: 'Font Awesome 6 Free' !important;
+            font-weight: 900;
+        }
+        
+        /* Social Link Icon Fallbacks */
+        .social-link i {
+            min-width: 20px;
+            text-align: center;
+            display: inline-block;
+        }
+        
+        /* Specific icon fixes */
+        .fa-github:before { content: "\f09b"; }
+        .fa-linkedin:before { content: "\f08c"; }
+        .fa-envelope:before { content: "\f0e0"; }
+        .fa-user-secret:before { content: "\f21b"; }
+        .fa-cube:before { content: "\f1b2"; }
+        .fa-shield-alt:before { content: "\f3ed"; }
+        
+        /* Fix for potential z-index issues */
+        body {
+            position: relative;
+            z-index: 0;
+        }
+        
+        main {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+    
+    
+<style>
+    /* About page specific styles */
+    #about-hero {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        color: white;
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+        padding: 6rem 0 2rem;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    #about-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: 
+            radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 20%),
+            radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.05) 0%, transparent 15%);
+        pointer-events: none;
+    }
+    
+    .hero-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+        z-index: 1;
+    }
+    
+    .floating-elements {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .floating-element {
+        position: absolute;
+        font-size: 2rem;
+        color: rgba(255, 255, 255, 0.1);
+        opacity: 0.3;
+        animation: float var(--duration, 6s) ease-in-out infinite;
+        animation-delay: var(--delay, 0s);
+    }
+    
+    .floating-element:nth-child(1) { top: 20%; left: 10%; }
+    .floating-element:nth-child(2) { top: 60%; right: 15%; }
+    .floating-element:nth-child(3) { bottom: 30%; left: 20%; }
+    .floating-element:nth-child(4) { top: 40%; right: 30%; }
+    .floating-element:nth-child(5) { bottom: 20%; right: 10%; }
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(10deg); }
+    }
+    
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        text-align: center;
+        margin: 0 auto;
+    }
+    
+    .hero-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        background: linear-gradient(to right, #fff, #e0f7ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        opacity: 0.9;
+    }
+    
+    .hero-description {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        color: #d7cbcf;
+    }
+    
+    .hero-stats {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 2rem;
+        flex-wrap: wrap;
+    }
+    
+    .stat-item {
+        text-align: center;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: var(--border-radius);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        min-width: 120px;
+        transition: transform 0.3s ease;
+    }
+    
+    .stat-item:hover {
+        transform: translateY(-5px);
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: white;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+    
+    .stat-label {
+        font-size: 0.9rem;
+        opacity: 0.8;
+        font-weight: 500;
+    }
+    
+    #about-details {
+        padding: 4rem 0;
+    }
+    
+    .about-image {
+        position: relative;
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+    
+    .profile-img {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid var(--primary-color);
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .about-image-overlay {
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--bg-primary);
+        padding: 1rem;
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        z-index: 10;
+        max-width: 280px;
+        width: max-content;
+    }
+    
+    .tech-stack {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+    
+    .tech-item {
+        background: var(--primary-color);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: var(--border-radius);
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+    
+    .about-content h2 {
+        margin-bottom: 1.5rem;
+        color: var(--primary-color);
+        position: relative;
+        padding-bottom: 0.5rem;
+    }
+    
+    .about-content h2::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        border-radius: 3px;
+    }
+    
+    .about-content h3 {
+        margin: 2rem 0 1rem;
+        color: var(--text-primary);
+    }
+    
+    .about-content p {
+        line-height: 1.7;
+        margin-bottom: 1rem;
+        color: var(--text-secondary);
+    }
+    
+    .journey-highlight {
+        background: linear-gradient(135deg, rgba(0, 123, 255, 0.05) 0%, rgba(0, 191, 255, 0.05) 100%);
+        border-left: 4px solid var(--primary-color);
+        border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        padding: 1.5rem;
+        margin: 2rem 0;
+        display: flex;
+        gap: 1.5rem;
+        align-items: flex-start;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .highlight-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        color: white;
+        flex-shrink: 0;
+        box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+    }
+    
+    .highlight-content h3 {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        color: var(--primary-color);
+    }
+    
+    .highlight-content p {
+        margin-bottom: 0;
+        font-style: italic;
+    }
+    
+    .competencies-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    
+    .competency-item {
+        text-align: center;
+        padding: 2rem;
+        background: var(--bg-primary);
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .competency-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+    }
+    
+    .competency-item:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--primary-color);
+    }
+    
+    .competency-item:hover::before {
+        transform: scaleX(1);
+    }
+    
+    .competency-item i {
+        font-size: 3rem;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+        transition: transform 0.3s ease;
+    }
+    
+    .competency-item:hover i {
+        transform: scale(1.1);
+    }
+    
+    .competency-item h4 {
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+    }
+    
+    /* Innovation section */
+    .innovation-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+    
+    .innovation-card {
+        background: var(--bg-primary);
+        border-radius: var(--border-radius-lg);
+        padding: 2rem;
+        box-shadow: var(--shadow);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .innovation-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--primary-color);
+    }
+    
+    .innovation-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+    }
+    
+    .innovation-card:hover::before {
+        transform: scaleX(1);
+    }
+    
+    .innovation-icon {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        font-size: 1.8rem;
+        color: white;
+        box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
+    }
+    
+    .innovation-card h3 {
+        text-align: center;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+    }
+    
+    .innovation-card p {
+        text-align: center;
+        color: var(--text-secondary);
+        line-height: 1.6;
+    }
+    
+    /* Philosophy section */
+    .philosophy-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+    
+    .philosophy-item {
+        text-align: center;
+        padding: 2rem;
+        background: var(--bg-primary);
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: slideInUp 0.6s ease forwards;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .philosophy-item:nth-child(1) {
+        animation-delay: 0.2s;
+    }
+    
+    .philosophy-item:nth-child(2) {
+        animation-delay: 0.4s;
+    }
+    
+    .philosophy-item:nth-child(3) {
+        animation-delay: 0.6s;
+    }
+    
+    .philosophy-item:nth-child(4) {
+        animation-delay: 0.8s;
+    }
+    
+    @keyframes slideInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .philosophy-item:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--primary-color);
+    }
+    
+    .philosophy-item::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, rgba(0, 123, 255, 0.05), transparent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .philosophy-item:hover::after {
+        opacity: 1;
+    }
+    
+    .philosophy-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        font-size: 2rem;
+        color: white;
+        box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .philosophy-item:hover .philosophy-icon {
+        transform: translateY(-5px) scale(1.1);
+        box-shadow: 0 12px 25px rgba(0, 123, 255, 0.4);
+    }
+    
+    .philosophy-icon::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+        transform: rotate(30deg);
+        transition: all 0.5s ease;
+    }
+    
+    .philosophy-item:hover .philosophy-icon::before {
+        transform: rotate(30deg) translate(20%, 20%);
+    }
+    
+    /* Light mode improvements */
+    /* These styles have been removed to revert to the previous design */
+    
+    /* Dark mode enhancements */
+    [data-theme="dark"] .timeline-content {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    [data-theme="dark"] .timeline-item:hover .timeline-content {
+        border-color: #64748b;
+    }
+    
+    [data-theme="dark"] .skill-tag {
+        background: rgba(100, 116, 139, 0.2);
+        color: #cbd5e1;
+        border: 1px solid rgba(100, 116, 139, 0.3);
+    }
+    
+    [data-theme="dark"] .skill-tag:hover {
+        background: #64748b;
+        color: white;
+    }
+    
+    [data-theme="dark"] .journey-highlight {
+        background: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.5) 100%);
+        border-left: 4px solid #64748b;
+    }
+    
+    [data-theme="dark"] .about-content h2::after {
+        background: linear-gradient(90deg, #64748b, #94a3b8);
+    }
+    
+    [data-theme="dark"] #about-hero {
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    }
+    
+    [data-theme="dark"] .hero-title {
+        background: linear-gradient(to right, #e2e8f0, #cbd5e1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    [data-theme="dark"] .stat-item {
+        background: rgba(30, 41, 59, 0.3);
+        border: 1px solid rgba(100, 116, 139, 0.3);
+    }
+    
+    [data-theme="dark"] .innovation-card {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    [data-theme="dark"] .innovation-card:hover {
+        border-color: #64748b;
+    }
+    
+    [data-theme="dark"] .philosophy-item {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    [data-theme="dark"] .philosophy-item:hover {
+        border-color: #64748b;
+    }
+    
+    [data-theme="dark"] .competency-item {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    [data-theme="dark"] .competency-item:hover {
+        border-color: #64748b;
+    }
+    
+    /* Responsive */
+    @media (max-width: 1200px) {
+        .hero-title {
+            font-size: 3rem;
+        }
+        
+        .innovation-grid,
+        .philosophy-grid {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+    }
+    
+    @media (max-width: 992px) {
+        .hero-title {
+            font-size: 2.8rem;
+        }
+        
+        .category h3 {
+            font-size: 1.4rem;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        #about-hero {
+            min-height: 70vh;
+            padding: 5rem 0 3rem;
+        }
+        
+        .hero-title {
+            font-size: 2.5rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+        }
+        
+        .hero-description {
+            font-size: 1rem;
+        }
+        
+        .hero-stats {
+            gap: 1rem;
+        }
+        
+        .stat-item {
+            min-width: 100px;
+            padding: 0.75rem;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+        }
+        
+        .floating-element {
+            font-size: 1.5rem;
+        }
+        
+        #about-details {
+            padding: 3rem 0;
+        }
+        
+        .about-image {
+            margin-bottom: 3rem;
+        }
+        
+        .about-image-overlay {
+            position: static;
+            transform: none;
+            left: auto;
+            bottom: auto;
+            margin: 2rem auto 0;
+            max-width: 100%;
+        }
+        
+        .competencies-grid,
+        .philosophy-grid,
+        .innovation-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        /* Center social links on smaller screens */
+        .social-links {
+            justify-content: center;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .hero-title {
+            font-size: 2rem;
+            padding-top:2rem;
+        }
+        
+        .hero-stats {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .competency-item,
+        .philosophy-item,
+        .innovation-card {
+            padding: 1.5rem;
+        }
+        
+        .profile-img {
+            width: 250px;
+            height: 250px;
+        }
+        
+        .section {
+            padding: 3rem 0;
+        }
+        
+        .cta-actions {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .cta-actions .btn {
+            width: 100%;
+            min-width: auto;
+        }
+        
+        .journey-highlight {
+            flex-direction: column;
+            gap: 1rem;
+            text-align: center;
+        }
+        
+        .highlight-icon {
+            margin: 0 auto;
+        }
+        
+        /* Disable animations on mobile for performance */
+        .timeline-item,
+        .philosophy-item,
+        .achievement-item,
+        .innovation-card,
+        .category {
+            opacity: 1;
+            transform: none;
+            animation: none;
+        }
+        
+        .floating-element {
+            display: none;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .hero-title {
+            font-size: 1.8rem;
+            padding-top: 2rem;
+        }
+        
+        .hero-stats {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .competency-item,
+        .philosophy-item,
+        .innovation-card {
+            padding: 1.5rem;
+        }
+        
+        .profile-img {
+            width: 200px;
+            height: 200px;
+        }
+    }
+    
+    @media (max-width: 360px) {
+        .hero-title {
+            font-size: 1.6rem;
+        }
+        
+        .competency-item,
+        .philosophy-item,
+        .innovation-card {
+            padding: 1rem;
+        }
+        
+        .philosophy-icon,
+        .innovation-icon {
+            width: 50px;
+            height: 50px;
+            font-size: 1.2rem;
+        }
+    }
+    
+    @media (min-width: 1400px) {
+        .hero-title {
+            font-size: 4rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.8rem;
+        }
+        
+        .hero-description {
+            font-size: 1.3rem;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+        }
+        
+        .competency-item,
+        .philosophy-item,
+        .innovation-card {
+            padding: 2.5rem;
+        }
+    }
+    
+    @media (min-width: 1600px) {
+        .container {
+            max-width: 1400px;
+        }
+        
+        .hero-content {
+            max-width: 1000px;
+        }
+        
+        .hero-title {
+            font-size: 4.5rem;
+        }
+    }
+</style>
+
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Christopher Erick Otieno",
+        "jobTitle": "Cybersecurity Analyst, System Administrator",
+        "url": "http://localhost/about/",
+        "sameAs": [
+            "https://github.com/Christopher-Erick",
+            "https://www.linkedin.com/in/christopher-erick-otieno",
+            "https://tryhackme.com/p/erikchris54",
+            "https://app.hackthebox.com/users/ChristopherErick",
+            "mailto:christophererick879@gmail.com"
+        ],
+        "knowsAbout": ["Cybersecurity", "Penetration Testing", "Vulnerability Assessment", "SIEM", "Incident Response", "Python", "Django", "JavaScript"],
+        "description": "Building secure digital ecosystems from the ground up — where cybersecurity meets seamless operations."
+    }
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="/" class="navbar-brand">
+                <i class="fas fa-shield-alt"></i> Christopher Erick Otieno
+            </a>
+            
+            <ul class="navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about/">About</a></li>
+                <li><a href="/portfolio/">Portfolio</a></li>
+                <li><a href="/resume/">Resume</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+            
+            <div class="navbar-actions">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        
+<!-- About Hero Section -->
+<section id="about-hero" class="hero">
+    <div class="container">
+        <div class="hero-content fade-in">
+            <h1 class="hero-title">About Christopher Erick</h1>
+            <p class="hero-subtitle">Cybersecurity Analyst, IT Professional & System Administrator</p>
+            <p class="hero-description">
+                Building secure digital ecosystems from the ground up — where cybersecurity meets seamless operations, 
+                data drives decisions, and complex challenges become elegant solutions. Passionate about protecting 
+                digital assets and ensuring organizational security through proactive threat analysis.
+            </p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Security Projects</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Commitment to Security</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Animated Background Elements -->
+    <div class="hero-bg">
+        <div class="floating-elements">
+            <div class="floating-element" style="--delay: 0s; --duration: 6s;"><i class="fas fa-shield-alt"></i></div>
+            <div class="floating-element" style="--delay: 1s; --duration: 8s;"><i class="fas fa-bug"></i></div>
+            <div class="floating-element" style="--delay: 2s; --duration: 7s;"><i class="fas fa-network-wired"></i></div>
+            <div class="floating-element" style="--delay: 3s; --duration: 9s;"><i class="fab fa-linux"></i></div>
+            <div class="floating-element" style="--delay: 4s; --duration: 5s;"><i class="fas fa-server"></i></div>
+        </div>
+    </div>
+</section>
+
+<!-- Innovation & Creativity Section -->
+<section id="innovation" class="section">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h2>Innovation in Cybersecurity</h2>
+            <p>Where creativity meets cutting-edge security solutions</p>
+        </div>
+        
+        <div class="innovation-grid">
+            <div class="innovation-card fade-in">
+                <div class="innovation-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>Creative Problem Solving</h3>
+                <p>Approaching security challenges with innovative thinking to develop unique solutions that protect against evolving threats.</p>
+            </div>
+            
+            <div class="innovation-card fade-in">
+                <div class="innovation-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h3>Automated Security</h3>
+                <p>Developing custom scripts and tools to streamline security processes and reduce manual intervention in threat detection.</p>
+            </div>
+            
+            <div class="innovation-card fade-in">
+                <div class="innovation-icon">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+                <h3>Integrated Solutions</h3>
+                <p>Designing comprehensive security architectures that seamlessly integrate with existing IT infrastructure.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Detailed About Section -->
+<section id="about-details" class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col slide-in-right">
+                <div class="about-content">
+                    <h2>My Journey in Cybersecurity</h2>
+                    <p>
+                        With 1 year of specialized experience in cybersecurity, my journey began with a fascination 
+                        for understanding how digital systems work and evolved into a passion for defending them 
+                        against sophisticated cyber threats. I focus on building secure digital ecosystems where 
+                        cybersecurity meets seamless operations, data drives decisions, and complex challenges 
+                        become elegant solutions.
+                    </p>
+                    <p>
+                        My approach to cybersecurity is rooted in proactive security measures, continuous monitoring, 
+                        and staying ahead of emerging threats. Whether I'm conducting penetration tests with Gobuster, 
+                        analyzing security vulnerabilities with Splunk, or implementing robust defense strategies, I 
+                        approach every challenge with meticulous attention to detail and a commitment to organizational 
+                        security excellence.
+                    </p>
+                    
+                    <div class="journey-highlight">
+                        <div class="highlight-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div class="highlight-content">
+                            <h3>What Drives Me</h3>
+                            <p>
+                                I'm driven by the constant evolution of cyber threats and the challenge of staying one step ahead. 
+                                Every security vulnerability I discover and every system I secure contributes to a safer digital world. 
+                                My goal is to make cybersecurity accessible and effective for organizations of all sizes.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <h3>Core Competencies</h3>
+                    <div class="competencies-grid">
+                        <div class="competency-item">
+                            <i class="fas fa-search"></i>
+                            <h4>Vulnerability Assessment</h4>
+                            <p>Comprehensive security assessments and risk analysis</p>
+                        </div>
+                        <div class="competency-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <h4>Penetration Testing</h4>
+                            <p>Ethical hacking and security testing methodologies</p>
+                        </div>
+                        <div class="competency-item">
+                            <i class="fas fa-eye"></i>
+                            <h4>Security Monitoring</h4>
+                            <p>SIEM implementation and threat detection</p>
+                        </div>
+                        <div class="competency-item">
+                            <i class="fas fa-bug"></i>
+                            <h4>Incident Response</h4>
+                            <p>Threat analysis and incident investigation</p>
+                        </div>
+                        <div class="competency-item">
+                            <i class="fas fa-server"></i>
+                            <h4>System Administration</h4>
+                            <p>Server management, configuration, and maintenance</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Values & Philosophy Section -->
+<section id="philosophy" class="section">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h2>My Security Philosophy</h2>
+            <p>Core principles that guide my approach to cybersecurity</p>
+        </div>
+        
+        <div class="philosophy-grid">
+            <div class="philosophy-item fade-in">
+                <div class="philosophy-icon">
+                    <i class="fas fa-shield-check"></i>
+                </div>
+                <h3>Proactive Defense</h3>
+                <p>Security isn't just about responding to threats—it's about anticipating and preventing them before they can cause harm.</p>
+            </div>
+            
+            <div class="philosophy-item fade-in">
+                <div class="philosophy-icon">
+                    <i class="fas fa-sync"></i>
+                </div>
+                <h3>Continuous Learning</h3>
+                <p>The threat landscape evolves constantly. Staying ahead requires continuous education and adaptation to new security challenges.</p>
+            </div>
+            
+            <div class="philosophy-item fade-in">
+                <div class="philosophy-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Collaborative Security</h3>
+                <p>Effective security is a team effort. Building security awareness and fostering collaboration across all organizational levels.</p>
+            </div>
+            
+            <div class="philosophy-item fade-in">
+                <div class="philosophy-icon">
+                    <i class="fas fa-balance-scale"></i>
+                </div>
+                <h3>Balanced Approach</h3>
+                <p>Security measures should enable business operations, not hinder them. Finding the right balance between security and usability.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section id="about-cta" class="section">
+    <div class="container">
+        <div class="cta-content text-center fade-in">
+            <h2>Let's Secure Your Organization Together</h2>
+            <p>Ready to strengthen your cybersecurity posture? I'm here to help protect your digital assets with comprehensive security solutions.</p>
+            <div class="cta-actions">
+                <a href="/contact/" class="btn btn-primary btn-lg">
+                    <i class="fas fa-paper-plane"></i> Get In Touch
+                </a>
+                <a href="/resume/" class="btn btn-outline btn-lg">
+                    <i class="fas fa-file-alt"></i> View Resume
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Christopher Erick Otieno</h3>
+                    <div class="social-links">
+                        <a href="https://github.com/Christopher-Erick" class="social-link" target="_blank" rel="noopener">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/christopher-erick-otieno" class="social-link" target="_blank" rel="noopener">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://tryhackme.com/p/erikchris54" class="social-link" target="_blank" rel="noopener">
+                            <i class="fas fa-user-secret"></i>
+                        </a>
+                        <a href="https://app.hackthebox.com/users/ChristopherErick" class="social-link" target="_blank" rel="noopener">
+                            <i class="fas fa-cube"></i>
+                        </a>
+                        <a href="mailto:christophererick879@gmail.com" class="social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/portfolio/">Portfolio</a></li>
+                        <li><a href="/resume/">Resume</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="/contact/">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>Cybersecurity Assessment</li>
+                        <li>Penetration Testing</li>
+                        <li>System Administration</li>
+                        <li>Data Analysis</li>
+                        <li>IT Support</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-envelope"></i> christophererick879@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +254758081580</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Christopher Erick Otieno. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/js/main.js"></script>
+    
+    
+    <!-- CSRF Token for AJAX requests -->
+    <input type="hidden" name="csrfmiddlewaretoken" value="myRnYjFMLUNgd0NjAGMdaawKmgx05nLsGsBSTLrxfbj1hJparBGA8v5yWOl2ukTJ">
+    <script>
+        // Function to get CSRF token from cookies
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        window.csrfToken = getCookie('csrftoken');
+    </script>
+    
+    <!-- Analytics (if needed) -->
+    
+</body>
+</html>
