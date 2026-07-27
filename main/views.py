@@ -13,11 +13,11 @@ logger = logging.getLogger('portfolio_site')
 
 def home(request):
     """Render the home page"""
-    # Fetch active testimonials ordered by display order
-    testimonials = getattr(Testimonial, 'objects').filter(is_active=True).order_by('order', 'name')
-    
-    # Debug: Print number of testimonials to console
-    print(f"Number of testimonials fetched: {testimonials.count()}")
+    try:
+        testimonials = getattr(Testimonial, 'objects').filter(is_active=True).order_by('order', 'name')
+    except Exception as e:
+        logger.error(f"Error fetching testimonials: {e}")
+        testimonials = []
     
     return render(request, 'main/home.html', {
         'testimonials': testimonials
