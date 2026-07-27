@@ -1,0 +1,11 @@
+# Cloudflare Tunnel Configuration
+# Used by cloudflared daemon to tunnel local web service to Cloudflare edge network
+tunnel: ${CLOUDFLARE_TUNNEL_ID}
+credentials-file: /etc/cloudflared/cert.json
+
+ingress:
+  # Map incoming traffic for your custom domain to internal Django Gunicorn container
+  - hostname: ${DOMAIN_NAME}
+    service: http://web:8000
+  # Catch-all rule (returns 404 for unmatched hostnames)
+  - service: http_status:404

@@ -1,12 +1,11 @@
 """
 Secure configuration loader for portfolio project
-Loads sensitive data from environment variables or .env file
+Loads configuration values strictly from environment variables
 """
 
 import os
 from pathlib import Path
 
-# Build paths inside the project
 BASE_DIR = Path(__file__).resolve().parent
 
 def load_env_file():
@@ -18,15 +17,12 @@ def load_env_file():
                 line = line.strip()
                 if line and not line.startswith('#') and '=' in line:
                     key, value = line.split('=', 1)
-                    # Always set the environment variable from .env file
-                    os.environ[key.strip()] = value.strip()
+                    os.environ.setdefault(key.strip(), value.strip())
 
-# Load .env file on import
 load_env_file()
 
-# Personal Information Configuration
 class PersonalConfig:
-    """Secure personal information configuration"""
+    """Personal information configuration"""
     
     @staticmethod
     def get_full_name():
@@ -34,35 +30,34 @@ class PersonalConfig:
     
     @staticmethod
     def get_email():
-        return os.getenv('EMAIL', 'erikchris54@gmail.com')
+        return os.getenv('EMAIL', 'christophererick879@gmail.com')
     
     @staticmethod
     def get_github_username():
-        return os.getenv('GITHUB_USERNAME', 'your-username')
+        return os.getenv('GITHUB_USERNAME', 'Christopher-Erick')
     
     @staticmethod
     def get_tryhackme_username():
-        return os.getenv('TRYHACKME_USERNAME', 'your-username')
+        return os.getenv('TRYHACKME_USERNAME', 'erikchris54')
     
     @staticmethod
     def get_hackthebox_username():
-        return os.getenv('HACKTHEBOX_USERNAME', 'your-username')
+        return os.getenv('HACKTHEBOX_USERNAME', 'ChristopherErick')
     
     @staticmethod
     def get_tagline():
-        return os.getenv('TAGLINE', 'Your professional tagline')
+        return os.getenv('TAGLINE', 'Cybersecurity Professional & Software Engineer')
     
     @staticmethod
     def get_phone():
-        return os.getenv('PHONE', '')
+        return os.getenv('PHONE', '+254758081580')
     
     @staticmethod
     def get_location():
-        return os.getenv('LOCATION', '')
+        return os.getenv('LOCATION', 'Nairobi, Kenya')
 
-# Admin Configuration
 class AdminConfig:
-    """Secure admin configuration"""
+    """Admin configuration"""
     
     @staticmethod
     def get_admin_username():
@@ -72,41 +67,25 @@ class AdminConfig:
     def get_admin_email():
         return os.getenv('ADMIN_EMAIL', PersonalConfig.get_email())
 
-# Social Media URLs
 class SocialConfig:
     """Social media and professional platform URLs"""
     
     @staticmethod
     def get_github_url():
         username = PersonalConfig.get_github_username()
-        # In production, environment variables should be set directly
-        # In development, they come from .env file
-        # If username is the default placeholder or empty, use the known values
-        if username and username != 'your-username':
-            return f'https://github.com/{username}'
-        # Fallback to known values if environment variables aren't set properly
-        return 'https://github.com/Christopher-Erick'
+        return f'https://github.com/{username}' if username else '#'
     
     @staticmethod
     def get_tryhackme_url():
         username = PersonalConfig.get_tryhackme_username()
-        if username and username != 'your-username':
-            return f'https://tryhackme.com/p/{username}'
-        # Fallback to known values if environment variables aren't set properly
-        return 'https://tryhackme.com/p/erikchris54'
+        return f'https://tryhackme.com/p/{username}' if username else '#'
     
     @staticmethod
     def get_hackthebox_url():
         username = PersonalConfig.get_hackthebox_username()
-        if username and username != 'your-username':
-            return f'https://app.hackthebox.com/users/{username}'
-        # Fallback to known values if environment variables aren't set properly
-        return 'https://app.hackthebox.com/users/ChristopherErick'
+        return f'https://app.hackthebox.com/users/{username}' if username else '#'
     
     @staticmethod
     def get_email_url():
         email = PersonalConfig.get_email()
-        if email and email != 'your.email@domain.com':
-            return f'mailto:{email}'
-        # Fallback to known values if environment variables aren't set properly
-        return 'mailto:erikchris54@gmail.com'
+        return f'mailto:{email}' if email else '#'

@@ -1,0 +1,13 @@
+# Cloudflare Wrangler Configuration
+name = "portfolio-website"
+compatibility_date = "2026-07-27"
+main = "src/index.js"
+
+# Static site & assets routing for Cloudflare Pages / Workers
+[assets]
+directory = "./staticfiles"
+binding = "ASSETS"
+
+# Environment configuration
+[vars]
+ENVIRONMENT = "production"

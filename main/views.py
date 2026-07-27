@@ -127,14 +127,28 @@ def download_resume(request):
 def contact(request):
     """Handle contact form"""
     if request.method == 'POST':
-        # Simple form handling without a form class
-        name = request.POST.get('name', '')
-        email = request.POST.get('email', '')
-        subject = request.POST.get('subject', '')
-        message = request.POST.get('message', '')
+        import json
+        is_json = request.content_type == 'application/json' or request.headers.get('x-requested-with') == 'XMLHttpRequest'
+        
+        if is_json and request.body:
+            try:
+                body_data = json.loads(request.body)
+                name = body_data.get('name', '')
+                email = body_data.get('email', '')
+                subject = body_data.get('subject', '')
+                message = body_data.get('message', '')
+            except Exception:
+                name = request.POST.get('name', '')
+                email = request.POST.get('email', '')
+                subject = request.POST.get('subject', '')
+                message = request.POST.get('message', '')
+        else:
+            name = request.POST.get('name', '')
+            email = request.POST.get('email', '')
+            subject = request.POST.get('subject', '')
+            message = request.POST.get('message', '')
         
         if name and email and subject and message:
-            # Save to database
             try:
                 contact_submission = getattr(ContactSubmission, 'objects').create(
                     name=name,
@@ -148,30 +162,26 @@ def contact(request):
                 logger.error(f"Failed to save contact submission to database: {str(e)}")
                 database_success = False
             
-            # Log the contact attempt
             logger.info(f"Contact form submitted by {name} ({email}) with subject: {subject}")
             
-            # Try to send email (in production, you'd use a proper email backend)
-            email_success = False
             try:
-                # Check if email settings are configured
                 if hasattr(settings, 'CONTACT_EMAIL') and settings.CONTACT_EMAIL:
                     send_mail(
                         f"Contact Form: {subject}",
                         f"From: {name} <{email}>\n\n{message}",
-                        email,  # From email
-                        [settings.CONTACT_EMAIL],  # To email
+                        email,
+                        [settings.CONTACT_EMAIL],
                         fail_silently=False,
                     )
-                    email_success = True
-                    logger.info(f"Contact email sent successfully from {email}")
-                else:
-                    # Email not configured, but that's okay
-                    logger.info("Email not configured, skipping email send")
             except Exception as e:
                 logger.error(f"Failed to send contact email: {str(e)}")
             
-            # Show appropriate message based on what worked
+            if is_json:
+                return JsonResponse({
+                    'success': True,
+                    'message': 'Thank you for your message! I will get back to you soon.'
+                })
+
             if database_success:
                 messages.success(request, 'Thank you for your message. We will contact you soon!')
             else:
@@ -179,14 +189,17 @@ def contact(request):
             
             return redirect('main:contact')
         else:
+            if is_json:
+                return JsonResponse({'success': False, 'error': 'Please fill in all required fields.'}, status=400)
             messages.error(request, 'Please fill in all required fields.')
     
     return render(request, 'main/contact.html')
 
+from django.http import HttpResponseForbidden
+
+@staff_member_required
 def security_dashboard(request):
-    """Render the security dashboard"""
-    # This would typically fetch security event data from the database
-    # For now, we'll just render the template
+    """Render the security dashboard (Staff authenticated only)"""
     return render(request, 'main/security_dashboard.html')
 
 def health_check(request):
@@ -204,30 +217,24 @@ def health_check(request):
     from django.conf import settings
     debug_mode = getattr(settings, 'DEBUG', False)
     
-    # Check Cloudinary configuration
-    cloudinary_status = "Not checked"
-    try:
-        from django.conf import settings
-        default_storage = getattr(settings, 'DEFAULT_FILE_STORAGE', '')
-        if 'cloudinary' in default_storage.lower():
-            cloudinary_status = "Configured"
-        else:
-            cloudinary_status = "Not configured"
-    except:
-        cloudinary_status = "Error checking"
+    # Check storage configuration
+    storage_status = "Configured" if hasattr(settings, 'DEFAULT_FILE_STORAGE') else "Default"
     
     return JsonResponse({
         'status': 'healthy',
         'timestamp': timezone.now().isoformat(),
         'database': db_status,
         'debug': debug_mode,
-        'cloudinary': cloudinary_status
+        'storage': storage_status
     })
 
 def cloudinary_test(request):
-    """Test endpoint to check Cloudinary configuration"""
-    import os
+    """Test endpoint to check Cloudinary configuration (DEBUG mode only)"""
     from django.conf import settings
+    if not settings.DEBUG and not request.user.is_staff:
+        return HttpResponseForbidden('Access denied')
+    
+    import os
     
     # Check Cloudinary environment variables
     cloudinary_cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME', 'Not set')
@@ -268,7 +275,11 @@ def cloudinary_test(request):
     })
 
 def cloudinary_upload_test(request):
-    """Test endpoint to try uploading a file to Cloudinary"""
+    """Test endpoint to try uploading a file (DEBUG mode only)"""
+    from django.conf import settings
+    if not settings.DEBUG and not request.user.is_staff:
+        return HttpResponseForbidden('Access denied')
+
     if request.method != 'POST':
         return JsonResponse({'error': 'POST method required'})
     
@@ -276,14 +287,10 @@ def cloudinary_upload_test(request):
         return JsonResponse({'error': 'No file provided'})
     
     try:
-        # Import Cloudinary
         import cloudinary
         import cloudinary.uploader
         
-        # Get the uploaded file
         uploaded_file = request.FILES['file']
-        
-        # Upload to Cloudinary
         result = cloudinary.uploader.upload(uploaded_file)
         
         return JsonResponse({
@@ -300,11 +307,13 @@ def cloudinary_upload_test(request):
         })
 
 def cloudinary_debug(request):
-    """Debug endpoint to check actual file paths in database"""
+    """Debug endpoint to check actual file paths in database (DEBUG mode only)"""
+    from django.conf import settings
+    if not settings.DEBUG and not request.user.is_staff:
+        return HttpResponseForbidden('Access denied')
+
     from portfolio.models import Project
-    import os
     
-    # Get all projects
     projects = getattr(Project, 'objects').all()
     
     project_data = []
@@ -325,5 +334,8 @@ def cloudinary_debug(request):
     })
 
 def test_social_links(request):
-    """Test view to check social links rendering"""
+    """Test view to check social links rendering (DEBUG mode only)"""
+    from django.conf import settings
+    if not settings.DEBUG and not request.user.is_staff:
+        return HttpResponseForbidden('Access denied')
     return render(request, 'test_social_links.html')

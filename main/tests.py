@@ -30,7 +30,7 @@ class ContactFormTest(TestCase):
         
         # Then submit the form
         response = self.client.post(self.contact_url, data)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
         
         # Check that the contact submission was saved
         submissions = ContactSubmission.objects.filter(email='john@example.com')

@@ -33,45 +33,34 @@ def load_env_file():
 load_env_file()
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# Generate a secure secret key from environment or create one
 SECRET_KEY = os.getenv('SECRET_KEY')
-if not SECRET_KEY:
-    # Generate a new secret key for development
-    SECRET_KEY = get_random_secret_key()
-    print("⚠️  WARNING: Generated temporary SECRET_KEY. Set SECRET_KEY in .env for production!")
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 'yes')
+
+if not SECRET_KEY:
+    if DEBUG:
+        SECRET_KEY = get_random_secret_key()
+        print("⚠️  WARNING: Generated temporary SECRET_KEY for development. Set SECRET_KEY in environment for production!")
+    else:
+        raise ValueError("CRITICAL SECURITY ERROR: SECRET_KEY must be set in environment variables when DEBUG is False!")
 
 # Security: Allowed hosts configuration
 ALLOWED_HOSTS = []
 if DEBUG:
-    ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', '.trycloudflare.com']
 else:
-    # Production hosts from environment
     hosts = os.getenv('ALLOWED_HOSTS', '')
     if hosts:
         ALLOWED_HOSTS = [host.strip() for host in hosts.split(',')]
     else:
-        # Fallback for production - should be set in environment
-        ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+        ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.trycloudflare.com']
 
-# Add Render-specific hosts
-RENDER_EXTERNAL_HOSTNAME = os.getenv('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
-
-# Also add the RENDER_APP_URL if available
-RENDER_APP_URL = os.getenv('RENDER_APP_URL')
-if RENDER_APP_URL:
-    ALLOWED_HOSTS.append(RENDER_APP_URL.split('//')[1].split('/')[0])
-
-# Add the default Render URL pattern
-# This will be something like your-app-name.onrender.com
-import os
-RENDER_SERVICE_NAME = os.getenv('RENDER_SERVICE_NAME')
-if RENDER_SERVICE_NAME:
-    ALLOWED_HOSTS.append(f"{RENDER_SERVICE_NAME}.onrender.com")
+# CSRF Trusted Origins for Cloudflare and custom domains
+CSRF_TRUSTED_ORIGINS = []
+csrf_origins = os.getenv('CSRF_TRUSTED_ORIGINS', '')
+if csrf_origins:
+    CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in csrf_origins.split(',')]
+else:
+    CSRF_TRUSTED_ORIGINS = ['https://*.trycloudflare.com', 'http://localhost:8000', 'http://127.0.0.1:8000']
 
 # Application definition
 
@@ -189,27 +178,42 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# AWS S3 Configuration for media files
-# AWS S3 Settings
+# Cloudflare R2 Storage Settings (S3 API compatible)
+CLOUDFLARE_R2_ACCESS_KEY_ID = os.getenv('CLOUDFLARE_R2_ACCESS_KEY_ID')
+CLOUDFLARE_R2_SECRET_ACCESS_KEY = os.getenv('CLOUDFLARE_R2_SECRET_ACCESS_KEY')
+CLOUDFLARE_R2_BUCKET_NAME = os.getenv('CLOUDFLARE_R2_BUCKET_NAME')
+CLOUDFLARE_R2_ENDPOINT_URL = os.getenv('CLOUDFLARE_R2_ENDPOINT_URL')
+CLOUDFLARE_R2_CUSTOM_DOMAIN = os.getenv('CLOUDFLARE_R2_CUSTOM_DOMAIN')
+
+# Cloudinary Configuration
+CLOUDINARY_CLOUD_NAME = os.getenv('CLOUDINARY_CLOUD_NAME')
+CLOUDINARY_API_KEY = os.getenv('CLOUDINARY_API_KEY')
+CLOUDINARY_API_SECRET = os.getenv('CLOUDINARY_API_SECRET')
+
+# AWS S3 Settings (Fallback)
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME', 'us-east-1')
-AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com' if AWS_STORAGE_BUCKET_NAME else ''
 AWS_DEFAULT_ACL = 'public-read'
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
 AWS_LOCATION = 'media'
 
-# Cloudinary Configuration
-# Added Cloudinary integration for persistent media storage on Render
-CLOUDINARY_CLOUD_NAME = os.getenv('CLOUDINARY_CLOUD_NAME')
-CLOUDINARY_API_KEY = os.getenv('CLOUDINARY_API_KEY')
-CLOUDINARY_API_SECRET = os.getenv('CLOUDINARY_API_SECRET')
-
-# Media files
-if not DEBUG and CLOUDINARY_CLOUD_NAME and CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET:
+# Media files storage selection
+if not DEBUG and CLOUDFLARE_R2_ACCESS_KEY_ID and CLOUDFLARE_R2_BUCKET_NAME and CLOUDFLARE_R2_ENDPOINT_URL:
+    # Use Cloudflare R2 for media files in production
+    AWS_ACCESS_KEY_ID = CLOUDFLARE_R2_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY = CLOUDFLARE_R2_SECRET_ACCESS_KEY
+    AWS_STORAGE_BUCKET_NAME = CLOUDFLARE_R2_BUCKET_NAME
+    AWS_S3_ENDPOINT_URL = CLOUDFLARE_R2_ENDPOINT_URL
+    AWS_S3_CUSTOM_DOMAIN = CLOUDFLARE_R2_CUSTOM_DOMAIN
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    MEDIA_URL = f'https://{CLOUDFLARE_R2_CUSTOM_DOMAIN}/' if CLOUDFLARE_R2_CUSTOM_DOMAIN else '/media/'
+    MEDIA_ROOT = ''
+elif not DEBUG and CLOUDINARY_CLOUD_NAME and CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET:
     # Use Cloudinary for media files in production
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 elif not DEBUG and AWS_ACCESS_KEY_ID and AWS_STORAGE_BUCKET_NAME:
@@ -251,18 +255,20 @@ SECURE_HSTS_SECONDS = 31536000 if not DEBUG else 0  # 1 year
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 
+import sys
+IS_TESTING = 'test' in sys.argv
+
 # HTTPS settings for production
 SECURE_SSL_REDIRECT = os.getenv('SECURE_SSL_REDIRECT', 'True').lower() in ('true', '1', 'yes')
-# Add explicit check for DEBUG mode
-if DEBUG:
+if DEBUG or IS_TESTING:
     SECURE_SSL_REDIRECT = False
+
 SESSION_COOKIE_SECURE = os.getenv('SESSION_COOKIE_SECURE', 'True').lower() in ('true', '1', 'yes')
-# Add explicit check for DEBUG mode
-if DEBUG:
+if DEBUG or IS_TESTING:
     SESSION_COOKIE_SECURE = False
+
 CSRF_COOKIE_SECURE = os.getenv('CSRF_COOKIE_SECURE', 'True').lower() in ('true', '1', 'yes')
-# Add explicit check for DEBUG mode
-if DEBUG:
+if DEBUG or IS_TESTING:
     CSRF_COOKIE_SECURE = False
 
 if not DEBUG and SECURE_SSL_REDIRECT:

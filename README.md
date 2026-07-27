@@ -1,84 +1,47 @@
 # Cybersecurity Professional Portfolio
 
-A comprehensive Django-based portfolio website for showcasing cybersecurity expertise, projects, and professional experience.
-
-## ⚠️ Important Notice
-
-If you've deployed this application and it's missing personal information or projects, please see [FIX_DEPLOYMENT.md](FIX_DEPLOYMENT.md) for instructions on how to populate your database with the necessary data.
+A high-performance, security-hardened Django portfolio website optimized for deployment on **Cloudflare** (Cloudflare Tunnel, R2 Storage, WAF & CDN).
 
 ## Project Overview
 
-This portfolio website is designed for cybersecurity professionals to showcase their skills, projects, and experience. It features a modern, responsive design with dark/light mode support and interactive elements.
+This portfolio website is designed for cybersecurity professionals to showcase their skills, projects, and experience. It features a modern, responsive design with dark/light mode support, rate-limiting security middleware, Cloudflare edge integration, and zero-egress R2 media storage.
 
 ## Features
 
 - **Professional Portfolio**: Display skills, experience, education, and certifications
-- **Project Showcase**: Highlight cybersecurity projects with detailed descriptions
-- **Blog Section**: Share knowledge through technical blog posts
-- **Security Dashboard**: Monitor website security metrics and events
-- **Responsive Design**: Works on all device sizes
-- **Dark/Light Mode**: Toggle between color schemes
-- **Contact Form**: Allow visitors to get in touch
+- **Project Showcase**: Highlight cybersecurity projects with detailed writeups and documents
+- **Blog Section**: Share knowledge through technical blog posts with view/like analytics
+- **Security Audit & Dashboard**: Custom rate-limiting, Cloudflare IP detection, security event logging
+- **Cloudflare Integration**: Built for Cloudflare Tunnel (`cloudflared`) & Cloudflare R2 Media Storage
+- **Responsive Design**: Modern glassmorphism UI with dark/light theme switching
+
+## Quick Deployment (Cloudflare)
+
+For complete production deployment instructions on Cloudflare, see **[CLOUDFLARE_DEPLOYMENT_GUIDE.md](CLOUDFLARE_DEPLOYMENT_GUIDE.md)**.
+
+```bash
+# Copy Cloudflare environment template
+cp .env.example .env
+
+# Start stack with Cloudflare Tunnel & PostgreSQL
+docker compose up -d --build
+```
+
+## Repository Structure
+
+- **`portfolio_site/`**: Core Django settings & WSGI configuration
+- **`main/`**, **`portfolio/`**, **`blog/`**: Application modules & views
+- **`cloudflared/`**: Cloudflare Tunnel configuration
+- **`scripts/`**: Project management, data population & verification scripts
+- **`docs/`**: Historical deployment guides and technical reference manuals
 
 ## Technology Stack
 
-- **Backend**: Django (Python)
-- **Frontend**: HTML5, CSS3, JavaScript
-- **Database**: SQLite (development) or PostgreSQL (production)
-- **Security**: Custom middleware, rate limiting, event logging
-
-## Installation
-
-### Standard Installation
-
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   ```
-
-2. Navigate to the project directory:
-   ```bash
-   cd RESUME
-   ```
-
-3. Create a virtual environment:
-   ```bash
-   python -m venv venv
-   ```
-
-4. Activate the virtual environment:
-   ```bash
-   # On Windows
-   venv\Scripts\activate
-   # On macOS/Linux
-   source venv/bin/activate
-   ```
-
-5. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-6. Run migrations:
-   ```bash
-   python manage.py migrate
-   ```
-
-7. Create a superuser (optional):
-   ```bash
-   python manage.py createsuperuser
-   ```
-
-8. Run the development server:
-   ```bash
-   python manage.py runserver
-   ```
-
-9. Visit `http://127.0.0.1:8000` in your browser
-
-### Docker Installation (Recommended for Production)
-
-For a containerized deployment, see [DOCKER_README.md](file:///c:/Users/CHRISTOPHER/Desktop/project/RESUME/DOCKER_README.md) for detailed instructions.
+- **Backend**: Django (Python 3.12)
+- **Frontend**: Vanilla CSS / JavaScript, HTML5
+- **Database**: SQLite (dev) / PostgreSQL (production)
+- **Object Storage**: Cloudflare R2 (S3 compatible)
+- **Edge Network**: Cloudflare Tunnel, WAF, DNS, CDN
 
 1. Configure environment variables (your personal information is already preserved):
    ```bash

@@ -125,13 +125,14 @@ class RateLimitMiddleware(MiddlewareMixin):
         return None
     
     def get_client_ip(self, request):
-        """Get client IP address, considering proxy headers"""
+        """Get client IP address, prioritizing Cloudflare CF-Connecting-IP header"""
+        cf_ip = request.META.get('HTTP_CF_CONNECTING_IP')
+        if cf_ip:
+            return cf_ip.strip()
         x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
         if x_forwarded_for:
-            ip = x_forwarded_for.split(',')[0].strip()
-        else:
-            ip = request.META.get('REMOTE_ADDR')
-        return ip
+            return x_forwarded_for.split(',')[0].strip()
+        return request.META.get('REMOTE_ADDR', '')
 
 
 class SecurityLoggingMiddleware(MiddlewareMixin):
@@ -195,13 +196,14 @@ class SecurityLoggingMiddleware(MiddlewareMixin):
         return None
     
     def get_client_ip(self, request):
-        """Get client IP address, considering proxy headers"""
+        """Get client IP address, prioritizing Cloudflare CF-Connecting-IP header"""
+        cf_ip = request.META.get('HTTP_CF_CONNECTING_IP')
+        if cf_ip:
+            return cf_ip.strip()
         x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
         if x_forwarded_for:
-            ip = x_forwarded_for.split(',')[0].strip()
-        else:
-            ip = request.META.get('REMOTE_ADDR')
-        return ip
+            return x_forwarded_for.split(',')[0].strip()
+        return request.META.get('REMOTE_ADDR', '')
 
 
 class BlockSuspiciousRequestsMiddleware(MiddlewareMixin):
@@ -267,10 +269,11 @@ class BlockSuspiciousRequestsMiddleware(MiddlewareMixin):
         return None
     
     def get_client_ip(self, request):
-        """Get client IP address, considering proxy headers"""
+        """Get client IP address, prioritizing Cloudflare CF-Connecting-IP header"""
+        cf_ip = request.META.get('HTTP_CF_CONNECTING_IP')
+        if cf_ip:
+            return cf_ip.strip()
         x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
         if x_forwarded_for:
-            ip = x_forwarded_for.split(',')[0].strip()
-        else:
-            ip = request.META.get('REMOTE_ADDR')
-        return ip
+            return x_forwarded_for.split(',')[0].strip()
+        return request.META.get('REMOTE_ADDR', '')
