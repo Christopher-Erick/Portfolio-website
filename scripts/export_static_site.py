@@ -28,11 +28,22 @@ PAGES_TO_EXPORT = [
     ('/blog/', 'blog/index.html', blog_list),
 ]
 
+SECURITY_HEADERS = """/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://use.fontawesome.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com https://use.fontawesome.com data:; img-src 'self' data: https: blob:; connect-src 'self' https:;
+"""
+
 def export_site():
     factory = RequestFactory()
     output_dir = os.path.join(settings.BASE_DIR, 'staticfiles')
     os.makedirs(output_dir, exist_ok=True)
     
+    # 1. Export all HTML pages
     for path, relative_file, view_func in PAGES_TO_EXPORT:
         request = factory.get(path, HTTP_HOST='localhost')
         try:
@@ -56,6 +67,12 @@ def export_site():
             f.write(html_content)
             
         print(f"Generated static page: {target_path}")
+
+    # 2. Write Cloudflare Edge Security Headers (_headers)
+    headers_path = os.path.join(output_dir, '_headers')
+    with open(headers_path, 'w', encoding='utf-8') as f:
+        f.write(SECURITY_HEADERS)
+    print(f"Generated Cloudflare Security Headers: {headers_path}")
 
 if __name__ == '__main__':
     export_site()
