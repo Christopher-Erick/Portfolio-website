@@ -44,56 +44,6 @@
     <link rel="stylesheet" href="{% static 'css/components.css' %}">
     <link rel="stylesheet" href="{% static 'css/icons.css' %}">
     
-    <!-- Icon Fixes -->
-    <style>
-        /* FontAwesome Icon Fixes */
-        .fab, .fas, .far, .fal, .fad, .fat {
-            font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands', 'FontAwesome' !important;
-            font-style: normal;
-            font-variant: normal;
-            text-rendering: auto;
-            line-height: 1;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        
-        .fab {
-            font-family: 'Font Awesome 6 Brands' !important;
-            font-weight: 400;
-        }
-        
-        .fas {
-            font-family: 'Font Awesome 6 Free' !important;
-            font-weight: 900;
-        }
-        
-        /* Social Link Icon Fallbacks */
-        .social-link i {
-            min-width: 20px;
-            text-align: center;
-            display: inline-block;
-        }
-        
-        /* Specific icon fixes */
-        .fa-github:before { content: "\f09b"; }
-        .fa-linkedin:before { content: "\f08c"; }
-        .fa-envelope:before { content: "\f0e0"; }
-        .fa-user-secret:before { content: "\f21b"; }
-        .fa-cube:before { content: "\f1b2"; }
-        .fa-shield-alt:before { content: "\f3ed"; }
-        
-        /* Fix for potential z-index issues */
-        body {
-            position: relative;
-            z-index: 0;
-        }
-        
-        main {
-            position: relative;
-            z-index: 1;
-        }
-    </style>
-    
     {% block extra_css %}{% endblock %}
     
     <!-- Structured Data -->
@@ -213,27 +163,6 @@
     <!-- JavaScript -->
     <script src="{% static 'js/main.js' %}"></script>
     {% block extra_js %}{% endblock %}
-    
-    <!-- CSRF Token for AJAX requests -->
-    {% csrf_token %}
-    <script>
-        // Function to get CSRF token from cookies
-        function getCookie(name) {
-            let cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                const cookies = document.cookie.split(';');
-                for (let i = 0; i < cookies.length; i++) {
-                    const cookie = cookies[i].trim();
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
-            }
-            return cookieValue;
-        }
-        window.csrfToken = getCookie('csrftoken');
-    </script>
     
     <!-- Analytics (if needed) -->
     {% if google_analytics_id %}
