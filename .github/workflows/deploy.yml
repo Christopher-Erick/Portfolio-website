@@ -26,11 +26,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Collect static assets & generate index.html
+      - name: Migrate DB, Collect static assets & generate index.html
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY || 'github-actions-build-key-1234567890' }}
           DEBUG: 'False'
         run: |
+          python manage.py migrate --noinput
           python manage.py collectstatic --noinput
           python scripts/export_static_site.py
 

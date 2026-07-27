@@ -20,9 +20,14 @@ def export_site():
     factory = RequestFactory()
     request = factory.get('/', HTTP_HOST='localhost')
     
-    # 1. Render Home Page -> index.html
-    response = home(request)
-    html_content = response.content.decode('utf-8')
+    try:
+        response = home(request)
+        html_content = response.content.decode('utf-8')
+    except Exception as e:
+        print(f"Warning/Error rendering home view: {e}")
+        # Fallback to render template directly if view encounters issues
+        from django.template.loader import render_to_string
+        html_content = render_to_string('main/home.html', {'testimonials': []}, request=request)
     
     output_dir = os.path.join(settings.BASE_DIR, 'staticfiles')
     os.makedirs(output_dir, exist_ok=True)
